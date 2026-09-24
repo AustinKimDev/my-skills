@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "modelMetadata": "gpt-image 2.0 (embedded PNG metadata)",
+  "asset": "iky-logo.png",
+  "format": "RGBA PNG",
+  "dimensions": [
+    2172,
+    724
+  ],
+  "transparentPixels": 1232325,
+  "promptIntent": "Lowercase geometric rounded iky wordmark with dot, IKY pink #FE3A8F, transparent background",
+  "processing": "Original generated PNG copied without redrawing; alpha channel inspected.",
+  "sha256": "73e8968177bc3530afd1f2f51fed2bccf54646aa308c0b76821a09981825d562",
+  "verifiedPngColorType": 6
+}

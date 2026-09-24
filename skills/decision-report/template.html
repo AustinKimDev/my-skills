@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<!-- TODO: title -->
+<title>프로젝트명 — 현황 보고 & 결정 요청</title>
+<!-- TODO: 보고서 고유 id + 생성 시각 — 핸드오프 JSON에 실려 stale 붙여넣기를 막는다 -->
+<meta name="report-id" content="rpt-YYYYMMDD-슬러그">
+<meta name="generated-at" content="YYYY-MM-DDTHH:MM:SS+09:00">
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+/* 흰 캔버스 + 잉크색 본문은 고정. 프로젝트 토큰은 폰트·간격·제한된 강조색에만 반영 */
+:root{
+  color-scheme:light;
+  --accent:oklch(0.22 0.01 260);
+  --bg:#fff;
+  --card:#fff;
+  --elev:oklch(0.97 0.004 260);
+  --text:oklch(0.20 0.01 260);
+  --dim:oklch(0.40 0.01 260);
+  --faint:oklch(0.53 0.01 260);
+  --hair:oklch(0.89 0.006 260);
+  --green:oklch(0.46 0.12 150);
+  --green-soft:oklch(0.96 0.03 150);
+  --amber:oklch(0.52 0.12 70);
+  --amber-soft:oklch(0.97 0.03 70);
+  --shadow:0 8px 24px oklch(0.2 0.01 260/0.05),0 1px 3px oklch(0.2 0.01 260/0.05);
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);min-height:100vh;padding:48px 24px 90px}
+.wrap{max-width:980px;margin:0 auto}
+h1{font-size:26px;font-weight:800;letter-spacing:-0.6px}
+.sub{color:var(--dim);font-size:14px;margin-top:8px;line-height:1.6}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--elev);border:1px solid var(--hair);color:var(--text);font-size:12px;font-weight:700;border-radius:20px;padding:4px 11px;margin-bottom:14px}
+section{margin-top:44px}
+h2{font-size:17px;font-weight:700;letter-spacing:-0.4px;display:flex;align-items:center;gap:9px;margin-bottom:16px}
+h2 i{color:var(--dim);font-size:20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:18px;box-shadow:0 1px 2px oklch(0.2 0.01 260/0.03)}
+.kpi .v{font-size:24px;font-weight:800;letter-spacing:-0.5px;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:13px;color:var(--faint);font-weight:600}
+.kpi .l{font-size:12px;color:var(--dim);margin-top:5px}
+.kpi.hl{background:var(--elev);border-color:var(--text)}
+.kpi.hl .v{color:var(--text)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--hair);border-radius:12px;overflow:hidden;font-size:13.5px;display:block}
+table thead,table tbody{display:table;width:100%;table-layout:fixed}
+th{font-size:11px;letter-spacing:0.2px;color:var(--faint);font-weight:700;text-align:left;padding:12px 16px;border-bottom:1px solid var(--hair)}
+td{padding:12px 16px;border-bottom:1px solid var(--hair);color:var(--dim);line-height:1.55;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td b{color:var(--text);font-weight:600}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;border-radius:14px;padding:3px 9px;white-space:nowrap}
+.st.done{background:var(--green-soft);color:var(--green)}
+.st.part{background:var(--amber-soft);color:var(--amber)}
+.st.wait{background:var(--elev);color:var(--dim)}
+.note{font-size:12.5px;color:var(--faint);line-height:1.7;margin-top:10px}
+/* 결정 카드 */
+.dcard{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:22px;margin-bottom:16px;box-shadow:var(--shadow)}
+.dhead{display:flex;align-items:flex-start;gap:12px}
+.dnum{flex-shrink:0;width:30px;height:30px;border-radius:8px;background:var(--text);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.dq{font-size:15.5px;font-weight:700;letter-spacing:-0.3px;line-height:1.45}
+.dwhy{font-size:13px;color:var(--dim);line-height:1.65;margin:10px 0 14px 42px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:42px}
+.opt{cursor:pointer;border:1px solid var(--hair);background:var(--elev);border-radius:8px;padding:10px 15px;min-height:44px;font-size:13.5px;font-weight:600;color:var(--dim);font-family:inherit;text-align:left;transition:border-color 0.18s var(--ease),background-color 0.18s var(--ease),color 0.18s var(--ease);user-select:none}
+.opt:hover{border-color:var(--text);color:var(--text)}
+.opt.sel{background:var(--text);border-color:var(--text);color:#fff}
+.opt .rec{font-size:10px;font-weight:800;color:var(--green);margin-left:6px}
+.opt small{display:block;font-weight:400;font-size:11.5px;color:var(--faint);margin-top:3px;max-width:300px;line-height:1.5}
+.opt.sel .rec,.opt.sel small{color:oklch(1 0 0/0.78)}
+/* sticky 핸드오프 바 */
+.bar{position:fixed;left:0;right:0;bottom:0;background:oklch(1 0 0/0.94);backdrop-filter:blur(20px);border-top:1px solid var(--hair);padding:14px 24px calc(14px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;z-index:50}
+.bar .cnt{font-size:13px;color:var(--dim)}
+.bar .cnt b{color:var(--accent)}
+.copybtn{background:var(--text);color:#fff;border:none;border-radius:8px;padding:12px 22px;min-height:44px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:8px;transition:transform 0.18s var(--ease)}
+.copybtn:active{transform:scale(0.96)}
+.copybtn.ok{background:var(--green);color:#fff}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.cols2{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:16px}
+.mini .t{font-size:13px;font-weight:700;display:flex;gap:7px;align-items:center}
+.mini .t i{color:var(--amber)}
+.mini p{font-size:12.5px;color:var(--dim);line-height:1.65;margin-top:7px}
+/* 접이식 상세 (details/summary) */
+.det{background:var(--card);border:1px solid var(--hair);border-radius:10px;margin-bottom:10px;overflow:hidden}
+.det summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;padding:14px 18px;font-size:13.5px;font-weight:700;user-select:none;transition:background 0.18s var(--ease)}
+.det summary:hover{background:var(--elev)}
+.det summary::-webkit-details-marker{display:none}
+.det summary i.lead{color:var(--dim);font-size:16px}
+.det summary i.chev{margin-left:auto;color:var(--faint);transition:transform 0.2s var(--ease)}
+.det[open] summary i.chev{transform:rotate(180deg)}
+.det .body{padding:2px 18px 18px;font-size:13px;color:var(--dim);line-height:1.75;border-top:1px solid var(--hair)}
+.det .body ol,.det .body ul{margin:8px 0 0 18px}
+.det .body li{margin-bottom:6px}
+.det .body li:last-child{margin-bottom:0}
+.det .body b{color:var(--text);font-weight:600}
+.det .body .flow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:10px;font-size:12.5px}
+.det .body .flow .step{background:var(--elev);border:1px solid var(--hair);border-radius:7px;padding:6px 11px;font-weight:600;color:var(--text)}
+.det .body .flow i{color:var(--faint);font-size:13px}
+.det .body code{font-family:ui-monospace,'SF Mono',monospace;font-size:0.92em;background:var(--elev);border-radius:5px;padding:1px 5px}
+.det .body p{margin-top:10px}
+.det .body p:first-child{margin-top:0}
+/* 상세 서술 — 여러 문단 산문(단독 사용 가능) */
+.prose{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px;font-size:13px;color:var(--dim);line-height:1.8}
+.prose p{margin-top:10px}.prose p:first-child{margin-top:0}.prose b{color:var(--text);font-weight:600}
+/* 스크린샷·이미지 (작성 시 임베드 — src는 data:URI 권장, 또는 file:///절대경로) */
+.shot{margin:12px 0 2px;background:var(--elev);border:1px solid var(--hair);border-radius:10px;overflow:hidden}
+.shot img{display:block;width:100%;height:auto;outline:1px solid oklch(0 0 0/0.1);outline-offset:-1px}
+.shot figcaption{font-size:12px;color:var(--faint);padding:9px 14px;border-top:1px solid var(--hair);line-height:1.6}
+/* 시각 근거 — 질문에 맞는 양식 1개 이상만 남긴다 */
+.visuals{display:grid;gap:14px}
+.visual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.viz{margin:0;background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px;min-width:0}
+.viz figcaption{font-size:12px;color:var(--faint);line-height:1.6;margin-top:12px}
+.viz-title{font-size:14px;font-weight:700;letter-spacing:-0.2px;margin-bottom:4px}
+.viz-summary{font-size:12.5px;color:var(--dim);line-height:1.6;margin-bottom:14px}
+.viz-bars{display:grid;gap:11px}
+.viz-bar-row{display:grid;grid-template-columns:minmax(72px,1fr) minmax(120px,3fr) auto;align-items:center;gap:10px;font-size:12px}
+.viz-bar-label{color:var(--dim);font-weight:600}
+.viz-bar-track{height:8px;background:var(--elev);border-radius:99px;overflow:hidden}
+.viz-bar-fill{height:100%;background:var(--text);border-radius:inherit}
+.viz-bar-value{font-variant-numeric:tabular-nums;color:var(--text);font-weight:700}
+.viz-timeline{list-style:none;border-left:1px solid var(--hair);margin-left:6px;padding-left:18px;display:grid;gap:14px}
+.viz-timeline li{position:relative;font-size:12.5px;color:var(--dim);line-height:1.55}
+.viz-timeline li::before{content:"";position:absolute;left:-23px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--card);border:2px solid var(--text)}
+.viz-timeline time{display:block;color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+.viz-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.viz-side{background:var(--elev);border-radius:8px;padding:14px;font-size:12.5px;color:var(--dim);line-height:1.6}
+.viz-side b{display:block;color:var(--text);font-size:13px;margin-bottom:5px}
+.viz-chart{display:block;width:100%;height:auto;overflow:visible}
+.viz-chart .grid{stroke:var(--hair);stroke-width:1}
+.viz-chart .series{fill:none;stroke:var(--text);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.viz-chart .area{fill:oklch(0.2 0.01 260/0.08)}
+.viz-chart text{fill:var(--dim);font-size:11px;font-family:'Pretendard',-apple-system,sans-serif}
+/* 결정별 메모 / 기타 자유입력 */
+.memo{margin:12px 0 0 42px}
+.memo textarea{width:calc(100% - 0px);max-width:560px;display:block;background:var(--elev);border:1px solid var(--hair);border-radius:8px;color:var(--text);font-family:inherit;font-size:16px;line-height:1.6;padding:10px 13px;resize:vertical;min-height:44px;transition:border-color 0.18s var(--ease)}
+.memo textarea:focus{border-color:var(--text)}
+.memo textarea::placeholder{color:var(--faint)}
+/* 핸드오프 바 보조 버튼 */
+.ghostbtn{background:var(--elev);border:1px solid var(--hair);color:var(--dim);border-radius:8px;padding:11px 16px;min-height:44px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:border-color 0.18s var(--ease),color 0.18s var(--ease),transform 0.18s var(--ease)}
+.ghostbtn:hover{color:var(--text);border-color:var(--text)}
+.ghostbtn:active{transform:scale(0.96)}
+/* 클립보드 실패 시 수동복사 폴백 */
+.cbfallback{position:fixed;inset:0;background:oklch(0.1 0.008 260/0.68);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
+.cbfallback.on{display:flex}
+.cbfallback .panel{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:20px;max-width:620px;width:100%;box-shadow:var(--shadow)}
+.cbfallback h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.cbfallback p{font-size:12.5px;color:var(--dim);line-height:1.6;margin-bottom:12px}
+.cbfallback textarea{width:100%;height:200px;background:var(--elev);border:1px solid var(--hair);border-radius:8px;color:var(--text);font-family:ui-monospace,'SF Mono',monospace;font-size:12px;line-height:1.6;padding:12px;resize:vertical}
+.cbfallback .x{margin-top:12px;display:flex;justify-content:flex-end}
+/* 증거 링크 (결정 → 파일/PR/라인) */
+.evid{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px 42px}
+.evlink{display:inline-flex;align-items:center;gap:5px;background:var(--elev);border:1px solid var(--hair);border-radius:7px;padding:7px 10px;min-height:36px;font-size:12px;color:var(--dim);text-decoration:none;transition:border-color 0.18s var(--ease),color 0.18s var(--ease)}
+.evlink:hover{color:var(--text);border-color:var(--text)}
+.evlink i{color:var(--accent);font-size:14px}
+/* 랭킹(우선순위 드래그 정렬) */
+.ranklist{display:flex;flex-direction:column;gap:8px;margin-left:42px}
+.rankitem{display:flex;align-items:center;gap:11px;background:var(--elev);border:1px solid var(--hair);border-radius:8px;padding:11px 14px;min-height:44px;font-size:13.5px;font-weight:600;color:var(--text);cursor:grab;user-select:none;transition:border-color 0.18s var(--ease)}
+.rankitem:hover{border-color:var(--text)}
+.rankitem.drag{opacity:0.5;cursor:grabbing}
+.rankitem .rnk{flex-shrink:0;width:22px;height:22px;border-radius:6px;background:var(--text);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.rankitem .lbl{display:flex;flex-direction:column}
+.rankitem .lbl small{font-weight:400;font-size:11.5px;color:var(--faint);margin-top:2px}
+.rankitem .grip{margin-left:auto;color:var(--faint);font-size:16px}
+button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--text);outline-offset:3px}
+@media(max-width:640px){
+  body{padding:32px 16px 148px}
+  section{margin-top:36px}
+  .viz-compare{grid-template-columns:1fr}
+  .viz-bar-row{grid-template-columns:72px 1fr auto}
+  .dwhy,.opts,.memo,.evid,.ranklist{margin-left:0}
+  .bar{justify-content:flex-start;gap:8px;padding-inline:12px}
+  .copybtn{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:0.01ms!important;animation-duration:0.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- TODO: 배지·제목·부제 -->
+<div class="badge"><i class="ph-fill ph-circle"></i> 프로젝트명 · 날짜</div>
+<h1>현황 보고 & 결정 요청</h1>
+<p class="sub">요약 한두 줄. 아래 <b style="color:var(--text)">결정 N건</b>을 선택하고 하단 "선택 요약 복사"로 붙여넣어 주세요.</p>
+
+<!-- ═══ 현황 KPI ═══ -->
+<section>
+<h2><i class="ph ph-gauge"></i>한눈에 보기</h2>
+<div class="kpis">
+  <!-- TODO: KPI 타일들 — 강조는 class="kpi hl" -->
+  <div class="kpi hl"><div class="v">12<small> /12</small></div><div class="l">예: 테스트 통과</div></div>
+  <div class="kpi"><div class="v">47</div><div class="l">예: 커밋</div></div>
+</div>
+<p class="note"><!-- TODO: 검증/근거 한 줄 --></p>
+</section>
+
+<!-- ═══ 상태 테이블 (선택) ═══ -->
+<section>
+<h2><i class="ph ph-list-checks"></i>진행 상황</h2>
+<table>
+<thead><tr><th style="width:30%">항목</th><th style="width:52%">내용</th><th>상태</th></tr></thead>
+<tbody>
+  <!-- TODO: 행 — 상태 배지는 st done / st part / st wait -->
+  <tr><td><b>예시 기능</b></td><td>설명</td><td><span class="st done">완료</span></td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ═══ 시각 근거 — 질문에 맞는 예시만 남기기 ═══ -->
+<section>
+<h2><i class="ph ph-chart-line-up"></i>시각 근거</h2>
+<p class="note"><!-- TODO: 무엇을 비교·확인할 수 있는지 한 줄. 아래 양식 중 유용한 것만 남기고 실제 값으로 교체 --></p>
+<div class="visuals">
+  <div class="visual-grid">
+    <!-- 수치 비교·순위: 가로 막대 -->
+    <figure class="viz">
+      <div class="viz-title">선택지별 예상 효과</div>
+      <div class="viz-summary">공통 기준에서 길이로 비교합니다.</div>
+      <div class="viz-bars" role="img" aria-label="옵션 A 82점, 옵션 B 64점, 옵션 C 41점">
+        <div class="viz-bar-row"><span class="viz-bar-label">옵션 A</span><span class="viz-bar-track"><span class="viz-bar-fill" style="display:block;width:82%"></span></span><span class="viz-bar-value">82</span></div>
+        <div class="viz-bar-row"><span class="viz-bar-label">옵션 B</span><span class="viz-bar-track"><span class="viz-bar-fill" style="display:block;width:64%"></span></span><span class="viz-bar-value">64</span></div>
+        <div class="viz-bar-row"><span class="viz-bar-label">옵션 C</span><span class="viz-bar-track"><span class="viz-bar-fill" style="display:block;width:41%"></span></span><span class="viz-bar-value">41</span></div>
+      </div>
+      <figcaption>평가 기준과 단위를 명시하세요.</figcaption>
+    </figure>
+
+    <!-- 시간 순서·마일스톤: 타임라인 -->
+    <figure class="viz">
+      <div class="viz-title">핵심 진행 순서</div>
+      <div class="viz-summary">결정 전후의 의존 관계를 시간축으로 보여줍니다.</div>
+      <ol class="viz-timeline">
+        <li><time>09월 02일</time>현재 상태와 검증 결과 확정</li>
+        <li><time>결정 직후</time>선택한 방향으로 구현 범위 고정</li>
+        <li><time>다음 검증</time>실제 결과 확인 후 후속 작업 진행</li>
+      </ol>
+      <figcaption>날짜가 없으면 단계명이나 의존 이벤트를 사용하세요.</figcaption>
+    </figure>
+  </div>
+
+  <div class="visual-grid">
+    <!-- 전후·선택지 차이: 비교 -->
+    <figure class="viz">
+      <div class="viz-title">변경 전후</div>
+      <div class="viz-summary">결정으로 달라지는 핵심만 나란히 둡니다.</div>
+      <div class="viz-compare">
+        <div class="viz-side"><b>현재</b>텍스트 중심이라 차이를 읽어서 해석해야 합니다.</div>
+        <div class="viz-side"><b>변경 후</b>근거 시각물로 비교와 판단이 빨라집니다.</div>
+      </div>
+      <figcaption>같은 기준과 문장 구조로 비교하세요.</figcaption>
+    </figure>
+
+    <!-- 추세·흐름: 접근 가능한 인라인 SVG -->
+    <figure class="viz">
+      <div class="viz-title">검증 추세</div>
+      <div class="viz-summary">연속 값은 선의 위치와 기울기로 보여줍니다.</div>
+      <svg class="viz-chart" viewBox="0 0 360 150" role="img" aria-labelledby="trend-title trend-desc">
+        <title id="trend-title">1차부터 4차까지 검증 통과율 추세</title>
+        <desc id="trend-desc">검증 통과율이 52퍼센트에서 88퍼센트로 꾸준히 상승했습니다.</desc>
+        <line class="grid" x1="36" y1="22" x2="344" y2="22"></line>
+        <line class="grid" x1="36" y1="72" x2="344" y2="72"></line>
+        <line class="grid" x1="36" y1="122" x2="344" y2="122"></line>
+        <path class="area" d="M36 105 L138 88 L240 62 L344 36 L344 122 L36 122 Z"></path>
+        <polyline class="series" points="36,105 138,88 240,62 344,36"></polyline>
+        <text x="36" y="142">1차</text><text x="132" y="142">2차</text><text x="234" y="142">3차</text><text x="326" y="142">4차</text>
+      </svg>
+      <figcaption>축·단위·핵심 값을 실제 데이터에 맞게 교체하세요.</figcaption>
+    </figure>
+  </div>
+</div>
+</section>
+
+<!-- ═══ 작업 상세 — 접이식 (강력 권장) ═══
+     상태 테이블은 한 줄 요약까지만. "어디서 불러오나", "내부 흐름", "변경 파일 상세" 같은
+     깊은 디테일은 여기 details 블록에 접어 둔다 — 본문은 스캔 가능하게, 깊이는 클릭으로. -->
+<section>
+<h2><i class="ph ph-magnifying-glass-plus"></i>작업 상세 — 펼쳐서 보기</h2>
+
+<!-- TODO: det 블록 반복. summary의 lead 아이콘은 주제에 맞게 교체 -->
+<details class="det">
+<summary><i class="ph ph-flow-arrow lead"></i>예: 내부 동작 흐름<i class="ph ph-caret-down chev"></i></summary>
+<div class="body">
+  <!-- 선택: 단계 흐름 칩 -->
+  <div class="flow">
+    <span class="step">입력</span><i class="ph ph-arrow-right"></i>
+    <span class="step">처리</span><i class="ph ph-arrow-right"></i>
+    <span class="step">출력</span>
+  </div>
+  <ol>
+    <li><b>키워드</b>: 설명. 코드 식별자는 <code>code</code>로.</li>
+  </ol>
+</div>
+</details>
+
+<details class="det">
+<summary><i class="ph ph-files lead"></i>예: 변경 파일 상세<i class="ph ph-caret-down chev"></i></summary>
+<div class="body"><ul><li><code>path/to/file.py</code> <b>(+N)</b> — 무엇을 왜</li></ul></div>
+</details>
+
+<!-- 상세 서술 + 스크린샷: 표 한 줄에 안 들어가는 맥락을 문단으로, 캡처는 figure로.
+     img src = data:image/png;base64,...(자가완결·파일 이동에도 안 깨짐, 권장) 또는 file:///절대경로.
+     .prose / .shot 은 details 밖 단독 섹션으로도 그대로 쓸 수 있다. -->
+<details class="det" open>
+<summary><i class="ph ph-article lead"></i>예: 상세 서술 & 스크린샷<i class="ph ph-caret-down chev"></i></summary>
+<div class="body">
+  <p>긴 배경·근거를 문단으로. 표 한 줄로 부족한 맥락, 트레이드오프, 의사결정 히스토리를 자유롭게 적는다.</p>
+  <p>두 번째 문단도 가능. 코드 식별자는 <code>identifier</code>로.</p>
+  <!-- 실제 캡처가 판단에 도움 될 때 아래 figure를 활성화하고 src·alt·캡션을 실제 근거로 교체.
+  <figure class="shot">
+    <img src="data:image/png;base64,..." alt="스크린샷이 보여주는 상태와 핵심 근거">
+    <figcaption>캡처 캡션 — 무엇을 보여주는지 한 줄.</figcaption>
+  </figure>
+  -->
+</div>
+</details>
+
+</section>
+
+<!-- ═══ 결정 카드 ═══ -->
+<section>
+<h2><i class="ph ph-hand-pointing"></i>결정 요청 — 클릭해서 선택하세요</h2>
+
+<!-- TODO: 결정 카드 반복. data-q = 요약 키(복사 텍스트에 들어감) -->
+<div class="dcard" data-q="① 예시 질문">
+  <div class="dhead"><div class="dnum">①</div><div class="dq">질문 본문?</div></div>
+  <div class="dwhy">이 결정이 왜 필요한지·무엇에 영향을 주는지 1~2줄.</div>
+  <!-- 선택: 증거 링크(결정 근거 → 파일/PR/라인). href는 file:///절대경로·https PR URL·vscode:// 등 -->
+  <div class="evid">
+    <a class="evlink" href="#"><i class="ph ph-file-code"></i>path/to/file.ts:42</a>
+    <a class="evlink" href="#"><i class="ph ph-git-pull-request"></i>PR #123</a>
+  </div>
+  <div class="opts">
+    <button type="button" class="opt" data-v="옵션 A">옵션 A<span class="rec">권장</span><small>권장 이유 한 줄</small></button>
+    <button type="button" class="opt" data-v="옵션 B">옵션 B<small>트레이드오프 한 줄</small></button>
+  </div>
+  <div class="memo"><textarea rows="1" aria-label="① 예시 질문 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
+</div>
+
+<!-- 복수 선택 카드: opts에 data-multi="1", 배타 옵션은 data-v="없음" -->
+<div class="dcard" data-q="② 복수 선택 예시">
+  <div class="dhead"><div class="dnum">②</div><div class="dq">복수로 고를 수 있는 질문? (복수 선택)</div></div>
+  <div class="dwhy">설명.</div>
+  <div class="opts" data-multi="1" data-none="없음">
+    <button type="button" class="opt" data-v="후보 1">후보 1<small>설명</small></button>
+    <button type="button" class="opt" data-v="후보 2">후보 2<small>설명</small></button>
+    <button type="button" class="opt" data-v="없음">없음<small>당분간 보류</small></button>
+  </div>
+  <div class="memo"><textarea rows="1" aria-label="② 복수 선택 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
+</div>
+
+<!-- 랭킹 카드: data-rank="1" + .ranklist. 항목을 끌어 우선순위 정렬. JSON values = 정렬된 순서, 항상 "결정함"으로 카운트 -->
+<div class="dcard" data-q="③ 랭킹 예시" data-rank="1">
+  <div class="dhead"><div class="dnum">③</div><div class="dq">우선순위대로 끌어서 정렬하세요. (드래그)</div></div>
+  <div class="dwhy">설명.</div>
+  <div class="ranklist">
+    <div class="rankitem" draggable="true" data-v="항목 A"><span class="rnk">1</span><span class="lbl">항목 A<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
+    <div class="rankitem" draggable="true" data-v="항목 B"><span class="rnk">2</span><span class="lbl">항목 B<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
+    <div class="rankitem" draggable="true" data-v="항목 C"><span class="rnk">3</span><span class="lbl">항목 C<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
+  </div>
+  <div class="memo"><textarea rows="1" aria-label="③ 랭킹 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
+</div>
+
+<p class="note"><i class="ph ph-info"></i> <!-- TODO: 이미 결정된 사항/제외 사항 한 줄 --></p>
+</section>
+
+<!-- ═══ 알려진 한계 (선택) ═══ -->
+<section>
+<h2><i class="ph ph-warning"></i>알려진 한계 (참고)</h2>
+<div class="cols2">
+  <!-- TODO: mini 카드들 -->
+  <div class="mini"><div class="t"><i class="ph ph-warning"></i>예시</div><p>설명.</p></div>
+</div>
+</section>
+
+</div>
+
+<!-- sticky 핸드오프 바 -->
+<div class="bar">
+  <button type="button" class="ghostbtn" onclick="applyRecommended()"><i class="ph ph-sparkle"></i>권장값 적용</button>
+  <button type="button" class="ghostbtn" onclick="resetAll()"><i class="ph ph-arrow-counter-clockwise"></i>초기화</button>
+  <span class="cnt" aria-live="polite"><b id="selCount">0</b> / <span id="totalCount">0</span> 결정 선택됨</span>
+  <button type="button" class="copybtn" id="copyBtn" onclick="copySummary()"><i class="ph ph-clipboard-text"></i>선택 요약 복사 → Claude에 붙여넣기</button>
+</div>
+
+<!-- 클립보드 실패 시 수동복사 폴백 (JS가 자동으로 띄움) -->
+<div class="cbfallback" id="cbFallback" role="dialog" aria-modal="true" aria-labelledby="cbFallbackTitle">
+  <div class="panel">
+    <h3 id="cbFallbackTitle">수동 복사</h3>
+    <p>자동 복사가 막혔습니다. 아래 전체를 선택·복사해 Claude에 붙여넣어 주세요.</p>
+    <textarea id="cbText" aria-label="수동 복사용 결정 요약" readonly></textarea>
+    <div class="x"><button type="button" class="ghostbtn" onclick="document.getElementById('cbFallback').classList.remove('on')">닫기</button></div>
+  </div>
+</div>
+
+<script>
+const REPORT_TITLE = document.title;
+const REPORT_ID = document.querySelector('meta[name="report-id"]')?.content || '';
+const GENERATED_AT = document.querySelector('meta[name="generated-at"]')?.content || '';
+
+// ── 선택 로직: 단일/복수(data-multi) + 배타 옵션(data-none 값) ──
+function setOpt(o, on){ o.classList.toggle('sel', on); o.setAttribute('aria-pressed', String(on)); }
+document.querySelectorAll('.opts').forEach(g => {
+  const multi = g.dataset.multi === '1';
+  const noneV = g.dataset.none;
+  g.querySelectorAll('.opt').forEach(o => {
+    setOpt(o, o.classList.contains('sel'));
+    o.addEventListener('click', () => {
+      if (multi) {
+        if (noneV && o.dataset.v === noneV) {
+          g.querySelectorAll('.opt').forEach(x => setOpt(x, false));
+          setOpt(o, true);
+        } else {
+          if (noneV) { const none = g.querySelector('[data-v="'+noneV+'"]'); if (none) setOpt(none, false); }
+          setOpt(o, !o.classList.contains('sel'));
+        }
+      } else {
+        g.querySelectorAll('.opt').forEach(x => setOpt(x, false));
+        setOpt(o, true);
+      }
+      updateCount();
+    });
+  });
+});
+
+// 메모/기타 입력도 "결정함"으로 카운트 + 높이 자동 확장
+document.querySelectorAll('.memo textarea').forEach(t => {
+  t.addEventListener('input', () => {
+    t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px';
+    updateCount();
+  });
+});
+
+function memoOf(c){ return (c.querySelector('.memo textarea')?.value || '').trim(); }
+function cardDecided(c){ return c.dataset.rank === '1' || !!c.querySelector('.opt.sel') || memoOf(c) !== ''; }
+function updateCount(){
+  const cards = document.querySelectorAll('.dcard');
+  let n = 0; cards.forEach(c => { if (cardDecided(c)) n++; });
+  document.getElementById('selCount').textContent = n;
+  document.getElementById('totalCount').textContent = cards.length;
+}
+updateCount();
+
+// ── 랭킹: 드래그로 우선순위 정렬 (data-rank="1") ──
+const rankOrig = new Map(); // 초기 순서 — 초기화 시 복원
+function renumber(list){ [...list.querySelectorAll('.rankitem')].forEach((it, i) => { const r = it.querySelector('.rnk'); if (r) r.textContent = i + 1; }); }
+function dragAfter(list, y){
+  let best = null, bestOff = -Infinity;
+  list.querySelectorAll('.rankitem:not(.drag)').forEach(el => {
+    const b = el.getBoundingClientRect(), off = y - b.top - b.height / 2;
+    if (off < 0 && off > bestOff) { bestOff = off; best = el; }
+  });
+  return best;
+}
+document.querySelectorAll('.ranklist').forEach(list => {
+  rankOrig.set(list, [...list.children]);
+  let dragEl = null;
+  list.querySelectorAll('.rankitem').forEach(it => {
+    it.addEventListener('dragstart', () => { dragEl = it; it.classList.add('drag'); });
+    it.addEventListener('dragend', () => { it.classList.remove('drag'); dragEl = null; renumber(list); updateCount(); });
+  });
+  list.addEventListener('dragover', e => {
+    e.preventDefault();
+    if (!dragEl) return;
+    const after = dragAfter(list, e.clientY);
+    if (after == null) list.appendChild(dragEl); else list.insertBefore(dragEl, after);
+  });
+});
+
+// ── 보조 액션: 권장값 일괄 적용 / 초기화 ──
+function applyRecommended(){
+  document.querySelectorAll('.dcard .opts').forEach(g => {
+    const recs = g.querySelectorAll('.opt .rec');
+    if (!recs.length) return;
+    if (g.dataset.multi !== '1') g.querySelectorAll('.opt').forEach(x => setOpt(x, false));
+    else if (g.dataset.none) { const none = g.querySelector('[data-v="'+g.dataset.none+'"]'); if (none) setOpt(none, false); } // 복수+'없음' 배타 유지
+    recs.forEach(r => setOpt(r.closest('.opt'), true));
+  });
+  updateCount();
+}
+function resetAll(){
+  document.querySelectorAll('.opt.sel').forEach(o => setOpt(o, false));
+  document.querySelectorAll('.memo textarea').forEach(t => { t.value = ''; t.style.height = 'auto'; });
+  rankOrig.forEach((items, list) => { items.forEach(it => list.appendChild(it)); renumber(list); });
+  updateCount();
+}
+
+// ── 핸드오프: 사람용 요약 + 기계가독 JSON. 이 텍스트가 에이전트에게 돌아가는 산출물 ──
+function buildSummary(){
+  const human = ['[' + REPORT_TITLE + ' 결정 요약]'];
+  const decisions = [];
+  document.querySelectorAll('.dcard').forEach((c, i) => {
+    const key = 'd' + (i + 1);
+    const q = c.dataset.q || key;
+    const rank = c.dataset.rank === '1';
+    const values = rank
+      ? [...c.querySelectorAll('.rankitem')].map(it => it.dataset.v)
+      : [...c.querySelectorAll('.opt.sel')].map(o => o.dataset.v);
+    const note = memoOf(c);
+    const shown = rank
+      ? values.map((v, n) => (n + 1) + '.' + v).join(' > ')
+      : (values.length ? values.join(', ') : '(미선택)');
+    human.push(q + ' → ' + shown + (note ? '  · 메모: ' + note : ''));
+    decisions.push(rank ? { key, q, type: 'rank', values, note } : { key, q, values, note });
+  });
+  const json = {
+    report: REPORT_TITLE, report_id: REPORT_ID,
+    generated_at: GENERATED_AT, copied_at: new Date().toISOString(),
+    decisions
+  };
+  return human.join('\n') + '\n\n```json\n' + JSON.stringify(json, null, 2) + '\n```';
+}
+function flipBtn(){
+  const b = document.getElementById('copyBtn');
+  b.classList.add('ok'); b.innerHTML = '<i class="ph ph-check"></i>복사됨 — Claude에 붙여넣으세요';
+  setTimeout(() => { b.classList.remove('ok'); b.innerHTML = '<i class="ph ph-clipboard-text"></i>선택 요약 복사 → Claude에 붙여넣기'; }, 2200);
+}
+function showFallback(text){
+  const f = document.getElementById('cbFallback'), t = document.getElementById('cbText');
+  t.value = text; f.classList.add('on'); t.focus(); t.select();
+}
+// 자동 복사 시도 → 실패(권한·비보안 컨텍스트·미지원) 시 수동복사 오버레이. 루프는 절대 무대응으로 끝나지 않는다.
+function copySummary(){
+  const text = buildSummary();
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(flipBtn).catch(() => showFallback(text));
+  } else {
+    showFallback(text);
+  }
+}
+</script>
+</body>
+</html>

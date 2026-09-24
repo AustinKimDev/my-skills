@@ -1,0 +1,4 @@
+interface:
+  display_name: "develop PR 리뷰·머지"
+  short_description: "PR 생성부터 리뷰·수정 반복, 머지와 Orca HTML 보고서까지 진행"
+  default_prompt: "$develop-pr-review-merge로 현재 작업을 develop에 PR 올리고 리뷰·수정을 반복한 뒤 문제가 없으면 머지하고, 요약과 HTML 변경 보고서를 Orca 브라우저에 열어줘."
