@@ -1,11 +1,12 @@
 # My Skills
 
-UI 설계, 기획, 이미지 제작, 배포와 업무보고에 사용하는 스킬 13개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
+UI 설계, 기획, 이미지 제작, 배포와 업무보고에 사용하는 스킬 15개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
 
 ## 스킬 목록
 
 | 스킬 | 용도 |
 |---|---|
+| [component-workbench](skills/component-workbench/SKILL.md) | 시안·기존 코드 기반 공통 컴포넌트 구현과 인터랙티브 문서 |
 | [decision-report](skills/decision-report/SKILL.md) | 선택·승인이 가능한 HTML 보고서 |
 | [deploy](skills/deploy/SKILL.md) | 배포 절차 실행·검증 |
 | [deploy-branch-deploy](skills/deploy-branch-deploy/SKILL.md) | deploy 브랜치 통합·배포 |
@@ -16,6 +17,7 @@ UI 설계, 기획, 이미지 제작, 배포와 업무보고에 사용하는 스�
 | [product-plan-html](skills/product-plan-html/SKILL.md) | 기획서를 HTML 문서로 제작 |
 | [product-planner](skills/product-planner/SKILL.md) | 제품·기능·정책 기획 |
 | [recommend-animate](skills/recommend-animate/SKILL.md) | 애니메이션 도구 선택·조합 |
+| [screen-flow](skills/screen-flow/SKILL.md) | 화면 시안 갤러리·연결 지도 생성과 검증 |
 | [standup](skills/standup/SKILL.md) | Git 기록 기반 한국어 업무보고 |
 | [ui-design](skills/ui-design/SKILL.md) | UI 설계·구현·시안 비교 |
 | [website-launch-readiness](skills/website-launch-readiness/SKILL.md) | 출시 전 20개 항목 점검 |
@@ -42,7 +44,7 @@ git clone https://github.com/AustinKimDev/my-skills.git ~/Workspace/my-skills
 
 ## 수록 범위
 
-직접 관리 대상으로 선정한 위 13개를 보관합니다. `notion-work-sync`와 `magic-ui`는 외부 스킬이므로 수록하지 않습니다. 외부 스킬에 로컬 연동을 추가한 `humanize-korean`, OMD·ui-craft 계열도 포함하지 않습니다.
+직접 관리 대상으로 선정한 위 15개를 보관합니다. `notion-work-sync`와 `magic-ui`는 외부 스킬이므로 수록하지 않습니다. 외부 스킬에 로컬 연동을 추가한 `humanize-korean`, OMD·ui-craft 계열도 포함하지 않습니다.
 
 개인 경로, 회사 계정 매핑, 프로젝트 전용 어댑터와 작업 화면은 공개본에서 제외했습니다. 프로젝트별 정책과 비공개 자료는 각 프로젝트의 지침·설정에서 관리하세요. 공개본은 이전 비공개 이력과 분리된 첫 커밋으로 시작합니다.
 

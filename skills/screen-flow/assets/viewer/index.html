@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>전체 화면과 흐름</title>
+    <link rel="stylesheet" href="./viewer.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="page-header">
+        <div class="heading-block">
+          <p class="eyebrow">MOBILE APP FLOW REVIEW</p>
+          <h1 id="pageTitle">전체 모바일 앱 흐름</h1>
+          <p class="page-description" id="pageDescription">
+            로그인과 가입부터 주요 화면까지 연결 관계를 살펴봅니다.
+          </p>
+          <p class="scope-summary" id="scopeSummary">전체 화면 수를 확인하고 있습니다.</p>
+        </div>
+        <div class="review-notice" id="reviewNotice">
+          정적 시안으로 정리한 UX 설계안이며, 실제 앱 동작을 나타내지 않습니다.
+        </div>
+      </header>
+
+      <section class="control-bar" aria-label="전체 앱 지도 탐색 도구">
+        <div class="mode-switch" id="modeSwitch" role="group" aria-label="보기 방식">
+          <button type="button" data-mode="graph" aria-pressed="true">연결 지도</button>
+          <button type="button" data-mode="all" aria-pressed="false">전체 화면</button>
+        </div>
+
+        <div class="search-control">
+          <label class="search-field" for="screenSearch">
+            <span class="search-label">화면 검색</span>
+            <input
+              id="screenSearch"
+              type="search"
+              inputmode="search"
+              autocomplete="off"
+              placeholder="화면 이름, 구역, 설명"
+              aria-controls="searchResults"
+              aria-expanded="false"
+            />
+          </label>
+          <div class="search-results" id="searchResults" role="listbox" hidden></div>
+        </div>
+
+        <div class="zoom-tools" id="zoomTools" aria-label="지도 확대와 이동">
+          <button type="button" id="zoomOut" aria-label="지도 축소">−</button>
+          <button type="button" id="zoomReset" aria-label="지도 100%로 보기">100%</button>
+          <button type="button" id="zoomIn" aria-label="지도 확대">＋</button>
+          <button type="button" id="zoomFit">전체 맞춤</button>
+        </div>
+      </section>
+
+      <main class="main-content">
+        <div class="loading-panel" id="loadingPanel" role="status">
+          <span class="loading-mark" aria-hidden="true"></span>
+          <strong>앱 흐름을 불러오고 있습니다.</strong>
+        </div>
+
+        <div class="error-panel" id="errorPanel" hidden>
+          <strong>앱 흐름을 불러오지 못했습니다.</strong>
+          <p id="errorMessage">flow.json 파일을 확인해 주세요.</p>
+          <button type="button" id="retryLoad">다시 불러오기</button>
+        </div>
+
+        <section class="view-panel graph-panel" id="graphView" aria-labelledby="graphTitle" hidden>
+          <div class="view-heading">
+            <div>
+              <h2 id="graphTitle">전체 앱 흐름</h2>
+              <p id="flowDescription"></p>
+            </div>
+            <div class="graph-legend" aria-label="연결선 범례">
+              <span><i class="line-sample primary"></i>주요 흐름</span>
+              <span><i class="line-sample optional"></i>선택 흐름</span>
+              <span><i class="line-sample return"></i>돌아오기</span>
+            </div>
+          </div>
+          <div
+            class="graph-viewport"
+            id="graphViewport"
+            role="region"
+            aria-label="화면 연결 지도. 빈 공간을 끌어 이동하고 확대 축소할 수 있습니다."
+            tabindex="0"
+          >
+            <div class="graph-plane" id="graphPlane">
+              <div class="group-layer" id="groupLayer" aria-hidden="true"></div>
+              <svg
+                class="connector-layer"
+                id="connectorLayer"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+              ></svg>
+              <div class="node-layer" id="nodeLayer"></div>
+            </div>
+            <div class="graph-empty" id="graphEmpty" hidden>표시할 화면이 없습니다.</div>
+            <div class="pan-hint" id="panHint">빈 공간을 끌어 이동 · Ctrl/⌘ + 휠로 확대</div>
+          </div>
+        </section>
+
+        <section class="view-panel all-panel" id="allView" aria-labelledby="allTitle" hidden>
+          <div class="view-heading">
+            <div>
+              <h2 id="allTitle">전체 화면</h2>
+              <p id="allSummary">모든 화면을 구역별로 모아 봅니다.</p>
+            </div>
+          </div>
+          <div class="section-groups" id="sectionGroups"></div>
+          <div class="content-empty" id="allEmpty" hidden>표시할 화면이 없습니다.</div>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <p>이미지와 연결선은 검토용 UX 설계안입니다. 실제 앱의 구현·완료·승인 상태를 뜻하지 않습니다.</p>
+      </footer>
+    </div>
+
+    <dialog class="screen-dialog" id="screenDialog" aria-labelledby="dialogTitle">
+      <div class="dialog-shell">
+        <header class="dialog-header">
+          <div class="dialog-heading">
+            <div class="dialog-kicker" id="dialogKicker"></div>
+            <h2 id="dialogTitle">화면 상세</h2>
+            <p id="dialogDescription"></p>
+          </div>
+          <div class="dialog-actions">
+            <a id="dialogOriginal" target="_blank" rel="noopener">원본 열기</a>
+            <button type="button" id="dialogClose">닫기</button>
+          </div>
+        </header>
+        <div class="dialog-body">
+          <div class="dialog-image-stage">
+            <img id="dialogImage" alt="" hidden />
+            <div class="dialog-image-state" id="dialogImageState" role="status">
+              이미지를 확인하고 있습니다.
+            </div>
+          </div>
+          <aside class="connection-panel" aria-label="화면 연결">
+            <section>
+              <h3>다음 화면</h3>
+              <div class="connection-list" id="outgoingConnections"></div>
+            </section>
+            <details class="incoming-details">
+              <summary>이 화면으로 들어오는 경로</summary>
+              <div class="connection-list" id="incomingConnections"></div>
+            </details>
+          </aside>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./viewer.js"></script>
+  </body>
+</html>
