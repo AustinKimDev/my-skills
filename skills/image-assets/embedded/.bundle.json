@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "root": "image-assets",
+  "modules": [
+    "image-generation"
+  ],
+  "source_sha256": {
+    "image-generation": {
+      "GUIDE.md": "7086a2d702a966543bec9d8df6783ca5c25428ad448aaecb003d6ee21b1d02bc"
+    }
+  },
+  "files": {
+    "embedded/image-generation/GUIDE.md": "e6c6859c31748e0fd784cbd49a2d159b2d3301aa67cfd6deb0f9bcaec2a31bbc",
+    "embedded/image-generation/references/dependencies.md": "383c268e9846dfb3d82dfccd76cc4bd25b3126383eea300136c93ed4bede2b5c",
+    "references/dependencies.md": "889b3a573484a27f595dbe1412d18b22f5bec367e544e69db71cc2f5f0d525dc"
+  }
+}

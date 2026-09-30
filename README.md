@@ -24,7 +24,7 @@ UI 설계, 기획, 이미지 제작, 배포와 업무보고에 사용하는 스�
 
 ## 사용 방법
 
-필요한 스킬 폴더를 사용하는 에이전트 환경의 스킬 경로에 연결하거나 설치합니다. `SKILL.md`만 가져오면 참조 문서나 실행 파일이 빠질 수 있으므로 해당 폴더 전체를 사용하세요.
+필요한 스킬 폴더 하나를 사용하는 에이전트 환경의 스킬 경로에 연결하거나 설치합니다. 필요한 연결 스킬과 참조 자료는 그 폴더의 `embedded/`에 포함되어 있습니다. `SKILL.md`만 가져오면 참조 문서나 실행 파일이 빠지므로 해당 폴더 전체를 사용하세요. 다른 스킬 폴더를 함께 설치할 필요는 없습니다.
 
 ```sh
 git clone https://github.com/AustinKimDev/my-skills.git ~/Workspace/my-skills
@@ -38,16 +38,34 @@ git clone https://github.com/AustinKimDev/my-skills.git ~/Workspace/my-skills
 
 기존 설치가 있다면 덮어쓰지 말고 차이를 확인한 뒤 연결하세요. 다른 에이전트 환경에서는 해당 환경의 스킬 설치 방식을 따릅니다. 소스 수정은 원본에서 하고, 커밋과 원격 푸시는 별도로 수행합니다.
 
-## 외부 스킬과 도구
+## 내장 스킬과 실행 도구
 
-`humanize-korean`, `better-writing`, `imagegen` 등 일부 연동 대상은 별도 설치 항목입니다. 각 스킬의 필요 조건을 확인하세요. `humanize-korean` 연동은 설치된 버전에 `references/ui-copy-review.md`가 있는지도 확인해야 합니다. 이 저장소만 복제하면 외부 스킬·브라우저·이미지 생성 도구까지 설치되지는 않습니다.
+15개를 분석해 연결 지침이 필요한 11개에는 의존 자료를 내장했고, 독립적인 4개에는 불필요한 의존성을 추가하지 않았습니다. [스킬별 연결 관계](DEPENDENCIES.md)에서 범위와 조건을 확인할 수 있습니다.
+
+`humanize-korean`, `better-*`, Apple·Emil 관련 지원 스킬 12개는 MIT 라이선스와 출처를 포함합니다. 한국어 제품 문구에는 내장된 UI 문구 검수 모드를 사용합니다. 내장 지침은 필요한 작업에서만 읽으며, 전체 스킬을 연쇄 실행하거나 새로운 권한을 부여하지 않습니다. 내장 진입 문서는 `GUIDE.md`로 저장해 최상위 스킬로 중복 등록되지 않게 했습니다.
+
+브라우저, 이미지 생성 도구, 계정·로그인, 프로젝트의 컴포넌트 패키지는 실행 환경에서 제공해야 합니다. 이를 연결하는 안내는 내장되어 있지만 실행 도구 자체나 계정 권한을 설치·제공하지는 않습니다. 환경에 설치된 `imagegen` 같은 도구별 지침이 있다면 그 환경의 사용 규칙을 따릅니다.
+
+## 내장본 갱신
+
+원본은 `skills/<스킬명>/`에서 `embedded/`와 생성된 `references/dependencies.md`를 제외한 파일입니다. 외부 지원 스킬 원본은 `vendor/skills/`, 환경 연결 안내는 `resources/`에 있습니다. 연결 관계의 기준은 [skill-dependencies.json](skill-dependencies.json)입니다.
+
+```sh
+python3 scripts/bundle_skills.py build
+python3 scripts/bundle_skills.py check
+python3 -m unittest discover -s scripts -p 'test_*.py'
+```
+
+Python 3.10 이상 표준 라이브러리만 사용합니다. 변경된 원본을 모든 내장본에 반영하며, 생성 파일의 직접 수정이나 관리 대상 밖의 파일이 발견되면 덮어쓰지 않고 중단합니다. 유지보수 절차는 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
 
 ## 수록 범위
 
-직접 관리 대상으로 선정한 위 15개를 보관합니다. `notion-work-sync`와 `magic-ui`는 외부 스킬이므로 수록하지 않습니다. 외부 스킬에 로컬 연동을 추가한 `humanize-korean`, OMD·ui-craft 계열도 포함하지 않습니다.
+직접 관리 대상으로 선정한 위 15개를 최상위 스킬로 보관합니다. `notion-work-sync`, `magic-ui`, OMD·ui-craft 계열은 개인 제작 스킬 목록에 포함하지 않습니다. 2026-09-30 의존성 내장 요청에 따라 `humanize-korean` 등 재배포 가능한 지원 스킬은 출처가 구분된 내장 자료로 추가했습니다. 이는 외부 스킬을 직접 제작한 것으로 분류하는 변경이 아닙니다.
 
 개인 경로, 회사 계정 매핑, 프로젝트 전용 어댑터와 작업 화면은 공개본에서 제외했습니다. 프로젝트별 정책과 비공개 자료는 각 프로젝트의 지침·설정에서 관리하세요. 공개본은 이전 비공개 이력과 분리된 첫 커밋으로 시작합니다.
 
 ## 참조 자료와 라이선스
 
 번들에 포함된 폰트·라이브러리의 기존 라이선스와 출처 문서를 유지합니다. 외부 서비스 화면과 관련 메모는 출처가 표시된 디자인 참고 자료이며, 해당 서비스의 공식 스킬이나 제휴를 뜻하지 않습니다. 스킬에 포함된 모든 자료가 저장소 작성자의 창작물이라는 의미는 아닙니다.
+
+지원 스킬의 출처와 라이선스는 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), 가져온 파일의 해시는 [vendor/sources.json](vendor/sources.json)에 기록합니다. 각 독립 스킬 폴더의 내장본에도 필요한 `LICENSE`와 `SOURCES.json`이 함께 들어갑니다.

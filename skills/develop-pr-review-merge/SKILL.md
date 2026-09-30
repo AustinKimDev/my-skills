@@ -5,6 +5,11 @@ description: "Complete the develop PR workflow in repositories that use a develo
 
 # Develop PR, review, merge, and report
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 ## Scope and authorization
 
 This is a user-level skill for use across repositories. Resolve repository-specific checks, integration rules, deployment requirements, and artifact locations from the current project. If `develop` is absent or conflicts with the project's required target, clarify the integration target before pushing or merging; do not create `develop` or silently substitute a release branch.
@@ -59,7 +64,7 @@ The HTML must include:
 
 Use a standalone HTML artifact in a stable, reopenable location, with embedded images or reliable relative assets and no unnecessary dependencies. Include interactive comparisons only when they clarify the change; make controls keyboard-accessible and verify their state changes. Keep unrelated private data out of captures and report content.
 
-Use the `orca-cli` skill for opening the report in Orca's embedded browser. Read its version-matched CLI guide, navigate/create the intended tab, activate it, and verify content, image loading, layout, and controls. Use file URLs when supported; otherwise use a local server following the project's port rules. Do not substitute desktop computer-use or another browser for the requested Orca report. For application QA, retain the user's selected browser/tool (such as Aside Browser MCP).
+Use the [bundled browser runtime guide](embedded/browser-runtime/GUIDE.md) for opening the report in Orca's embedded browser. Read the executable's version-matched CLI guide, navigate/create the intended tab, activate it, and verify content, image loading, layout, and controls. Use file URLs when supported; otherwise use a local server following the project's port rules. Do not substitute desktop computer-use or another browser for the requested Orca report. For application QA, retain the user's selected browser/tool (such as Aside Browser MCP).
 
 Inspect a screenshot when available. If capture fails, report that limit honestly and verify what is possible through the browser snapshot/DOM; do not claim visual screenshot verification. If Orca is unavailable, provide the saved HTML path and the exact opening failure.
 

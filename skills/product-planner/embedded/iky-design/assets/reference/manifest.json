@@ -1,0 +1,34 @@
+{
+  "contractHash": "98d9cf7877d21a8f6bd876cc2f5bbfed4f40ea9d59baa4b15ed8f0d2abff9db5",
+  "source": "mockups/design-system/index.html",
+  "sourceFiles": {
+    "index.html": "3f8a63f3e1ec20dd4e3b9f96cf4031ad75b1b1198e4a07421b75d1d9d95a8c41",
+    "styles.css": "a2f7205b97736da70e29a0d98334ebc128f4439e76ddb302b743721e6f1550bf"
+  },
+  "transformations": [
+    "Relocate local runtime assets",
+    "Replace repository-only source links with preserved provenance records",
+    "Generalize demo product identifiers for public distribution; retain historical source/style measurements"
+  ],
+  "files": {
+    "assets/brand/iky-logo.png": "73e8968177bc3530afd1f2f51fed2bccf54646aa308c0b76821a09981825d562",
+    "assets/brand/provenance.json": "965af4cb3d6b61fb31c5c16407c2743d71f5a177fbdc3786c1905781291d4469",
+    "assets/fan-ranking-trophy.png": "30cf77b87d4c534d1a405c07077dbd5fab40110e3e5291c8c4f7562e9681ca9c",
+    "assets/fonts/D2Coding-LICENSE.txt": "1807e8dec4d65f474cbf9be39f5e2254ecb81702babc320749e272ea66ffcc69",
+    "assets/fonts/D2Coding.ttf": "c064f343b5cfc131f083377ba606b748f9b61a5bbd89708e4010b9066dff5a24",
+    "assets/fonts/Pretendard-Black.otf": "94628b0bcea8936b6e5c30d98d685eb9bbaffb0fe2ed255542ecc656c248e021",
+    "assets/fonts/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7",
+    "assets/fonts/Pretendard-ExtraBold.otf": "c35fe941b7568d52a96010561540e47f9d3948dfde66ba25bc1908233e0a40cd",
+    "assets/fonts/Pretendard-LICENSE.txt": "b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e",
+    "assets/fonts/Pretendard-Medium.otf": "d39e50e4bb52b4993b6a4eeb821a171254745bd824446af01e1f616b89fface0",
+    "assets/fonts/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "assets/fonts/Pretendard-SemiBold.otf": "c89bc43027dc7cde5726e96223376f8eec09302b2fc1f8147fd5b57cfc376118",
+    "index.html": "e58e3ae34676557fdf797677ea2a6994b85f10c278ae9b575121c4350248c51d",
+    "LUCIDE-LICENSE.txt": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "source-records.html": "00915caca8a48f455b24982ede722a8aaf01607ea49a727d755b0bd04b7fa4c9",
+    "styles.css": "bc7d934b66a32d2e27956d46cb8426731185ef9ca1cbec8414623f1a312abca9",
+    "tokens.css": "3de8897bcbb6db35e414477206cd7f70ee835881fd88db6b768d183f942ad7bb",
+    "vendor/motion-12.23.24.js": "631dbfc6984d0078a6edbc9885a87d5d941ad9d7534740237c9679140c0dfdc5",
+    "vendor/MOTION-LICENSE.md": "1bf0dc3f7727723e5a032ed12164a47cf92c05204cb1a3485f123c24e2833ed1"
+  }
+}

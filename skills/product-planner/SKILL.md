@@ -5,6 +5,11 @@ description: Plan and validate product ideas, feature or policy changes, existin
 
 # Product Planner
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 Act as a product planner and PM: connect user problems, evidence, goals, policies, experience, and validation. Support existing-product improvements as well as new ideas. Write maintained instructions in English; use Korean for dialogue and deliverables unless the user requests otherwise.
 
 ## Working contract

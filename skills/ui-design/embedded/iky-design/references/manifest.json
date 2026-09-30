@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "files": {
+    "tokens.json": "46f9e88425fe191f073555970ff6b954171098c7e94a5f63031d4ce27bcee3f4",
+    "rules.md": "4bd52b1fdbcff68c3dd2311ff07ef2065549167e510b1ec86485039c89432a5b",
+    "audit.md": "491f87387d8fb4a0de9cd98bcd354b9d62c15a58e66bb273cf7bc0cde1b7ec41",
+    "component-recipes.md": "627f7ff260fb3248de5beac9d5f0bb3a1bc8bdde584dd23471fed6dd34e781f8",
+    "overlay-behavior.md": "d3add97013c87cdd90e2589ac1851024f1164e2b5ef42725cdc8dd366e2fad41",
+    "reference-sheet.json": "393ae1967dea2685edea8276fe95e2da6690cb92a43ee980addcc49fd69750ef",
+    "reference-introduction.json": "eebde37e9accf5bbdfcd91459fc363789fe2c7ed6d8fe29d2e7025b88bc3c933",
+    "reference-styles.json": "17e7c47029919f4ddb42c3a0fafc8f0567caef369173e1fbc841c0ffe6500f0e",
+    "reference-style-manifest.json": "8b364a5deb18e0d4ee7613ab6c2a936747403bef1fac03c6c025bfb8fa6ed5ec"
+  },
+  "contractHash": "98d9cf7877d21a8f6bd876cc2f5bbfed4f40ea9d59baa4b15ed8f0d2abff9db5"
+}

@@ -5,6 +5,11 @@ description: "Use when a repository has a deploy integration branch and the user
 
 # Deploy Branch Deploy
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 The release is anchored to **one verified `deploy` SHA**. Push, PR merge, and production deployment require the user's explicit authorization for this task. Nearest repository instructions and deployment runbooks take precedence.
 
 ## Execution sequence
@@ -34,6 +39,7 @@ The release is anchored to **one verified `deploy` SHA**. Push, PR merge, and pr
    - Once the replacement is ready, close the conflicting PR and leave a link to the replacement.
 
 5. **Deploy the exact deploy SHA**
+   - Apply the [bundled deployment workflow](embedded/deploy/GUIDE.md) for preflight, execution and verification, retaining the exact SHA and authorized branch sequence below.
    - Reconfirm the deploy SHA in a clean checkout. If the current working folder is dirty, use an isolated temporary clone.
    - Pass lockfile-frozen installation and project preflight checks, then use only the repository's existing deployment commands.
    - Respect DB migration → server → client dependency order. Use OTA only for JS/TS-only changes compatible with the existing native runtime.

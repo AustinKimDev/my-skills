@@ -1,0 +1,133 @@
+[
+  {
+    "tag": "div",
+    "attrs": {
+      "class": "topline"
+    },
+    "children": [
+      {
+        "tag": "span",
+        "attrs": {
+          "class": "eyebrow"
+        },
+        "children": [
+          "IKY / UI specimen"
+        ]
+      },
+      {
+        "tag": "span",
+        "attrs": {
+          "class": "pill accent"
+        },
+        "children": [
+          "● 개선안 검토 중"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "header",
+    "attrs": {
+      "class": "hero"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "attrs": {
+          "class": "eyebrow"
+        },
+        "children": [
+          "A shared language for connection"
+        ]
+      },
+      {
+        "tag": "h1",
+        "attrs": {},
+        "children": [
+          "우리의 연결을 만드는",
+          {
+            "tag": "br",
+            "attrs": {},
+            "children": []
+          },
+          "디자인의 기준."
+        ]
+      },
+      {
+        "tag": "p",
+        "attrs": {},
+        "children": [
+          " IKY의 색상, 글자, 재질, 컴포넌트와 화면 구조를 한곳에서 살펴보세요. 라이트·다크 상태와 실제 동작을 비교하는 디자인 기준입니다. React·React Native·Flutter 구현은 같은 토큰과 규칙을 따릅니다. "
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "div",
+    "attrs": {
+      "class": "summary"
+    },
+    "children": [
+      {
+        "tag": "div",
+        "attrs": {},
+        "children": [
+          {
+            "tag": "strong",
+            "attrs": {},
+            "children": [
+              "01"
+            ]
+          },
+          {
+            "tag": "span",
+            "attrs": {},
+            "children": [
+              "코드에서 가져온 토큰"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "div",
+        "attrs": {},
+        "children": [
+          {
+            "tag": "strong",
+            "attrs": {},
+            "children": [
+              "02"
+            ]
+          },
+          {
+            "tag": "span",
+            "attrs": {},
+            "children": [
+              "상태를 포함한 컴포넌트"
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "div",
+        "attrs": {},
+        "children": [
+          {
+            "tag": "strong",
+            "attrs": {},
+            "children": [
+              "03"
+            ]
+          },
+          {
+            "tag": "span",
+            "attrs": {},
+            "children": [
+              "연결되는 화면 예시"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

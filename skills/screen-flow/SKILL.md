@@ -5,13 +5,18 @@ description: Create or update a browser review artifact with imagegen screen moc
 
 # Screen Flow
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 Turn individual screen mockups into an explorable product review. The same catalog drives **All screens** (`?mode=all`) and a **Connected map** (`?mode=graph`). A screen opens a full-size preview with incoming and outgoing actions. Search, pan, zoom, fit, keyboard navigation, and deep links are bundled.
 
 ## Start from the intended product
 
 Read the current product decisions and any supplied screens or prototype. Distinguish existing implementation, proposed behavior, and user-approved decisions. Use a route inventory when useful, but do not infer that every route is a user-facing screen or that old implementation approves a new design.
 
-For a new design, follow the user's selected design workflow or the project's existing design rules; use available `ui-design` guidance for unresolved visual decisions. This skill owns the review artifact, not a new product theme. Do not transfer a source project's brand, palette, tab count, domain policies, or fixed number of screens into another product.
+For a new design, follow the user's selected design workflow or the project's existing design rules; use [bundled ui-design](embedded/ui-design/GUIDE.md) guidance for unresolved visual decisions. This skill owns the review artifact, not a new product theme. Do not transfer a source project's brand, palette, tab count, domain policies, or fixed number of screens into another product.
 
 For an existing artifact, preserve IDs, image selections, descriptions, and transitions outside the requested correction. Update the authoritative decision record once; mark superseded decisions there instead of duplicating competing rules.
 
@@ -25,7 +30,7 @@ Give overlays with meaningful actions or decisions their own catalog nodes and i
 
 Keep all included screens in **one map**. Sections and spatial groups organize that map; they do not split the product into isolated chapter graphs. Multiple legitimate entry points are allowed, including deep links and authenticated entry. Label arrows with actions or conditions, not arbitrary arrows that imply nonexistent behavior.
 
-Read [catalog.md](references/catalog.md) when preparing or editing `flow.json`. For new screen designs, use the installed `imagegen` skill and read [image-workflow.md](references/image-workflow.md). Create the actual screen mockups with image generation; do not substitute HTML/CSS, SVG, canvas drawings, or browser captures unless the user explicitly chooses that production method. The HTML viewer presents the generated images; it is not a substitute image renderer.
+Read [catalog.md](references/catalog.md) when preparing or editing `flow.json`. For new screen designs, use the [bundled image-generation guide](embedded/image-generation/GUIDE.md) with the available image tool and read [image-workflow.md](references/image-workflow.md). Create the actual screen mockups with image generation; do not substitute HTML/CSS, SVG, canvas drawings, or browser captures unless the user explicitly chooses that production method. The HTML viewer presents the generated images; it is not a substitute image renderer.
 
 Generate independent screen images **in parallel**, with one image-generation call per screen and bounded concurrency supported by the current harness. Define the catalog, shared visual direction, and exact copy first. A representative anchor can precede dependent screens; generate the independent screens within each batch concurrently. Reuse existing screenshots and user-provided mockups for unchanged screens. Parallel tool calls do not require subagents or a CLI/API backend; follow the session's separate authorization rules for those mechanisms.
 
@@ -46,7 +51,7 @@ For changes to the helper itself, run `node --test "$SKILL_DIR/scripts/review.te
 
 The starter contains an empty catalog rather than fake completed screens. Add `meta.entryScreenIds`, section definitions, screens, and one flow with explicit grid coordinates. Use `meta.defaultMode` to choose `all` or `graph`; URL parameters override it. Theme the review shell through `viewer.css` only when requested or useful. The app designs themselves remain separate images.
 
-Serve the artifact over HTTP because the viewer fetches `flow.json`. Prefer the project's existing local server and observe its port conventions. If needed, serve only the output directory on loopback using an available port. Never expose the repository root merely to preview an artifact. In Orca, follow the installed `orca-cli` browser instructions, establish this session's workspace, and pin subsequent commands to its page ID; otherwise use the environment's approved browser workflow.
+Serve the artifact over HTTP because the viewer fetches `flow.json`. Prefer the project's existing local server and observe its port conventions. If needed, serve only the output directory on loopback using an available port. Never expose the repository root merely to preview an artifact. Follow the [bundled browser runtime guide](embedded/browser-runtime/GUIDE.md). In Orca, establish this session's workspace, and pin subsequent commands to its page ID; otherwise use the environment's approved browser workflow.
 
 ## Verify the review, then hand it back
 

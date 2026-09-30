@@ -5,6 +5,11 @@ description: "Initialize project asset style guides, then create and integrate c
 
 # Image Assets
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 Own image art direction and production through a usable saved asset. When called by `ui-design`, remain its supporting workflow: return the finished images and integration evidence without restarting screen discovery. Follow the user's language and project locale for communication and product copy; maintain instructions and prompt records in English unless requested otherwise.
 
 ## Project setup and init
@@ -36,7 +41,7 @@ Use the current project's guide and reference images. For a selected glossy 3D f
 
 For a requested asset or assets needed by an authorized UI implementation, proceed with creation, necessary background removal, edge cleanup, resizing, saving and integration. These are part of the deliverable; do not ask for a separate confirmation for each production step. A read-only review does not authorize new images. Optional full-screen concept mockups and additional style exploration follow the parent workflow's opt-in rule. Do not generate a gallery merely because several templates exist.
 
-Use the installed `imagegen` skill as the execution backend, or the user's explicitly selected image tool/skill. Read its instructions when generating. Prefer the exposed built-in generation tool; use its actual input schema and report only tool/model metadata that is available. Do not promise a model from a prompt preference. Do not install tools or dependencies, switch to a separate paid API/CLI, publish, or broaden the asset batch without the applicable authorization. Loading a supporting skill does not require spawning a subagent.
+Use the [bundled image-generation guide](embedded/image-generation/GUIDE.md) with the available built-in tool or the user's explicitly selected image backend. Follow the active environment's tool-specific instructions when generating. Prefer the exposed built-in generation tool; use its actual input schema and report only tool/model metadata that is available. Do not promise a model from a prompt preference. Do not install tools or dependencies, switch to a separate paid API/CLI, publish, or broaden the asset batch without the applicable authorization. Loading a supporting skill does not require spawning a subagent.
 
 Compose the final prompt from the chosen style recipe, delivery recipe and text mode; fill task fields and omit irrelevant lines. Supply inspected references where supported, labeling their roles. For edits, enumerate what must remain unchanged. For a collection, hold the style lock constant across separate assets and vary only the requested subjects. Default changing/personalized content and functional controls to live UI. Static titles or complete banner copy may belong in the image when selected; verify exact lettering and provide actual accessible actions and the responsive/text-size behavior in [text in images](references/text-in-images.md).
 

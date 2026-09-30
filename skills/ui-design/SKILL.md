@@ -5,34 +5,39 @@ description: "Design and implement web or native UI using project settings first
 
 # UI Design
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 ## Korean product-copy review
 
-When creating, changing, or reviewing Korean words or sentences in this workflow, resolve the separately installed `humanize-korean` skill and follow its `references/ui-copy-review.md` integration (normally under `~/.agents/skills/humanize-korean`) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
+When creating, changing, or reviewing Korean words or sentences in this workflow, follow the [bundled Korean UI-copy review](embedded/humanize-korean/references/ui-copy-review.md) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
 
 
 Write agent instructions and maintained guides in English. User-facing communication and product copy follow the user’s requested language and the project locale; Korean examples are references, not a global language restriction.
 
 Use this design precedence throughout: **explicit user direction → established project design settings → IKY defaults → optional supporting references**. Project settings include design documents, configured tokens and themes, reusable components, branding, locale, and established conventions. Use IKY to fill unspecified decisions; do not restyle an existing project merely to match IKY. An isolated implementation defect is not automatically an intentional project convention.
 
-When IKY is part of the effective project contract, resolve root `DESIGN.md` or the project's existing named authority before applying its defaults. Use IKY's [project setup and override workflow](../iky-design/references/project-setup.md) for explicit initialization or continuing project-specific decisions. Store active overrides there with scope and decision provenance; `.ui-design/` briefs link the authority instead of creating another override ledger. Preserve legacy records and independent non-IKY design contracts; ordinary UI work does not force setup, migration or adoption.
+When IKY is part of the effective project contract, resolve root `DESIGN.md` or the project's existing named authority before applying its defaults. Use IKY's [project setup and override workflow](embedded/iky-design/references/project-setup.md) for explicit initialization or continuing project-specific decisions. Store active overrides there with scope and decision provenance; `.ui-design/` briefs link the authority instead of creating another override ledger. Preserve legacy records and independent non-IKY design contracts; ordinary UI work does not force setup, migration or adoption.
 
 ## IKY single source of truth
 
-Read [iky-design](../iky-design/SKILL.md) when exploration, implementation, or review requires design decisions, changes to visual rules or interaction, or resolution of uncertain design behavior. It supplies the default foundation beneath project settings. For bounded edits reusing established components and tokens, inspect the affected behavior and rendered state without opening the full reference/audit workflow. Reuse relevant guidance already read. Preserve detailed design documentation and record actual scoped overrides rather than copying or silently changing tokens.
+Read [iky-design](embedded/iky-design/GUIDE.md) when exploration, implementation, or review requires design decisions, changes to visual rules or interaction, or resolution of uncertain design behavior. It supplies the default foundation beneath project settings. For bounded edits reusing established components and tokens, inspect the affected behavior and rendered state without opening the full reference/audit workflow. Reuse relevant guidance already read. Preserve detailed design documentation and record actual scoped overrides rather than copying or silently changing tokens.
 
-After changes to visual rules, interaction, materials, or unresolved design behavior, run the applicable scope of [iky-design-audit](../iky-design-audit/SKILL.md). For bounded edits using established components and tokens, use targeted checks of the affected behavior and rendered state. Retain pass/fail/unverified/not-applicable evidence for the checks actually required. A successful web build does not establish native visual parity. Neither path starts a new approval round for an already selected direction.
+After changes to visual rules, interaction, materials, or unresolved design behavior, run the applicable scope of [iky-design-audit](embedded/iky-design-audit/GUIDE.md). For bounded edits using established components and tokens, use targeted checks of the affected behavior and rendered state. Retain pass/fail/unverified/not-applicable evidence for the checks actually required. A successful web build does not establish native visual parity. Neither path starts a new approval round for an already selected direction.
 
-For changes to card materials, gradients, button surfaces or trailing icons, follow IKY's [material reconstruction recipes](../iky-design/references/component-recipes.md) and [scoped regression matrix](../iky-design-audit/references/audit.md). Preserve background ownership across the full surface, distinct light roles and reserved text/icon layout space. Verify actual renderer geometry and output; a platform adapter must not silently change the visual contract. Keep numeric values in IKY's SSOT rather than copying another palette or radius into this workflow.
+For changes to card materials, gradients, button surfaces or trailing icons, follow IKY's [material reconstruction recipes](embedded/iky-design/references/component-recipes.md) and [scoped regression matrix](embedded/iky-design-audit/references/audit.md). Preserve background ownership across the full surface, distinct light roles and reserved text/icon layout space. Verify actual renderer geometry and output; a platform adapter must not silently change the visual contract. Keep numeric values in IKY's SSOT rather than copying another palette or radius into this workflow.
 
 When a user approves a design correction, carry it into the canonical project rules. Update portable skill snapshots only when portable IKY maintenance is explicitly in scope; a project override must not silently become a global default. Preserve detailed tables, examples and exceptions. Compare manifests after synchronization, and retain earlier captures under their original revision; updated guidance does not retroactively certify native or web parity.
 
 For surface-palette changes, route to IKY COLOR-01 and DEPTH-02: keep the restrained indigo dark foundation, material gradients and glass fill consistent while retaining near-white light surfaces. Follow explicit project overrides; do not introduce a separate palette in this workflow. Include retained examples and displayed/copied tokens in the appearance checks.
 
-For semantic button emphasis, apply the user-selected **09+04 gradient-corner** recipe under IKY COLOR-03 / CONTROL-07 / DEPTH-06. Read the [recipe](../iky-design/references/component-recipes.md#semantic-gradient-corner-buttons) and [tokens](../iky-design/references/tokens.json): neutral faces and appearance-specific neutral labels, directional gradient borders, aligned corner light, and neutral contact depth. This replaces the saturated filled-face and three-strength colored-shadow explorations. Preserve focus, disabled, busy repeat blocking, stable geometry, interruptible hover/press transitions and reduced motion. Measure actual composed contrast and verify both appearances; source integrity does not certify browser or native appearance. Explicitly filled brand-pink actions retain their separate white foreground rule. Keep numeric values in IKY and apply project overrides first.
+For semantic button emphasis, apply the user-selected **09+04 gradient-corner** recipe under IKY COLOR-03 / CONTROL-07 / DEPTH-06. Read the [recipe](embedded/iky-design/references/component-recipes.md#semantic-gradient-corner-buttons) and [tokens](embedded/iky-design/references/tokens.json): neutral faces and appearance-specific neutral labels, directional gradient borders, aligned corner light, and neutral contact depth. This replaces the saturated filled-face and three-strength colored-shadow explorations. Preserve focus, disabled, busy repeat blocking, stable geometry, interruptible hover/press transitions and reduced motion. Measure actual composed contrast and verify both appearances; source integrity does not certify browser or native appearance. Explicitly filled brand-pink actions retain their separate white foreground rule. Keep numeric values in IKY and apply project overrides first.
 
 For IKY appearance setup, use its system/light/dark preference contract and light/dark semantic material sets. Consult THEME-01–04 and the appearance recipes; do not assume IKY means dark-only or reuse a product example's brand as the design-system identity. Verify overlays and component states as well as the page background in both appearances.
 
-Open IKY's [bundled interactive sheet](../iky-design/assets/reference/index.html) when visual or interaction decisions require comparison with its examples, when reconstructing materials, or when investigating a fidelity discrepancy. Compare the relevant states and retain their evidence; bounded reuse of established components does not require reopening the sheet. Its local assets and manifest are the portable reference, and a localhost URL from another session is not.
+Open IKY's [bundled interactive sheet](embedded/iky-design/assets/reference/index.html) when visual or interaction decisions require comparison with its examples, when reconstructing materials, or when investigating a fidelity discrepancy. Compare the relevant states and retain their evidence; bounded reuse of established components does not require reopening the sheet. Its local assets and manifest are the portable reference, and a localhost URL from another session is not.
 
 ### IKY scope and reuse
 
@@ -44,9 +49,9 @@ For light appearance and controls, route to THEME-05, DEPTH-05 and LAYOUT-04: ne
 
 ## Popup and bottom-sheet workflow
 
-When implementing or reviewing confirmations, sheets, dialogs or operation feedback, read IKY's [overlay behavior contract](../iky-design/references/overlay-behavior.md) (OVERLAY-01–06). Identify the user task and target environment before choosing a component. Trace existing imports, Alert shims and overlay providers; reuse the shared semantic confirmation anatomy rather than styling each call site independently.
+When implementing or reviewing confirmations, sheets, dialogs or operation feedback, read IKY's [overlay behavior contract](embedded/iky-design/references/overlay-behavior.md) (OVERLAY-01–06). Identify the user task and target environment before choosing a component. Trace existing imports, Alert shims and overlay providers; reuse the shared semantic confirmation anatomy rather than styling each call site independently.
 
-Compare equivalent actions within the affected feature, including request/withdrawal and failure/return. Apply the project's recorded host policy or the IKY selection matrix; mobile/desktop adaptation can change the host while preserving content/action semantics. Check actual secondary/primary styling, content height, keyboard space and all dismissal routes while pending. Use [the overlay audit matrix](../iky-design-audit/references/audit.md#overlay-consistency-and-lifecycle); keep source findings and target-runtime verification distinct.
+Compare equivalent actions within the affected feature, including request/withdrawal and failure/return. Apply the project's recorded host policy or the IKY selection matrix; mobile/desktop adaptation can change the host while preserving content/action semantics. Check actual secondary/primary styling, content height, keyboard space and all dismissal routes while pending. Use [the overlay audit matrix](embedded/iky-design-audit/references/audit.md#overlay-consistency-and-lifecycle); keep source findings and target-runtime verification distinct.
 
 A request to investigate globally authorizes a caller inventory and ranked findings, not an automatic application-wide rewrite. When migration is authorized, group callers by task semantics and preserve asynchronous and platform lifecycle behavior. Portable skill maintenance updates the guidance and integrity records; product implementation, visual reference recapture and deployment remain separate scopes unless requested.
 
@@ -118,29 +123,29 @@ Declare each subject's target `preview.viewport`; keep portrait mobile frames se
 
 IKY is the default foundation beneath project settings. Apple Design and other expertise are optional support, loaded only for the current problem; they do not override the effective design contract. Keep one primary workflow. A supporting skill does not start a new design-system setup, interview, or approval process.
 
-| Need | Installed skill |
+| Need | Bundled support |
 |---|---|
-| Supplemental Apple interaction or spatial guidance | `apple-design` |
-| Keyboard, focus, forms, accessibility | `better-accessibility` |
-| Grouping, layout, responsive behavior | `better-layout` |
-| Korean type, numbers, wrapping | `better-typography` |
-| Color roles, themes, contrast | `better-colors` |
-| Labels, errors, instructions | `better-writing` |
-| Component craft and purposeful motion | `better-ui`; `emil-design-eng` when useful |
-| Requested holistic review | `better-interface` |
-| Motion review or improvement plan | `review-animations`, `improve-animations` |
-| Existing/requested component library | `shadcn`, `daisyui`, or `magic-ui` |
-| Illustrations, backgrounds, textures and image-led cards | `image-assets`, using `imagegen` or the user's selected generation backend |
+| Supplemental Apple interaction or spatial guidance | [apple-design](embedded/apple-design/GUIDE.md) |
+| Keyboard, focus, forms, accessibility | [better-accessibility](embedded/better-accessibility/GUIDE.md) |
+| Grouping, layout, responsive behavior | [better-layout](embedded/better-layout/GUIDE.md) |
+| Korean type, numbers, wrapping | [better-typography](embedded/better-typography/GUIDE.md) |
+| Color roles, themes, contrast | [better-colors](embedded/better-colors/GUIDE.md) |
+| Labels, errors, instructions | [better-writing](embedded/better-writing/GUIDE.md) |
+| Component craft and purposeful motion | [better-ui](embedded/better-ui/GUIDE.md); [emil-design-eng](embedded/emil-design-eng/GUIDE.md) when useful |
+| Requested holistic review | [better-interface](embedded/better-interface/GUIDE.md) |
+| Motion review or improvement plan | [review-animations](embedded/review-animations/GUIDE.md), [improve-animations](embedded/improve-animations/GUIDE.md) |
+| Existing/requested component library | [component-library integration](embedded/component-libraries/GUIDE.md) for shadcn/ui, daisyUI, or Magic UI |
+| Illustrations, backgrounds, textures and image-led cards | [image-assets](embedded/image-assets/GUIDE.md), with its bundled image-generation guide and the selected runtime tool |
 
-Do not install missing skills automatically. Respect existing platform features and project patterns. UI Craft, OMD, Impeccable, and aesthetic presets are explicitly selected alternatives.
+Use the bundled support rather than requiring separate skill installations. Component packages and execution tools are not bundled; respect existing platform features, project patterns, and installation authorization. UI Craft, OMD, Impeccable, and aesthetic presets are explicitly selected alternatives.
 
 ### Image assets as part of UI design
 
-Own the complete composition: layout, live text, imagery, interactions and integration. When the requested design needs imagery, load [image-assets](../image-assets/SKILL.md); skill routing means reading and applying its workflow, not automatically spawning an agent. It handles style selection, generation, processing and deliverable verification while `ui-design` remains the primary workflow.
+Own the complete composition: layout, live text, imagery, interactions and integration. When the requested design needs imagery, load [image-assets](embedded/image-assets/GUIDE.md); skill routing means reading and applying its workflow, not automatically spawning an agent. It handles style selection, generation, processing and deliverable verification while `ui-design` remains the primary workflow.
 
 1. Inspect project assets and their current guide, then decide whether to reuse an image, use existing vectors/code, or create a raster asset. Use the existing project asset contract; new guides default to `ASSET_GUIDE.md` at the project root, while existing locations such as `assets/ASSET_GUIDE.md` remain valid. When a continuing collection needs a guide, follow `image-assets` project setup/init to derive project colors and style, recording only unresolved decisions. Do not overwrite an existing guide or ask for setup on every invocation. Identify a concrete visual purpose; do not add imagery to every screen or generate a placeholder gallery.
 2. Hand over the subject/meaning, effective project style and inspected references, actual placement/size/crops, text and action locations, output path and requested scope. Choose art style separately from delivery: a soft 3D object and its scene background may share materials but have different alpha and composition rules.
-3. Design text and imagery together. Use [image-assets text modes](../image-assets/references/text-in-images.md) for live text, a hybrid with illustrated lettering, or a complete banner with baked-in copy. Do not ban image typography categorically. Use the current user choice and project contract; keep content accurate and actual actions accessible at all supported sizes.
+3. Design text and imagery together. Use [image-assets text modes](embedded/image-assets/references/text-in-images.md) for live text, a hybrid with illustrated lettering, or a complete banner with baked-in copy. Do not ban image typography categorically. Use the current user choice and project contract; keep content accurate and actual actions accessible at all supported sizes.
 4. In direct implementation or after selection/design delegation, create the images needed for the scoped outcome and complete necessary cutout cleanup, optimization, repository saving and consuming-code integration without a separate routine approval round. Reuse accepted assets across variants where suitable. Optional concept mockups, extra image batches, dependency installation and backend/API changes retain their own boundaries. Review-only work remains read-only.
 5. Resume the screen implementation with the returned files. Verify actual image placement, crop/alpha, copy readability, hit targets, relevant appearance/text-size states and target platforms. If creation is unavailable, continue independent work, record the missing deliverable and report the limitation; do not call the UI complete with a fabricated asset.
 

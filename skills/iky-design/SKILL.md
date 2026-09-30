@@ -4,9 +4,14 @@ description: Initialize project IKY guides, record scoped overrides, and apply t
 ---
 # IKY Design
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 ## Korean product-copy review
 
-When creating, changing, or reviewing Korean words or sentences in this workflow, resolve the separately installed `humanize-korean` skill and follow its `references/ui-copy-review.md` integration (normally under `~/.agents/skills/humanize-korean`) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
+When creating, changing, or reviewing Korean words or sentences in this workflow, follow the [bundled Korean UI-copy review](embedded/humanize-korean/references/ui-copy-review.md) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
 
 
 ## Authority and project defaults
@@ -36,7 +41,7 @@ Use this as the design contract alongside the selected implementation workflow. 
 1. Identify the actual screen, state, platform and existing runtime. Locate a project IKY spec if present; compare its version/hash with [manifest](references/manifest.json). Report drift; do not silently regenerate an accepted reference from the implementation.
 2. Map components to stable rule IDs. Preserve detailed source documentation and build actual interactive controls in the target stack. Reuse the existing platform dependencies. Keep numbers, semantics and state ownership explicit.
 3. Match tokens, supported font weights, dimensions, surface layers and motion. Keep typography roles separate from raw values. Any renderer fallback requires explicit platform verification.
-4. Run scoped behavior, accessibility and visual comparison. Use `iky-design-audit` when available; its standalone rubric is also bundled in [audit](references/audit.md). Audit only relevant scope, but mark untested required targets unverified.
+4. Run scoped behavior, accessibility and visual comparison. Use the self-contained rubric in [audit](references/audit.md); the separate `iky-design-audit` entrypoint is optional and is not required to perform these checks. Audit only relevant scope, but mark untested required targets unverified.
 5. Report implemented work, evidence and unresolved differences. Never claim identical native output from web screenshots or successful typechecking alone.
 
 For exact component composition and required states, read [component recipes](references/component-recipes.md). The [complete sheet fixture](references/reference-sheet.json) preserves every section and product example without abridgement; consult relevant sections when reconstructing or auditing the gallery. Its product strings do not impose a project language.

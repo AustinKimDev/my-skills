@@ -1,0 +1,168 @@
+:root {
+  --iky-canvas: #0b0b10;
+  --iky-surface: #111119;
+  --iky-card: #171720;
+  --iky-muted: #20202a;
+  --iky-border: rgba(255,255,255,0.1);
+  --iky-borderStrong: #3f3f46;
+  --iky-text: #f9fafb;
+  --iky-secondary: #a1a1aa;
+  --iky-brand: #fe3a8f;
+  --iky-action: #fe3a8f;
+  --iky-pressed: #ed2b80;
+  --iky-onAction: #ffffff;
+  --iky-error: #ffadbf;
+  --iky-success: #92dfb5;
+  --iky-warning: #efc988;
+  --iky-panel-start: #1c1c26;
+  --iky-panel-end: #16161f;
+  --iky-card-start: #20202a;
+  --iky-card-end: #171720;
+  --iky-glass-fill: rgba(32,32,42,0.82);
+  --iky-shadow-panel: inset 0 1px 0 #ffffff18, 0 2px 4px #0004, 0 12px 28px #0003;
+  --iky-shadow-card: inset 0 1px 0 #ffffff18, 0 2px 3px #0005, 0 8px 16px #0004, 0 20px 36px #0003;
+  --iky-shadow-floating: inset 0 1px 0 #ffffff18, 0 1px 2px #0008, 0 8px 16px #0004, 0 24px 40px #0006;
+  --iky-shadow-input: inset 0 2px 4px #0005, inset 0 1px 2px #0003, 0 1px 0 #ffffff0c;
+  --iky-shadow-control: inset 0 1px 0 #ffffff40, 0 1px 2px #0005, 0 4px 8px #0004, 0 10px 18px #0003;
+}
+:root[data-theme="light"] {
+  --iky-canvas: #fafafa;
+  --iky-surface: #fefefe;
+  --iky-card: #ffffff;
+  --iky-muted: #f2f2f2;
+  --iky-border: rgba(24,24,27,0.12);
+  --iky-borderStrong: #d4d4d8;
+  --iky-text: #18181b;
+  --iky-secondary: #52525b;
+  --iky-brand: #fe3a8f;
+  --iky-action: #fe3a8f;
+  --iky-pressed: #ed2b80;
+  --iky-onAction: #ffffff;
+  --iky-error: #be123c;
+  --iky-success: #166534;
+  --iky-warning: #92400e;
+  --iky-panel-start: #ffffff;
+  --iky-panel-end: #fefefe;
+  --iky-card-start: #ffffff;
+  --iky-card-end: #f2f2f2;
+  --iky-glass-fill: rgba(255,255,255,0.88);
+  --iky-shadow-panel: inset 0 1px 0 #ffffff, 0 2px 4px #18181b08, 0 12px 28px #18181b0a;
+  --iky-shadow-card: inset 0 1px 0 #ffffff, 0 1px 2px #18181b0d, 0 4px 10px #18181b0a, 0 12px 24px #18181b0a;
+  --iky-shadow-floating: inset 0 1px 0 #ffffff, 0 2px 4px #18181b14, 0 12px 28px #18181b1a;
+  --iky-shadow-input: inset 0 1px 2px #18181b0d, 0 1px 0 #ffffff;
+  --iky-shadow-control: inset 0 1px 0 #ffffff70, 0 1px 2px #18181b14, 0 4px 8px #18181b12, 0 10px 18px #18181b0d;
+}
+:root {
+  --iky-button-face: 44px;
+  --iky-button-radius: 12px;
+  --iky-button-font: 14px;
+  --iky-button-transition: 150ms;
+}
+:root {
+  --iky-button-surface: #20202a;
+  --iky-button-foreground: #f9fafb;
+  --iky-button-line: #ffffff25;
+  --iky-button-min-width: 128px;
+  --iky-button-padding-inline: 18px;
+  --iky-button-padding-block: 10px;
+  --iky-button-line-height: 20px;
+  --iky-button-font-weight: 600;
+  --iky-button-gap: 8px;
+  --iky-button-icon: 18px;
+  --iky-button-corner-opacity: 0.7;
+  --iky-button-corner-active-opacity: 1;
+  --iky-button-duration: 220ms;
+  --iky-button-press-duration: 120ms;
+  --iky-button-easing: cubic-bezier(.22, 1, .36, 1);
+  --iky-button-disabled-fill: #20202a;
+  --iky-button-disabled-foreground: #a1a1aa;
+  --iky-button-disabled-border: #ffffff25;
+  --iky-button-disabled-opacity: 0.58;
+  --iky-button-shadow-rest: inset 0 1px 0 #ffffff18, 0 1px 2px #0005, 0 3px 6px #0003, 0 0 0 #0000;
+  --iky-button-shadow-hover: inset 0 1px 0 #ffffff25, 0 1px 2px #0005, 0 4px 8px #0004, 0 0 0 #0000;
+  --iky-button-shadow-pressed: inset 0 2px 3px #0005, 0 1px 0 #ffffff0c, 0 0 0 #0000, 0 0 0 #0000;
+}
+:root [data-iky-tone="brand"] {
+  --iky-tone-accent-rgb: 254 58 143;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root [data-iky-tone="positive"] {
+  --iky-tone-accent-rgb: 74 222 128;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root [data-iky-tone="danger"] {
+  --iky-tone-accent-rgb: 251 113 133;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root [data-iky-tone="warning"] {
+  --iky-tone-accent-rgb: 251 191 36;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root [data-iky-tone="info"] {
+  --iky-tone-accent-rgb: 96 165 250;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root [data-iky-tone="neutral"] {
+  --iky-tone-accent-rgb: 161 161 170;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .85), rgb(var(--iky-tone-accent-rgb) / .5) 48%, rgb(var(--iky-tone-accent-rgb) / .3) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] {
+  --iky-button-surface: #ffffff;
+  --iky-button-foreground: #18181b;
+  --iky-button-line: #d4d4d8;
+  --iky-button-min-width: 128px;
+  --iky-button-padding-inline: 18px;
+  --iky-button-padding-block: 10px;
+  --iky-button-line-height: 20px;
+  --iky-button-font-weight: 600;
+  --iky-button-gap: 8px;
+  --iky-button-icon: 18px;
+  --iky-button-corner-opacity: 0.7;
+  --iky-button-corner-active-opacity: 1;
+  --iky-button-duration: 220ms;
+  --iky-button-press-duration: 120ms;
+  --iky-button-easing: cubic-bezier(.22, 1, .36, 1);
+  --iky-button-disabled-fill: #ffffff;
+  --iky-button-disabled-foreground: #52525b;
+  --iky-button-disabled-border: #d4d4d8;
+  --iky-button-disabled-opacity: 0.58;
+  --iky-button-shadow-rest: inset 0 1px 0 #fff, 0 1px 2px #18181b12, 0 3px 6px #18181b09, 0 0 0 #0000;
+  --iky-button-shadow-hover: inset 0 1px 0 #fff, 0 1px 2px #18181b18, 0 4px 8px #18181b10, 0 0 0 #0000;
+  --iky-button-shadow-pressed: inset 0 2px 3px #18181b18, 0 1px 0 #fff, 0 0 0 #0000, 0 0 0 #0000;
+}
+:root[data-theme="light"] [data-iky-tone="brand"] {
+  --iky-tone-accent-rgb: 219 39 119;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] [data-iky-tone="positive"] {
+  --iky-tone-accent-rgb: 22 163 74;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] [data-iky-tone="danger"] {
+  --iky-tone-accent-rgb: 225 29 72;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] [data-iky-tone="warning"] {
+  --iky-tone-accent-rgb: 217 119 6;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] [data-iky-tone="info"] {
+  --iky-tone-accent-rgb: 37 99 235;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}
+:root[data-theme="light"] [data-iky-tone="neutral"] {
+  --iky-tone-accent-rgb: 113 113 122;
+  --iky-button-border-gradient: linear-gradient(125deg, rgb(var(--iky-tone-accent-rgb) / .9), rgb(var(--iky-tone-accent-rgb) / .55) 48%, rgb(var(--iky-tone-accent-rgb) / .35) 100%);
+  --iky-button-corner-gradient: radial-gradient(ellipse at 0 0, rgb(var(--iky-tone-accent-rgb) / .26), rgb(var(--iky-tone-accent-rgb) / .07) 40%, transparent 72%);
+}

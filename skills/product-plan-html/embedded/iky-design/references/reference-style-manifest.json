@@ -1,0 +1,17 @@
+{
+  "sourceDigest": "f4373dace88935a8a79b066e95782b1cc69486082c5fcc4504ded16c8c37baf1",
+  "viewports": {
+    "390": {
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "fontStatus": "loaded"
+    },
+    "1280": {
+      "width": 1280,
+      "height": 844,
+      "dpr": 1,
+      "fontStatus": "loaded"
+    }
+  }
+}

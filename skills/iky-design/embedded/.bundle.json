@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "root": "iky-design",
+  "modules": [
+    "browser-runtime",
+    "humanize-korean"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    },
+    "humanize-korean": {
+      "LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",
+      "SKILL.md": "7a60c8240218ac7a3cb15f26f0824a682958cdc0475ba2d828c8375edc870569",
+      "references/ai-tell-taxonomy.md": "9215ced84745fc5e03220e6f47df65f4d7f62d0aaf6548c30b939cfb6043e557",
+      "references/quick-rules.md": "a54d695b00175ed89c0c8f72c1db09506e873257c7001e4e3f9fc6c9a72ce9e0",
+      "references/rewriting-playbook.md": "e070d5ed259812cb939bf18d12bf2602aab635124d2244280229d2c7ba1b559f",
+      "references/ui-copy-review.md": "2be6ffb2ad6b03599a809d007b78dac46c9bac185c8280035a093b93100ebe4d"
+    }
+  },
+  "files": {
+    "embedded/SOURCES.json": "db7e9b90fe533efe9e544a8a9918d61a39b46e6910b51e1e872fc485f7b38f2d",
+    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/references/dependencies.md": "4760947ebaae795eb63b7ebba7173abb29286e6c7725960e770979532934ab3b",
+    "embedded/humanize-korean/GUIDE.md": "0cfa6faf47e35bcd48c3ec66d27da16b9a675caa46fbe267b295ce872f277182",
+    "embedded/humanize-korean/LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",
+    "embedded/humanize-korean/references/ai-tell-taxonomy.md": "9215ced84745fc5e03220e6f47df65f4d7f62d0aaf6548c30b939cfb6043e557",
+    "embedded/humanize-korean/references/dependencies.md": "f2c19ff12c7ef61d6cd0abc7343567bb805d33119629ae2a769b94abb6ea1965",
+    "embedded/humanize-korean/references/quick-rules.md": "a54d695b00175ed89c0c8f72c1db09506e873257c7001e4e3f9fc6c9a72ce9e0",
+    "embedded/humanize-korean/references/rewriting-playbook.md": "e070d5ed259812cb939bf18d12bf2602aab635124d2244280229d2c7ba1b559f",
+    "embedded/humanize-korean/references/ui-copy-review.md": "2be6ffb2ad6b03599a809d007b78dac46c9bac185c8280035a093b93100ebe4d",
+    "references/dependencies.md": "64b99de18791b7963b5857f9ddc5db2aca7dc88822ab0975c9aed069a67183c8"
+  }
+}

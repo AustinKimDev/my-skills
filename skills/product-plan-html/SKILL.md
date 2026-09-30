@@ -5,12 +5,17 @@ description: Create and maintain readable product planning HTML documents from M
 
 # Product Plan HTML
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 Turn an established plan into a readable local document. The included shell follows a sidebar-and-sections reference: restrained neutral surfaces, one accent, descriptive feature blocks, expandable details, tables, search, themes, and print. Preserve a different reference or brand when the user selects one.
 
 ## Work from the current plan
 
 - Use the current conversation, authoritative planning documents and verified tracker mapping. Preserve accepted decisions; label proposals, open questions, observed code and deployment evidence separately.
-- For new unresolved product decisions, use the available product-planning workflow only when needed. Formatting a plan does not authorize new policies, implementation, tracker mutations, or publication.
+- For new unresolved product decisions, use the [bundled product-planner](embedded/product-planner/GUIDE.md) only when needed. Formatting a plan does not authorize new policies, implementation, tracker mutations, or publication.
 - Explain each feature through its purpose, a concrete example, user flow, work scope, policies/exceptions and observable completion criteria. Keep technical investigation in a separate linked section when it obscures the user-facing explanation.
 - Split requested releases by the verified feature IDs. Keep their shared policies consistent and link sibling documents. A moved feature keeps its identity; do not silently move similarly named but different products.
 - Treat calendar dates as planning windows unless a launch commitment is explicit. Do not invent ownership, estimates, implementation status or tested capacity.
@@ -33,7 +38,7 @@ The output embeds its CSS and JavaScript, uses local system fonts, and loads no 
 ## Review the actual result
 
 - Run the renderer and inspect its reported feature and section IDs. Check local links and compare release IDs/counts against the source mapping.
-- Open the generated HTML using the session's browser workflow. Inspect desktop and narrow width, long tables, dark mode, feature search, detail controls, keyboard navigation and print preparation. A successful renderer is not visual validation.
+- Open the generated HTML using the session's browser workflow and the [bundled runtime guide](embedded/browser-runtime/GUIDE.md). Inspect desktop and narrow width, long tables, dark mode, feature search, detail controls, keyboard navigation and print preparation. A successful renderer is not visual validation.
 - Before printing, the document reveals filtered features and expands details; after printing it restores the reading state. Verify this when changing print behavior.
 - Preserve old reference URLs when possible. A superseded document should clearly link to its current release documents rather than presenting stale scope as current.
 - Deliver clickable absolute local links; browser `file:///...` addresses can be included when the user specifically needs addresses. Never claim a public URL or publish an artifact merely to make local opening convenient.

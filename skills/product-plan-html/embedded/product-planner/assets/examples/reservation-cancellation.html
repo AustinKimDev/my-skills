@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>예약 취소 정책 변경 · 기획 검토 예시</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#202329;background:#f4f4f2;line-height:1.65;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:32px 24px 64px}h1{font-size:1.9rem;line-height:1.3;margin:.25em 0}h2{font-size:1.2rem;margin:0 0 12px}h3{font-size:1rem;margin:0 0 12px}p{margin:8px 0 16px}a{color:#264c78;text-underline-offset:3px}button,input,select{font:inherit}button,.button{min-height:44px;padding:9px 16px;border:1px solid #72767c;border-radius:4px;background:white;color:#202329;cursor:pointer}button.primary{background:#2c3037;color:white}button[aria-disabled=true],button:disabled{cursor:default;opacity:.65}input,select{min-height:44px;border:1px solid #777;padding:8px 10px;background:white;color:#202329;max-width:100%}input{width:100%}:focus-visible{outline:3px solid #37618a;outline-offset:3px}header{margin-bottom:24px}.eyebrow,.muted{color:#555b63;font-size:.9rem}.badge{display:inline-block;background:#e6e7e8;border:1px solid #c9cccf;padding:2px 8px;font-size:.8rem}.notice{border-left:3px solid #666;padding:10px 16px;background:#ececea}.nav{display:flex;flex-wrap:wrap;gap:10px 20px;padding:12px 0;border-block:1px solid #c9cccf;margin:24px 0}.panel{background:white;border:1px solid #c9cccf;padding:24px;margin:20px 0}.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.specimens{display:grid;grid-template-columns:minmax(240px,360px) minmax(0,1fr);gap:28px;align-items:start}.screen{border:2px solid #777;background:#fafafa;padding:20px;max-width:380px;width:100%;min-width:0}.screen h3{border-bottom:1px solid #bbb;padding-bottom:16px}.screen label{display:block;margin-bottom:6px}.screen button{margin-top:14px}.screen .actions{display:flex;gap:8px;flex-wrap:wrap}.number{display:inline-flex;align-items:center;justify-content:center;min-width:28px;min-height:28px;padding:2px 6px;border:1px solid #777;background:#f1f2f3;font-size:.85rem;font-weight:650;text-decoration:none;margin-inline:4px}.annotated{display:flex;align-items:center;gap:8px}.annotated>input{flex:1;min-width:0}.status{border:1px solid #c5c8cb;padding:12px;margin-top:18px;min-height:78px;background:white}.state-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.state-card{border-top:2px solid #aaa;padding:12px;background:#f8f8f8}.state-card p{font-size:.92rem;margin:6px 0}.controls{display:flex;gap:16px;align-items:end;flex-wrap:wrap;border:1px dashed #999;padding:16px;margin:16px 0 24px}.controls label{display:block;font-size:.88rem}.controls legend{font-size:.9rem;color:#555}.requirements{display:grid;grid-template-columns:1fr 1fr;gap:16px}.requirement{border:1px solid #ccc;padding:20px;scroll-margin-top:20px;min-width:0}.requirement:target{outline:3px solid #37618a;background:#f6f8fa}.requirement ul{padding-left:20px;margin:8px 0 16px}.requirement li{margin:8px 0;overflow-wrap:anywhere}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #ccc;padding:10px 12px;text-align:left;vertical-align:top}th{background:#f1f1ef}.connected{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.connected .screen{max-width:none}.flow{font-size:.95rem;padding:12px 16px;background:#f0f1f1}.return{display:inline-block;margin-top:12px}footer{font-size:.9rem;color:#555}[hidden]{display:none!important}@media(max-width:760px){main{padding:20px 14px 40px}h1{font-size:1.55rem}.pair,.specimens,.requirements,.connected{grid-template-columns:1fr}.panel{padding:16px}.screen{max-width:100%}.controls{align-items:stretch}.controls>div{width:100%}.controls select{width:100%}}@media print{.controls,.nav{display:none}main{padding:0}.panel,.requirement{break-inside:avoid}.requirements{display:block}.requirement{margin-bottom:12px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="eyebrow">PRODUCT PLANNER · 완성 산출물 예시 · RC-1</p>
+<h1>예약 취소 정책 변경</h1>
+<p>화면에서 요구사항·정책·검수 기준까지 연결해 검토합니다.</p>
+<div class="notice">
+<strong>가상 사례 · 로컬 시뮬레이션</strong>
+<br>실제 서비스·계정·저장·예약과 연결되지 않습니다. 정책 선택은 설명용이며 사용자 승인이나 효과 검증을 의미하지 않습니다.</div>
+</header>
+<nav class="nav" aria-label="기획 검토 탐색">
+<a href="#summary">문제와 대안</a>
+<a href="#specimen">화면과 상태</a>
+<a href="#requirements">연결 명세</a>
+<a href="#validation">검증과 미결</a>
+<a href="../../references/examples/reservation-cancellation.md">전체 Markdown 명세</a>
+</nav>
+
+<section class="panel" id="summary">
+<h2>운영자 요청에서 본인 직접 취소로</h2>
+<p>가정한 현황: 예약자가 운영자에게 취소를 요청합니다. 변경안은 시작 전 본인 예약의 직접 취소를 허용합니다. 무료 회의실 예약이며 환불은 범위에 없습니다.</p>
+<div class="pair">
+<div>
+<h3>A · 직접 취소 <span class="badge">예시상 선택</span>
+</h3>
+<p>대기와 운영 부담을 줄인다는 가설. 시간 경계·중복·결과 미확인 처리를 정의해야 합니다.</p>
+</div>
+<div>
+<h3>B · 운영자 승인 유지</h3>
+<p>예외 조정은 유연하지만 승인 대기와 운영 처리가 계속 필요합니다.</p>
+</div>
+</div>
+<p class="flow">예약 목록 → 예약 상세 → 취소 확인 → 결과 → 목록 복귀<br>운영자 조회는 같은 예약의 상태를 확인합니다.</p>
+</section>
+<section class="panel" id="specimen">
+<h2>사용자 흐름과 운영 영향</h2>
+<p>아래 설정은 검토용입니다. 취소 확정·예약 유지·결과 확인·목록 복귀는 화면 안에서 조작합니다.</p>
+<fieldset class="controls">
+<legend>검토용 시뮬레이션 설정 · 제품 UI가 아닙니다</legend>
+<div>
+<label for="cancel-scenario">취소 처리 응답</label>
+<select id="cancel-scenario">
+<option value="success">취소 성공</option>
+<option value="failure">미적용 실패</option>
+<option value="unknown">결과 미확인</option>
+<option value="expired">확정 시 시작 시각 도달</option>
+<option value="already">이미 취소된 예약</option>
+</select>
+</div>
+<div>
+<label for="cancel-reconcile">결과 확인 응답</label>
+<select id="cancel-reconcile">
+<option value="canceled">취소됨 확인</option>
+<option value="reserved">예약됨 확인</option>
+<option value="unknown">여전히 미확인</option>
+</select>
+</div>
+<div>
+<label for="clock-state">현재 시간 조건</label>
+<select id="clock-state">
+<option value="before">시작 전</option>
+<option value="at">정확히 시작 시각</option>
+<option value="after">시작 시각 이후</option>
+</select>
+</div>
+<button id="cancel-reset" type="button">예시 초기화</button>
+</fieldset>
+<div class="specimens">
+<div class="screen" aria-label="예약자 화면">
+<div id="detail-view">
+<h3>S-DETAIL · 예약 상세</h3>
+<p>
+<strong>회의실 A · 팀 회의</strong>
+<br>예시 예약 · 본인 소유<br>시작 시각: 14:00 · 가상 시간</p>
+<p id="time-label">시간 조건: 시작 전</p>
+<p>상태: <strong id="domain-label">예약됨</strong> <a class="number" href="#req-rc-01" aria-label="1 취소 자격 명세">1</a>
+</p>
+<p id="eligibility-note">
+</p>
+<button id="cancel-start" type="button">예약 취소</button>
+<a class="number" href="#req-rc-02" aria-label="2 취소 확인과 처리 중 명세">2</a>
+<div class="status">
+<p id="cancel-status" role="status" aria-live="polite" aria-atomic="true">시작 전에는 직접 취소할 수 있어요.</p>
+<button id="cancel-check" hidden type="button">결과 확인</button>
+<a class="number" href="#req-rc-05" aria-label="5 실패와 미확인 복구 명세">5</a>
+</div>
+<button id="list-return" type="button">예약 목록으로</button>
+</div>
+<div id="confirm-view" hidden>
+<h3 tabindex="-1" id="confirm-title">S-CONFIRM · 예약 취소 확인</h3>
+<p>
+<strong>회의실 A 예약을 취소할까요?</strong>
+</p>
+<p>취소하면 되돌릴 수 없어요.</p>
+<div class="actions">
+<button id="keep" type="button">예약 유지</button>
+<button id="confirm-cancel" type="button" class="primary">예약 취소</button>
+</div>
+<p id="confirm-status" role="status" aria-live="polite">
+</p>
+<a class="return" href="#req-rc-04">4 · 확정 시 시간 경계 명세</a>
+</div>
+<div id="list-view" hidden>
+<h3 tabindex="-1" id="list-title">S-LIST · 예약 목록</h3>
+<p>회의실 A · 팀 회의<br>
+<strong id="list-status">예약됨</strong>
+</p>
+<button id="detail-return" type="button">예약 상세 보기</button>
+<a class="number" href="#req-rc-03" aria-label="3 목록과 상세 상태 명세">3</a>
+</div>
+</div>
+<div>
+<h3>분기별 기대 결과</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>기대 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>본인 · 시작 전</td>
+<td>확인 후 직접 취소</td>
+</tr>
+<tr>
+<td>정확히 시작 시각 · 이후</td>
+<td>취소 불가 · 예약 유지</td>
+</tr>
+<tr>
+<td>이미 취소됨</td>
+<td>취소됨 정리 · 중복 효과 없음</td>
+</tr>
+<tr>
+<td>확정 실패</td>
+<td>자격 재평가 후 재시도</td>
+</tr>
+<tr>
+<td>결과 미확인</td>
+<td>새 취소 대신 결과 확인</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="screen" style="margin-top:20px" aria-label="운영자 조회 화면">
+<h3>S-ADMIN · 운영자 조회 <a class="number" href="#req-rc-06" aria-label="6 운영자 영향 명세">6</a>
+</h3>
+<p>회의실 A · 예시 예약</p>
+<p id="admin-status">예약됨</p>
+<p class="muted">예시는 같은 로컬 상태를 즉시 보여줍니다. 실제 갱신 지연과 미확인 문의 처리 수단은 별도 확인합니다. 시작 후 예외 취소 권한은 추가하지 않습니다.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="panel" id="validation">
+<h2>검증과 인계 전 확인</h2>
+<p>
+<strong>연결 검수:</strong> 정상 취소, 확인 전 예약 유지, 확정 시 시간 경계, 실패 후 재시도, 결과 확인, 목록·운영 조회 상태 일치를 확인합니다.</p>
+<p>
+<strong>제품에서 확인할 경로:</strong> 권한 차단, 화면을 닫은 뒤 재진입, 서비스 시각과 시간대, 실제 결과 확인의 최종성·조회 지연. 이 로컬 예시는 해당 구현을 증명하지 않습니다.</p>
+<p>
+<strong>실제 효과 미검증:</strong> 운영 문의 감소와 취소 편의성은 가설입니다. 실제 기준치·대상·관찰 기간을 정한 뒤 검증해야 합니다.</p>
+</section>
+<section class="panel" id="requirements">
+<h2>화면 번호와 연결된 명세</h2>
+<p class="muted">요구사항·정책·검수 기준은 같은 식별자로 연결됩니다. 기준 버전: RC-1.</p>
+<div class="requirements">
+<article class="requirement" id="req-rc-01" tabindex="-1">
+<h3>RC-01 · 자격과 노출</h3>
+<ul>
+<li>정책 P-RC-01: 예약자는 본인 예약에 한해 시작 전에 직접 취소할 수 있다. 정확히 시작 시각부터는 불가하다.</li>
+<li>S-DETAIL에는 예약명·시작 시각·현재 상태와 취소 가능 여부를 함께 표시한다. 취소 불가 시 “예약 시작 후에는 취소할 수 없어요.”를 제공한다.</li>
+<li>검수 AC-RC-01: 시작 전·정확히 시작·시작 후를 구분해 확인한다. 버튼 숨김 여부만으로 권한 차단을 검증하지 않는다.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-01">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-rc-02" tabindex="-1">
+<h3>RC-02 · 취소 확인과 처리 중</h3>
+<ul>
+<li>S-CONFIRM은 대상 예약, 취소 결과, “예약 유지”와 “예약 취소”를 제공한다. 확정 전 복귀는 예약 상태를 바꾸지 않는다.</li>
+<li>확정하면 처리 중 표시와 반복 실행 차단을 적용한다. 이 예시에서는 확인 화면 안의 동작을 잠시 막는다. 브라우저·앱 자체를 닫는 행위까지 막는다고 약속하지 않는다.</li>
+<li>정책 P-RC-02: 화면을 닫았다고 진행 중 취소가 철회되지는 않는다. 재진입 시 예약 상태부터 확인한다.</li>
+<li>검수 AC-RC-02: 확인 전 예약 유지로 상세에 복귀 가능. 처리 중 추가 취소가 시작되지 않음. 재진입 경로는 실제 제품에서 별도로 확인.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-02">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-rc-03" tabindex="-1">
+<h3>RC-03 · 완료와 연결 화면</h3>
+<ul>
+<li>성공이 확인되면 “예약을 취소했어요.”와 취소됨 상태를 표시한다. 예약 목록으로 돌아가도 취소됨으로 보인다.</li>
+<li>정책 P-RC-03: 취소는 되돌리지 않는다. 이미 취소된 예약을 재취소해도 중복 부수효과가 생기지 않아야 한다.</li>
+<li>검수 AC-RC-03: S-DETAIL·S-LIST·S-ADMIN의 동일 예약 상태가 일치하며, 오래된 화면 재시도는 취소됨으로 정리된다.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-03">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-rc-04" tabindex="-1">
+<h3>RC-04 · 시간 경계와 경쟁 상황</h3>
+<ul>
+<li>취소 확정 시점의 최종 조건을 다시 판정한다. 상세를 시작 전에 열었다는 이유로 시작 이후 취소를 허용하지 않는다.</li>
+<li>거절 시 예약 상태를 유지하고 원인을 안내한다. 다시 취소 버튼을 제공하지 않는다.</li>
+<li>검수 AC-RC-04: C-02·C-05에서 예약됨이 유지된다. 서비스 시각의 기준과 표시 시간대는 실제 프로젝트 규칙 확인이 필요하다.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-04">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-rc-05" tabindex="-1">
+<h3>RC-05 · 실패·미확인·재시도</h3>
+<ul>
+<li>미적용 실패가 확인되면 “취소하지 못했어요. 예약은 유지돼요.”와 재시도를 제공한다. 재시도는 현재 자격을 다시 평가한다.</li>
+<li>결과 미확인이면 “취소 결과를 확인하지 못했어요.”와 결과 확인을 제공한다. 미확인이라는 이유로 예약 유지 또는 취소 완료라고 단정하지 않는다.</li>
+<li>결과 확인으로 취소됨 확인 → RC-03, 예약됨 확인 → 현재 시간 조건에 맞는 화면, 여전히 미확인 → 현 안내 유지.</li>
+<li>검수 AC-RC-05: 결과 확인은 새 취소를 실행하지 않는다. 반복 활성화·결과 미확인 지속·시간 경계 경과도 확인한다.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-05">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-rc-06" tabindex="-1">
+<h3>RC-06 · 운영 영향</h3>
+<ul>
+<li>기존 관리 권한을 가진 운영자는 같은 예약 상태를 조회한다. 이 변경은 시작 후 강제 취소 권한을 부여하지 않는다.</li>
+<li>운영자가 미확인 문의를 받으면 확인 가능한 예약 상태를 기준으로 안내한다. 조회할 수 없다면 해결됐다고 말하지 않는다. 새 지원 채널·응답 시간은 약속하지 않는다.</li>
+<li>검수 AC-RC-06: 운영자 조회와 사용자 목록·상세가 동일 예약 상태를 설명한다. 갱신 지연이 있다면 확인 시각을 구분하고 실제 허용 지연을 추가 합의한다.</li>
+</ul>
+<a href="../../references/examples/reservation-cancellation.md#req-rc-06">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+</div>
+</section>
+<footer>기획 예시의 품질 기준을 보여주는 자료입니다. 실제 제품 정책·구현·검증 상태는 별도로 확인합니다. <a href="save-feedback.html">다른 완성 예시 보기</a>
+</footer>
+</main>
+<script>
+'use strict';
+const byId=id=>document.getElementById(id);
+let reservation='reserved', phase='idle', view='detail', cancelTimer=null;
+const clockControl=byId('clock-state');
+function cancelEligible(){return reservation==='reserved'&&clockControl.value==='before'&&phase!=='unknown'&&phase!=='pending'&&phase!=='checking';}
+function renderCancel(){
+ byId('detail-view').hidden=view!=='detail';byId('confirm-view').hidden=view!=='confirm';byId('list-view').hidden=view!=='list';
+ const uncertain=phase==='unknown'||phase==='checking', domain=uncertain?'결과 미확인':reservation==='canceled'?'취소됨':'예약됨';
+ byId('domain-label').textContent=domain;byId('list-status').textContent=domain;
+ byId('admin-status').textContent=uncertain?'조회 결과 미확인 · 확정 상태 안내 보류':reservation==='canceled'?'취소됨':'예약됨';
+ byId('time-label').textContent='시간 조건: '+({before:'시작 전',at:'정확히 시작 시각',after:'시작 시각 이후'})[clockControl.value];
+ byId('eligibility-note').textContent=reservation==='canceled'?'이미 취소된 예약이에요.':clockControl.value!=='before'?'예약 시작 후에는 취소할 수 없어요.':'';
+ byId('cancel-start').hidden=!cancelEligible();
+ byId('cancel-start').textContent=phase==='failure'?'다시 취소':'예약 취소';
+ byId('cancel-check').hidden=!uncertain;
+ byId('cancel-check').setAttribute('aria-disabled',String(phase==='checking'));
+ byId('cancel-check').textContent=phase==='checking'?'확인 중':'결과 확인';
+ byId('keep').disabled=phase==='pending';byId('confirm-cancel').setAttribute('aria-disabled',String(phase==='pending'));
+ byId('confirm-cancel').textContent=phase==='pending'?'취소 중':'예약 취소';
+ byId('confirm-status').textContent=phase==='pending'?'예약 취소 결과를 기다리고 있어요.':'';
+ const messages={success:'예약을 취소했어요.',already:'이미 취소된 예약이에요.',failure:'취소하지 못했어요. 예약은 유지돼요.',unknown:'취소 결과를 확인하지 못했어요.',checking:'예약 상태를 확인하고 있어요.',expired:'예약 시작 후에는 취소할 수 없어요.'};
+ byId('cancel-status').textContent=messages[phase]||(reservation==='canceled'?'취소된 예약이에요.':clockControl.value==='before'?'시작 전에는 직접 취소할 수 있어요.':'예약 시작 후에는 취소할 수 없어요.');
+}
+function focusDetail(){byId('cancel-status').setAttribute('tabindex','-1');byId('cancel-status').focus();}
+byId('cancel-start').addEventListener('click',()=>{if(!cancelEligible())return;view='confirm';phase='confirm';renderCancel();byId('confirm-title').focus();});
+byId('keep').addEventListener('click',()=>{if(phase==='pending')return;view='detail';phase='idle';renderCancel();byId('cancel-start').focus();});
+byId('confirm-cancel').addEventListener('click',()=>{if(phase!=='confirm')return;phase='pending';const result=byId('cancel-scenario').value;renderCancel();cancelTimer=setTimeout(()=>{
+ view='detail';
+ if(result==='already'){reservation='canceled';phase='already';}
+ else if(result==='expired'||clockControl.value!=='before'){clockControl.value='at';phase='expired';}
+ else if(result==='success'){reservation='canceled';phase='success';}
+ else phase=result;
+ renderCancel();focusDetail();
+},650);});
+byId('cancel-check').addEventListener('click',()=>{if(phase!=='unknown')return;phase='checking';const result=byId('cancel-reconcile').value;renderCancel();cancelTimer=setTimeout(()=>{if(result==='unknown')phase='unknown';else{reservation=result;phase=result==='canceled'?'success':'idle';}renderCancel();focusDetail();},650);});
+byId('list-return').addEventListener('click',()=>{view='list';renderCancel();byId('list-title').focus();});
+byId('detail-return').addEventListener('click',()=>{view='detail';renderCancel();focusDetail();});
+clockControl.addEventListener('change',renderCancel);
+byId('cancel-reset').addEventListener('click',()=>{clearTimeout(cancelTimer);reservation='reserved';phase='idle';view='detail';clockControl.value='before';renderCancel();focusDetail();});
+renderCancel();
+</script>
+</body>
+</html>

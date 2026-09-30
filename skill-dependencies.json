@@ -1,0 +1,411 @@
+{
+  "version": 1,
+  "modules": {
+    "component-workbench": {
+      "source": "skills/component-workbench",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "ui-design",
+          "when": "Unresolved visual or interaction decisions while implementing the requested components."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Open and exercise the interactive workbench in the selected browser."
+        }
+      ]
+    },
+    "decision-report": {
+      "source": "skills/decision-report",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "browser-runtime",
+          "when": "Open the report and preserve its selection-return session."
+        }
+      ]
+    },
+    "deploy": {
+      "source": "skills/deploy",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "deploy-branch-deploy": {
+      "source": "skills/deploy-branch-deploy",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "deploy",
+          "when": "Deploy and verify the exact integrated revision after the authorized PR sequence."
+        }
+      ]
+    },
+    "develop-pr-review-merge": {
+      "source": "skills/develop-pr-review-merge",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "browser-runtime",
+          "when": "Open and verify the requested Orca change report."
+        }
+      ]
+    },
+    "iky-design": {
+      "source": "skills/iky-design",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "humanize-korean",
+          "when": "Review Korean product copy through references/ui-copy-review.md; preserve the parent workflow."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Inspect the bundled interactive reference when visual comparison is required."
+        }
+      ]
+    },
+    "iky-design-audit": {
+      "source": "skills/iky-design-audit",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-design",
+          "when": "Inspect the interactive reference and brand foreground decision when required."
+        },
+        {
+          "name": "humanize-korean",
+          "when": "Review Korean product copy through the embedded UI-copy mode."
+        }
+      ]
+    },
+    "image-assets": {
+      "source": "skills/image-assets",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "image-generation",
+          "when": "Generate or edit the authorized raster assets with an available image tool."
+        }
+      ]
+    },
+    "product-plan-html": {
+      "source": "skills/product-plan-html",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "product-planner",
+          "when": "Resolve a requested planning decision; formatting alone does not start planning."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Open and verify the generated planning document."
+        }
+      ]
+    },
+    "product-planner": {
+      "source": "skills/product-planner",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "ui-design",
+          "when": "Provide bounded visual, interaction, or accessibility support for planning; do not implement production UI."
+        }
+      ]
+    },
+    "recommend-animate": {
+      "source": "skills/recommend-animate",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "screen-flow": {
+      "source": "skills/screen-flow",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "ui-design",
+          "when": "Resolve a new design question under the existing project or selected workflow."
+        },
+        {
+          "name": "image-generation",
+          "when": "Generate or edit screen mockups in the selected production method."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Open both gallery and map and exercise the review artifact."
+        }
+      ]
+    },
+    "standup": {
+      "source": "skills/standup",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "ui-design": {
+      "source": "skills/ui-design",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-design",
+          "when": "Apply the design foundation only beneath explicit user and project settings."
+        },
+        {
+          "name": "iky-design-audit",
+          "when": "Perform the scoped audit required by changed visual or interaction rules."
+        },
+        {
+          "name": "humanize-korean",
+          "when": "Review Korean product copy using its UI-copy integration."
+        },
+        {
+          "name": "image-assets",
+          "when": "Produce imagery actually required by the requested design."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Inspect previews and changed rendered behavior."
+        },
+        {
+          "name": "component-libraries",
+          "when": "Integrate an existing or explicitly selected shadcn/ui, daisyUI, or Magic UI setup."
+        },
+        {
+          "name": "apple-design",
+          "when": "Supplemental Apple interaction or spatial guidance."
+        },
+        {
+          "name": "better-accessibility",
+          "when": "Keyboard, focus, forms, semantics, and accessibility."
+        },
+        {
+          "name": "better-layout",
+          "when": "Grouping, reading order, and responsive layout."
+        },
+        {
+          "name": "better-typography",
+          "when": "Typeface behavior, Korean wrapping, and numeric typography."
+        },
+        {
+          "name": "better-colors",
+          "when": "Color roles, themes, and measured contrast."
+        },
+        {
+          "name": "better-writing",
+          "when": "Labels, errors, instructions, and tone."
+        },
+        {
+          "name": "better-ui",
+          "when": "Component craft and purposeful motion."
+        },
+        {
+          "name": "emil-design-eng",
+          "when": "A specific design-engineering question that needs this reference."
+        },
+        {
+          "name": "better-interface",
+          "when": "A requested holistic interface review."
+        },
+        {
+          "name": "review-animations",
+          "when": "A requested motion-code review."
+        },
+        {
+          "name": "improve-animations",
+          "when": "A requested motion audit and improvement plan."
+        }
+      ]
+    },
+    "website-launch-readiness": {
+      "source": "skills/website-launch-readiness",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "apple-design": {
+      "source": "vendor/skills/apple-design",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "better-accessibility": {
+      "source": "vendor/skills/better-accessibility",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "better-colors",
+          "when": "Color/contrast questions outside this domain."
+        },
+        {
+          "name": "better-typography",
+          "when": "Visual text sizing and input zoom."
+        },
+        {
+          "name": "better-layout",
+          "when": "Spatial RTL layout."
+        }
+      ]
+    },
+    "better-colors": {
+      "source": "vendor/skills/better-colors",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "better-interface": {
+      "source": "vendor/skills/better-interface",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "better-accessibility",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        },
+        {
+          "name": "better-layout",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        },
+        {
+          "name": "better-writing",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        },
+        {
+          "name": "better-typography",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        },
+        {
+          "name": "better-colors",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        },
+        {
+          "name": "better-ui",
+          "when": "The requested holistic review includes this domain; consolidate into the parent report."
+        }
+      ]
+    },
+    "better-layout": {
+      "source": "vendor/skills/better-layout",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "better-accessibility",
+          "when": "Hit targets and focus behavior."
+        },
+        {
+          "name": "better-ui",
+          "when": "Component surface or motion craft."
+        },
+        {
+          "name": "better-typography",
+          "when": "Line length and text spacing."
+        }
+      ]
+    },
+    "better-typography": {
+      "source": "vendor/skills/better-typography",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "better-writing",
+          "when": "Actual wording rather than text rendering."
+        },
+        {
+          "name": "better-accessibility",
+          "when": "Semantic structure and accessibility."
+        },
+        {
+          "name": "better-layout",
+          "when": "Spatial RTL layout."
+        },
+        {
+          "name": "better-colors",
+          "when": "Rendered contrast and color remediation."
+        }
+      ]
+    },
+    "better-ui": {
+      "source": "vendor/skills/better-ui",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "better-typography",
+          "when": "Text rendering."
+        },
+        {
+          "name": "better-accessibility",
+          "when": "Hit targets, keyboard, focus, and reduced motion."
+        }
+      ]
+    },
+    "better-writing": {
+      "source": "vendor/skills/better-writing",
+      "kind": "third-party",
+      "dependencies": [
+        {
+          "name": "humanize-korean",
+          "when": "Korean copy only; use the UI-copy integration rather than long-form grading."
+        },
+        {
+          "name": "better-typography",
+          "when": "Text rendering."
+        },
+        {
+          "name": "better-accessibility",
+          "when": "Error markup and announcements."
+        },
+        {
+          "name": "better-layout",
+          "when": "Room for localized strings."
+        }
+      ]
+    },
+    "emil-design-eng": {
+      "source": "vendor/skills/emil-design-eng",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "humanize-korean": {
+      "source": "vendor/skills/humanize-korean",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "improve-animations": {
+      "source": "vendor/skills/improve-animations",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "review-animations": {
+      "source": "vendor/skills/review-animations",
+      "kind": "third-party",
+      "dependencies": []
+    },
+    "browser-runtime": {
+      "source": "resources/browser-runtime",
+      "kind": "runtime-guide",
+      "entry": "GUIDE.md",
+      "dependencies": []
+    },
+    "component-libraries": {
+      "source": "resources/component-libraries",
+      "kind": "runtime-guide",
+      "entry": "GUIDE.md",
+      "dependencies": []
+    },
+    "image-generation": {
+      "source": "resources/image-generation",
+      "kind": "runtime-guide",
+      "entry": "GUIDE.md",
+      "dependencies": []
+    }
+  },
+  "handoffs": {
+    "component-workbench": [
+      "screen-flow artifacts are inputs; generating new screen catalogs is outside component documentation."
+    ],
+    "product-planner": [
+      "to-prd and to-issues are explicitly separate downstream workflows, not required planning dependencies."
+    ],
+    "better-interface": [
+      "interface-review resolves separately requested version-control change reviews; it is not invoked by a screen review."
+    ]
+  },
+  "runtime_requirements": {
+    "browser-runtime": "A browser/tool and its version-matched guide, workspace access, and any required login come from the session.",
+    "image-generation": "An available image generation/editing tool comes from the session; paid backends require applicable authorization.",
+    "component-libraries": "The selected component packages and version-specific documentation belong to the project; this bundle installs no packages."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "humanize-korean": {
+    "repository": "https://github.com/epoko77-ai/im-not-ai",
+    "source_path": "Codex entrypoint and shared references",
+    "snapshot": "Installed local snapshot, including existing local adaptations; hashes identify the imported files, not an upstream checkout.",
+    "license": "MIT",
+    "license_url": "https://github.com/epoko77-ai/im-not-ai/blob/2f3d943d08056b612a92e12bfb72ea94dd2acd18/LICENSE",
+    "imported_sha256": {
+      "SKILL.md": "7a60c8240218ac7a3cb15f26f0824a682958cdc0475ba2d828c8375edc870569",
+      "references/ai-tell-taxonomy.md": "9215ced84745fc5e03220e6f47df65f4d7f62d0aaf6548c30b939cfb6043e557",
+      "references/quick-rules.md": "a54d695b00175ed89c0c8f72c1db09506e873257c7001e4e3f9fc6c9a72ce9e0",
+      "references/rewriting-playbook.md": "e070d5ed259812cb939bf18d12bf2602aab635124d2244280229d2c7ba1b559f",
+      "references/ui-copy-review.md": "2be6ffb2ad6b03599a809d007b78dac46c9bac185c8280035a093b93100ebe4d"
+    }
+  }
+}

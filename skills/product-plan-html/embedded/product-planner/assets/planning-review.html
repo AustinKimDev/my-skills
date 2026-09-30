@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>기획 검토 템플릿</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,sans-serif;color:#222;background:#f5f5f5}
+*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:24px}header,section{background:white;border:1px solid #ccc;padding:20px;margin-bottom:20px}h1{font-size:1.6rem}h2{font-size:1.2rem}p,li,dd{line-height:1.7}nav{display:flex;flex-wrap:wrap;gap:16px;margin:20px 0}a{color:#174a83}a:focus-visible{outline:3px solid #174a83;outline-offset:4px}.screens{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.screen{border:1px solid #777;padding:16px;min-width:0;overflow-wrap:anywhere}.status{font-weight:600}table{width:100%;border-collapse:collapse}td,th{padding:10px;border:1px solid #ccc;text-align:left}@media(max-width:600px){main{padding:12px}section,header{padding:16px}}@media print{nav{display:none}section{break-inside:avoid}body{background:white}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>기획 검토 템플릿</h1><p class="status">상태: 작성 전 템플릿 · 실제 기획안이 아닙니다</p><p>화면 구조와 관련 요구사항을 함께 검토하는 기본 틀입니다. 작업별 내용을 채운 뒤 사용합니다.</p></header>
+<nav aria-label="검토 항목"><a href="#summary">기획 요약</a><a href="#alternatives">대안 비교</a><a href="#screens">화면과 동작</a><a href="#validation">검증과 미결 사항</a></nav>
+<section id="summary"><h2>기획 요약</h2><div data-content="summary"></div></section>
+<section id="alternatives"><h2>대안 비교</h2><div data-content="alternatives"></div></section>
+<section id="screens"><h2>화면과 동작</h2><div class="screens" data-content="screens"></div></section>
+<section id="validation"><h2>검증과 미결 사항</h2><div data-content="validation"></div></section>
+</main>
+</body>
+</html>

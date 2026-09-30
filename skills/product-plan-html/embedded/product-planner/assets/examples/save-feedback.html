@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>저장 버튼 피드백 개선 · 기획 검토 예시</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#202329;background:#f4f4f2;line-height:1.65;color-scheme:light}
+*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:32px 24px 64px}h1{font-size:1.9rem;line-height:1.3;margin:.25em 0}h2{font-size:1.2rem;margin:0 0 12px}h3{font-size:1rem;margin:0 0 12px}p{margin:8px 0 16px}a{color:#264c78;text-underline-offset:3px}button,input,select{font:inherit}button,.button{min-height:44px;padding:9px 16px;border:1px solid #72767c;border-radius:4px;background:white;color:#202329;cursor:pointer}button.primary{background:#2c3037;color:white}button[aria-disabled=true],button:disabled{cursor:default;opacity:.65}input,select{min-height:44px;border:1px solid #777;padding:8px 10px;background:white;color:#202329;max-width:100%}input{width:100%}:focus-visible{outline:3px solid #37618a;outline-offset:3px}header{margin-bottom:24px}.eyebrow,.muted{color:#555b63;font-size:.9rem}.badge{display:inline-block;background:#e6e7e8;border:1px solid #c9cccf;padding:2px 8px;font-size:.8rem}.notice{border-left:3px solid #666;padding:10px 16px;background:#ececea}.nav{display:flex;flex-wrap:wrap;gap:10px 20px;padding:12px 0;border-block:1px solid #c9cccf;margin:24px 0}.panel{background:white;border:1px solid #c9cccf;padding:24px;margin:20px 0}.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}.specimens{display:grid;grid-template-columns:minmax(240px,360px) minmax(0,1fr);gap:28px;align-items:start}.screen{border:2px solid #777;background:#fafafa;padding:20px;max-width:380px;width:100%;min-width:0}.screen h3{border-bottom:1px solid #bbb;padding-bottom:16px}.screen label{display:block;margin-bottom:6px}.screen button{margin-top:14px}.screen .actions{display:flex;gap:8px;flex-wrap:wrap}.number{display:inline-flex;align-items:center;justify-content:center;min-width:28px;min-height:28px;padding:2px 6px;border:1px solid #777;background:#f1f2f3;font-size:.85rem;font-weight:650;text-decoration:none;margin-inline:4px}.annotated{display:flex;align-items:center;gap:8px}.annotated>input{flex:1;min-width:0}.status{border:1px solid #c5c8cb;padding:12px;margin-top:18px;min-height:78px;background:white}.state-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.state-card{border-top:2px solid #aaa;padding:12px;background:#f8f8f8}.state-card p{font-size:.92rem;margin:6px 0}.controls{display:flex;gap:16px;align-items:end;flex-wrap:wrap;border:1px dashed #999;padding:16px;margin:16px 0 24px}.controls label{display:block;font-size:.88rem}.controls legend{font-size:.9rem;color:#555}.requirements{display:grid;grid-template-columns:1fr 1fr;gap:16px}.requirement{border:1px solid #ccc;padding:20px;scroll-margin-top:20px;min-width:0}.requirement:target{outline:3px solid #37618a;background:#f6f8fa}.requirement ul{padding-left:20px;margin:8px 0 16px}.requirement li{margin:8px 0;overflow-wrap:anywhere}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #ccc;padding:10px 12px;text-align:left;vertical-align:top}th{background:#f1f1ef}.connected{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.connected .screen{max-width:none}.flow{font-size:.95rem;padding:12px 16px;background:#f0f1f1}.return{display:inline-block;margin-top:12px}footer{font-size:.9rem;color:#555}[hidden]{display:none!important}@media(max-width:760px){main{padding:20px 14px 40px}h1{font-size:1.55rem}.pair,.specimens,.requirements,.connected{grid-template-columns:1fr}.panel{padding:16px}.screen{max-width:100%}.controls{align-items:stretch}.controls>div{width:100%}.controls select{width:100%}}@media print{.controls,.nav{display:none}main{padding:0}.panel,.requirement{break-inside:avoid}.requirements{display:block}.requirement{margin-bottom:12px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="eyebrow">PRODUCT PLANNER · 완성 산출물 예시 · SF-1</p>
+<h1>저장 버튼 피드백 개선</h1>
+<p>화면에서 요구사항·정책·검수 기준까지 연결해 검토합니다.</p>
+<div class="notice">
+<strong>가상 사례 · 로컬 시뮬레이션</strong>
+<br>실제 서비스·계정·저장·예약과 연결되지 않습니다. 정책 선택은 설명용이며 사용자 승인이나 효과 검증을 의미하지 않습니다.</div>
+</header>
+<nav class="nav" aria-label="기획 검토 탐색">
+<a href="#summary">문제와 대안</a>
+<a href="#specimen">화면과 상태</a>
+<a href="#requirements">연결 명세</a>
+<a href="#validation">검증과 미결</a>
+<a href="../../references/examples/save-feedback.md">전체 Markdown 명세</a>
+</nav>
+
+<section class="panel" id="summary">
+<h2>저장 여부와 다음 행동을 알 수 있게</h2>
+<p>가정한 현황: 저장 후 처리 중 표시가 없고, 실패 시 입력을 유지하는 규칙이 없습니다. 반복 실행과 이탈을 유발한다는 것은 아직 가설입니다.</p>
+<div class="pair">
+<div>
+<h3>A · 버튼 내부 피드백</h3>
+<p>빠르게 반응을 보여주지만 실패·미확인 상태의 복구 설명에는 공간이 부족합니다.</p>
+</div>
+<div>
+<h3>B · 버튼 + 화면 안내 <span class="badge">예시상 선택</span>
+</h3>
+<p>버튼으로 진행을, 화면 안에서 결과와 복구 행동을 안내합니다. 상태 명세가 추가로 필요합니다.</p>
+</div>
+</div>
+</section>
+<section class="panel" id="specimen">
+<h2>변경 전후와 상태 확인</h2>
+<p>번호를 선택하면 관련 명세로 이동합니다. 변경 전 화면은 정적 스케치이며, 변경안은 로컬에서 조작할 수 있습니다.</p>
+<fieldset class="controls">
+<legend>검토용 시뮬레이션 설정 · 제품 UI가 아닙니다</legend>
+<div>
+<label for="scenario">저장 응답</label>
+<select id="scenario">
+<option value="success">성공 확인</option>
+<option value="failure">미적용 실패 확인</option>
+<option value="unknown">결과 미확인</option>
+</select>
+</div>
+<div>
+<label for="reconcile">결과 확인 응답</label>
+<select id="reconcile">
+<option value="success">저장됨 확인</option>
+<option value="failure">미적용 확인</option>
+<option value="unknown">여전히 미확인</option>
+</select>
+</div>
+<button id="reset" type="button">예시 초기화</button>
+</fieldset>
+<div class="pair">
+<div>
+<h3>변경 전 · 정적 스케치</h3>
+<div class="screen" aria-label="변경 전 프로필 화면">
+<h3>프로필 편집</h3>
+<p>이름</p>
+<div class="status">민지</div>
+<p>
+<span class="button">저장</span>
+</p>
+<p class="muted">처리 중·실패·복구 안내 규칙 없음<br>가정한 현황입니다.</p>
+</div>
+</div>
+<div>
+<h3>변경안 · S-SAVE</h3>
+<form class="screen" id="save-form" aria-label="변경안 프로필 화면">
+<h3>프로필 편집</h3>
+<label for="profile-name">이름</label>
+<div class="annotated">
+<input id="profile-name" value="민지" aria-describedby="input-help">
+<a class="number" href="#req-sf-03" aria-label="3 입력 유지와 재시도 명세">3</a>
+</div>
+<p id="input-help" class="muted">이름을 바꿔 저장해보세요. 예시에서는 빈 이름을 저장할 수 없습니다.</p>
+<div class="annotated">
+<button id="save" class="primary" type="submit" aria-disabled="true">저장</button>
+<a class="number" href="#req-sf-01" aria-label="1 저장 시작과 반복 실행 명세">1</a>
+</div>
+<div class="status">
+<p id="save-status" role="status" aria-live="polite" aria-atomic="true">변경한 내용이 없어요.</p>
+<button id="check-result" type="button" hidden>결과 확인</button>
+<a class="number" href="#req-sf-04" aria-label="4 결과 미확인과 복구 명세">4</a>
+<a class="number" href="#req-sf-02" aria-label="2 저장 성공 명세">2</a>
+</div>
+<a class="return" href="#req-sf-05">5 · 키보드와 화면 복귀 규칙</a>
+</form>
+</div>
+</div>
+<h3 style="margin-top:24px">관련 상태</h3>
+<div class="state-grid">
+<div class="state-card">
+<strong>처리 중</strong>
+<p>저장 중<br>입력 유지·반복 실행 차단</p>
+</div>
+<div class="state-card">
+<strong>성공</strong>
+<p>저장했어요.<br>새 편집 가능</p>
+</div>
+<div class="state-card">
+<strong>확정 실패</strong>
+<p>입력 유지<br>편집·다시 저장</p>
+</div>
+<div class="state-card">
+<strong>결과 미확인</strong>
+<p>적용 여부 단정 불가<br>결과 확인 후 다음 행동</p>
+</div>
+</div>
+</section>
+<section class="panel" id="validation">
+<h2>검증과 미결 사항</h2>
+<p>
+<strong>기능 검수:</strong> 처리 중 반복 실행, 성공 후 변경 여부, 실패 시 입력 유지, 결과 확인 후 분기를 확인합니다.</p>
+<p>
+<strong>후속 확인:</strong> 기존 저장의 결과를 확인할 수 있는지 실제 개발 확인이 필요합니다. 구현 방법은 여기서 결정하지 않습니다.</p>
+<p>
+<strong>효과 미검증:</strong> 실제 사용자·서비스 데이터가 없습니다. 상태 이해·중복 실행 시도·복구 여부를 관찰하는 계획만 제시합니다. 제품 접근성·재진입·네트워크 처리는 이 예시로 검증되지 않습니다.</p>
+</section>
+<section class="panel" id="requirements">
+<h2>화면 번호와 연결된 명세</h2>
+<p class="muted">요구사항·정책·검수 기준은 같은 식별자로 연결됩니다. 기준 버전: SF-1.</p>
+<div class="requirements">
+<article class="requirement" id="req-sf-01" tabindex="-1">
+<h3>SF-01 · 저장 시작과 반복 실행</h3>
+<ul>
+<li>조건: 변경된 유효한 입력이 있고 기존 편집 권한이 유지됨.</li>
+<li>행동: 저장 선택 → 처리 중 상태. 입력과 저장 재실행을 잠시 막고 버튼에 “저장 중”을 표시한다.</li>
+<li>UI 규칙: 포커스가 사라지거나 다른 버튼으로 임의 이동하지 않게 한다. 처리 중 상태를 보조기술에도 전달한다.</li>
+<li>예시 정책 P-SF-01: 처리 중인 동일 작업을 반복 실행하지 않는다.</li>
+<li>검수 AC-SF-01: 처리 중 다시 활성화를 시도해도 추가 작업이 시작되지 않으며 현재 입력은 유지된다.</li>
+</ul>
+<a href="../../references/examples/save-feedback.md#req-sf-01">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-sf-02" tabindex="-1">
+<h3>SF-02 · 성공</h3>
+<ul>
+<li>조건: 저장 성공이 확인됨.</li>
+<li>결과: 같은 화면에서 “저장했어요.”를 표시하고 편집을 다시 허용한다. 저장된 값을 기준으로 변경 여부를 판단한다.</li>
+<li>정책 P-SF-02: 결과를 알리기 위해 자동으로 다른 화면으로 이동하지 않는다.</li>
+<li>검수 AC-SF-02: 성공 후 기존 입력이 보이고, 추가 수정이 없으면 저장을 다시 실행하지 않는다.</li>
+</ul>
+<a href="../../references/examples/save-feedback.md#req-sf-02">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-sf-03" tabindex="-1">
+<h3>SF-03 · 적용되지 않은 실패가 확인됨</h3>
+<ul>
+<li>조건: 작업이 적용되지 않았다는 결과가 확인됨.</li>
+<li>결과: 입력을 유지하고 “저장하지 못했어요. 입력한 내용은 그대로예요.”와 “다시 저장”을 제공한다.</li>
+<li>정책 P-SF-03: 수정 후 재시도도 가능하다. 실패 이유가 확인되지 않았다면 원인을 단정하지 않는다.</li>
+<li>검수 AC-SF-03: 실패 직전의 입력으로 돌아와 수정·재시도할 수 있고, 재시도에도 처리 중 규칙이 적용된다.</li>
+</ul>
+<a href="../../references/examples/save-feedback.md#req-sf-03">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-sf-04" tabindex="-1">
+<h3>SF-04 · 결과를 아직 알 수 없음</h3>
+<ul>
+<li>조건: 응답 유실 등으로 적용 여부를 판정할 수 없음. 이를 SF-03의 확정 실패로 취급하지 않는다.</li>
+<li>결과: “저장 결과를 확인하지 못했어요.”와 “결과 확인”을 표시한다. 확인 전까지 같은 작업의 새 저장과 편집을 보류한다.</li>
+<li>정책 P-SF-04: 결과 확인은 저장을 다시 실행하는 동작이 아니다. 성공 확인 → SF-02, 미적용 확인 → SF-03, 여전히 미확인 → 현 상태 유지.</li>
+<li>검수 AC-SF-04: 결과 확인을 해도 저장 작업이 중복 실행되지 않으며, 미확인 상태에서 무조건 재시도를 안내하지 않는다.</li>
+<li>후속 확인: 현재 제품이 이전 저장의 결과를 구분할 수 있는지 개발 확인이 필요하다. 불가능하면 이 경로의 복구 정책을 다시 합의해야 한다. 새로운 API는 이 예시에서 정하지 않는다.</li>
+</ul>
+<a href="../../references/examples/save-feedback.md#req-sf-04">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+<article class="requirement" id="req-sf-05" tabindex="-1">
+<h3>SF-05 · 상태 이해와 복귀</h3>
+<ul>
+<li>라벨은 저장·저장 중·다시 저장·결과 확인을 구분한다. 상태를 색상으로만 전달하지 않는다.</li>
+<li>키보드로 입력·저장·복구를 사용할 수 있어야 한다. 상태가 바뀌어도 입력과 버튼의 읽는 순서는 유지한다.</li>
+<li>제품 화면의 뒤로가기는 기존 경로를 따른다. 처리 중 화면을 떠나는 행위는 저장 취소를 의미하지 않는다. 재진입하면 저장된 값과 남아 있는 작업의 결과를 확인한다. 미완료 작업의 결과가 불명확하면 SF-04를 적용하고, 결과를 확정한 뒤 편집을 허용한다.</li>
+<li>검수 AC-SF-05: 키보드 사용과 상태 안내를 실제 대상 환경에서 확인한다. HTML 예시 통과만으로 제품 접근성·재진입 동작을 통과 처리하지 않는다.</li>
+</ul>
+<a href="../../references/examples/save-feedback.md#req-sf-05">Markdown 기준 명세</a> · <a href="#specimen">화면으로 돌아가기</a>
+</article>
+</div>
+</section>
+<footer>기획 예시의 품질 기준을 보여주는 자료입니다. 실제 제품 정책·구현·검증 상태는 별도로 확인합니다. <a href="reservation-cancellation.html">다른 완성 예시 보기</a>
+</footer>
+</main>
+<script>
+'use strict';
+const form=document.getElementById('save-form'), nameInput=document.getElementById('profile-name'), saveButton=document.getElementById('save'), statusText=document.getElementById('save-status'), checkButton=document.getElementById('check-result');
+const scenario=document.getElementById('scenario'), reconciliation=document.getElementById('reconcile');
+let stage='idle', saved='민지', timer=null;
+function renderSave(){
+ const blocked=['pending','checking','unknown'].includes(stage), dirty=nameInput.value.trim()!==''&&nameInput.value!==saved;
+ nameInput.readOnly=blocked;
+ saveButton.setAttribute('aria-disabled',String(blocked||!dirty));
+ saveButton.textContent=stage==='pending'?'저장 중':stage==='failure'?'다시 저장':'저장';
+ checkButton.hidden=!['unknown','checking'].includes(stage);
+ checkButton.setAttribute('aria-disabled',String(stage==='checking'));
+ checkButton.textContent=stage==='checking'?'확인 중':'결과 확인';
+ const messages={pending:'저장 중이에요.',checking:'저장 결과를 확인하고 있어요.',success:'저장했어요.',failure:'저장하지 못했어요. 입력한 내용은 그대로예요.',unknown:'저장 결과를 확인하지 못했어요.'};
+ statusText.textContent=messages[stage]||(dirty?'변경한 내용을 저장할 수 있어요.':nameInput.value.trim()===''?'이름을 입력해주세요.':'변경한 내용이 없어요.');
+}
+function settleSave(result,wasCheck){stage=result;if(result==='success')saved=nameInput.value;renderSave();if(wasCheck&&result!=='unknown')saveButton.focus();}
+form.addEventListener('submit',event=>{event.preventDefault();if(saveButton.getAttribute('aria-disabled')==='true')return;stage='pending';const result=scenario.value;renderSave();timer=setTimeout(()=>settleSave(result,false),650);});
+checkButton.addEventListener('click',()=>{if(stage!=='unknown')return;stage='checking';const result=reconciliation.value;renderSave();timer=setTimeout(()=>settleSave(result,true),650);});
+nameInput.addEventListener('input',()=>{if(nameInput.readOnly)return;stage='idle';renderSave();});
+document.getElementById('reset').addEventListener('click',()=>{clearTimeout(timer);stage='idle';saved='민지';nameInput.value='민지';renderSave();nameInput.focus();});
+renderSave();
+</script>
+</body>
+</html>

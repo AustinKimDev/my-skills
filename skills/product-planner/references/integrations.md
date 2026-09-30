@@ -2,7 +2,7 @@
 
 ## ui-design
 
-Keep product-planner primary for planning tasks. Load the installed ui-design skill only when its expertise is needed, with a bounded review/exploration brief. Resolve it from the active skill catalog rather than hard-coding an installation path. Do not install a missing skill automatically; state the limitation and continue independent planning.
+Keep product-planner primary for planning tasks. Read [bundled ui-design](../embedded/ui-design/GUIDE.md) only when its expertise is needed, with a bounded review/exploration brief. Its own supporting guides and resources are included in this package. No separate skill installation is needed; unavailable browser or image-generation tools remain explicit runtime limits.
 
 Forward user goal, relevant evidence, accepted requirements/policies, target screens/components/environment, existing design authority, prior selections, acceptance conditions and unresolved UI decisions. Reuse existing answers. Specify whether the request is review or exploration and that production implementation is outside the planning-support scope. If a limited comparison is sufficient, state the requested option count explicitly.
 

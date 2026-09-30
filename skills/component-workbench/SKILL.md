@@ -5,6 +5,11 @@ description: Build and maintain a Storybook-like interactive component workspace
 
 # Component Workbench
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 Deliver a browsable, interactive reference connected to the project's actual component source. Readers should be able to find a component, exercise its meaningful states, understand its public API, copy a valid usage example, and trace it to design evidence or existing consumers. A Markdown inventory or screenshot gallery alone does not satisfy a request for a Storybook-like workspace.
 
 Write agent-facing guides in English. Use the user's language and project locale for the workspace and user-facing documentation. Preserve the project's framework, design rules, component boundaries, and naming; a previous project's palette, font, navigation, component count, or package layout is not a portable default.
@@ -37,7 +42,7 @@ Avoid copying an existing design authority into a competing rulebook. Link the o
 
 ## Implement only the required component work
 
-The effective design order is user direction → project settings → the selected design workflow. Use installed `ui-design` for unresolved implementation/design choices, or the user's selected alternative. Reusing established components for documentation does not start a design exploration, style migration or full audit. If the design workflow requires additional references, follow it only for the affected decision.
+The effective design order is user direction → project settings → the selected design workflow. Use [bundled ui-design](embedded/ui-design/GUIDE.md) for unresolved implementation/design choices, or the user's selected alternative. Reusing established components for documentation does not start a design exploration, style migration or full audit. If the design workflow requires additional references, follow it only for the affected decision.
 
 Prefer existing primitives and compatible composition. Add a component when there is a distinct reusable responsibility; add a variant when semantics and state are genuinely shared. Preserve public contracts and existing consumers. Do not flatten business logic into atoms or introduce a universal cross-platform package solely to host documentation.
 
@@ -64,7 +69,7 @@ For additions or corrections, preserve component IDs, deep links, accepted desig
 
 Run checks proportional to the touched behavior and the project's requirements. Exercise actual specimen actions and relevant failure paths, check affected renders in the target runtime, and verify search/navigation/deep links in a new host. A static build or web preview does not establish native parity. Report unavailable checks separately from failures or passes.
 
-Use the session's approved browser workflow. In Orca, follow the installed `orca-cli` guidance, resolve the owning workspace and pin its page ID. Serve only the intended artifact/host using the project's port conventions; retain a repeatable command, not merely a transient localhost URL.
+Use the session's approved browser workflow. Follow the [browser runtime guide](embedded/browser-runtime/GUIDE.md); in Orca, resolve the owning workspace and pin its page ID. Serve only the intended artifact/host using the project's port conventions; retain a repeatable command, not merely a transient localhost URL.
 
 Deliver the workspace URL if running, source location and restart command, what was reused/added/changed, checks actually performed and material limits. Component documentation does not establish product integration or deployment. Stop after the requested coverage and applicable checks are complete.
 

@@ -4,9 +4,14 @@ description: Audit an interface against the portable IKY design contract, with r
 ---
 # IKY Design Audit
 
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+
 ## Korean product-copy review
 
-When creating, changing, or reviewing Korean words or sentences in this workflow, resolve the separately installed `humanize-korean` skill and follow its `references/ui-copy-review.md` integration (normally under `~/.agents/skills/humanize-korean`) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
+When creating, changing, or reviewing Korean words or sentences in this workflow, follow the [bundled Korean UI-copy review](embedded/humanize-korean/references/ui-copy-review.md) before accepting the copy. This includes short labels as well as headings, explanations, errors, empty states, and confirmations. Keep the current workflow and its authorization scope; an audit remains read-only unless fixes were requested.
 
 
 Read [audit procedure](references/audit.md), [rules](references/rules.md), and [tokens](references/tokens.json). These bundled references are self-contained. Compare [manifest](references/manifest.json) with a project's contract when one exists; report drift instead of assuming either is current.
@@ -46,11 +51,11 @@ Use the scope and platform acceptance section of [audit procedure](references/au
 
 ## Runnable reference checks
 
-When the audit requires comparison with IKY examples, material reconstruction, or investigation of a visual/interaction discrepancy, open its [interactive reference](../iky-design/assets/reference/index.html), verify its bundle manifest against this contract revision, and compare the relevant states and appearances. Bounded reuse of established project components needs targeted checks of the affected rendered state and behavior, without reopening the sheet. Tokens and rules retain numeric/semantic authority. Report discrepancies and preserve comparison provenance. Missing browser/native evidence stays unverified for a required target; a valid bundle hash only proves reference integrity.
+When the audit requires comparison with IKY examples, material reconstruction, or investigation of a visual/interaction discrepancy, open its [interactive reference](embedded/iky-design/assets/reference/index.html), verify its bundle manifest against this contract revision, and compare the relevant states and appearances. Bounded reuse of established project components needs targeted checks of the affected rendered state and behavior, without reopening the sheet. Tokens and rules retain numeric/semantic authority. Report discrepancies and preserve comparison provenance. Missing browser/native evidence stays unverified for a required target; a valid bundle hash only proves reference integrity.
 
 ## Brand button foreground
 
-Explicitly filled brand-pink buttons use the white on-action foreground for text, icons and progress in both appearances, including hover, pressed and busy states. Follow the brand recipe in [component recipes](references/component-recipes.md) and the [brand foreground decision record](../iky-design/references/brand-button-foreground.md); other semantic tones retain their own foregrounds and disabled stays neutral. Check actual nested labels, not just container styles. Record visual conformance and COLOR-02 contrast separately; never silently darken an approved white brand label or claim contrast compliance from user preference.
+Explicitly filled brand-pink buttons use the white on-action foreground for text, icons and progress in both appearances, including hover, pressed and busy states. Follow the brand recipe in [component recipes](references/component-recipes.md) and the [brand foreground decision record](embedded/iky-design/references/brand-button-foreground.md); other semantic tones retain their own foregrounds and disabled stays neutral. Check actual nested labels, not just container styles. Record visual conformance and COLOR-02 contrast separately; never silently darken an approved white brand label or claim contrast compliance from user preference.
 
 ## Popups, confirmations and bottom sheets
 
