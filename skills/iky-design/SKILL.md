@@ -1,6 +1,6 @@
 ---
 name: iky-design
-description: Initialize project IKY guides, record scoped overrides, and apply the portable IKY contract to UI, typography, controls and motion. Use for iky-design init or override, when IKY is selected, or as ui-design's applicable default; preserve project authority, branding and locale.
+description: Initialize project IKY guides, record scoped overrides, and apply the portable IKY contract to UI, typography, controls and motion. Use for iky-design init or override, when IKY is selected, or as iky-ui-design's applicable default; preserve project authority, branding and locale.
 ---
 # IKY Design
 

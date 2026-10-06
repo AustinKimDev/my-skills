@@ -1,12 +1,12 @@
 {
   "version": 1,
   "modules": {
-    "component-workbench": {
-      "source": "skills/component-workbench",
+    "iky-component-workbench": {
+      "source": "skills/iky-component-workbench",
       "kind": "owned",
       "dependencies": [
         {
-          "name": "ui-design",
+          "name": "iky-ui-design",
           "when": "Unresolved visual or interaction decisions while implementing the requested components."
         },
         {
@@ -15,8 +15,8 @@
         }
       ]
     },
-    "decision-report": {
-      "source": "skills/decision-report",
+    "iky-decision-report": {
+      "source": "skills/iky-decision-report",
       "kind": "owned",
       "dependencies": [
         {
@@ -25,23 +25,23 @@
         }
       ]
     },
-    "deploy": {
-      "source": "skills/deploy",
+    "iky-deploy": {
+      "source": "skills/iky-deploy",
       "kind": "owned",
       "dependencies": []
     },
-    "deploy-branch-deploy": {
-      "source": "skills/deploy-branch-deploy",
+    "iky-deploy-branch-deploy": {
+      "source": "skills/iky-deploy-branch-deploy",
       "kind": "owned",
       "dependencies": [
         {
-          "name": "deploy",
+          "name": "iky-deploy",
           "when": "Deploy and verify the exact integrated revision after the authorized PR sequence."
         }
       ]
     },
-    "develop-pr-review-merge": {
-      "source": "skills/develop-pr-review-merge",
+    "iky-develop-pr-review-merge": {
+      "source": "skills/iky-develop-pr-review-merge",
       "kind": "owned",
       "dependencies": [
         {
@@ -78,8 +78,8 @@
         }
       ]
     },
-    "image-assets": {
-      "source": "skills/image-assets",
+    "iky-image-assets": {
+      "source": "skills/iky-image-assets",
       "kind": "owned",
       "dependencies": [
         {
@@ -88,12 +88,12 @@
         }
       ]
     },
-    "product-plan-html": {
-      "source": "skills/product-plan-html",
+    "iky-product-plan-html": {
+      "source": "skills/iky-product-plan-html",
       "kind": "owned",
       "dependencies": [
         {
-          "name": "product-planner",
+          "name": "iky-product-planner",
           "when": "Resolve a requested planning decision; formatting alone does not start planning."
         },
         {
@@ -102,27 +102,27 @@
         }
       ]
     },
-    "product-planner": {
-      "source": "skills/product-planner",
+    "iky-product-planner": {
+      "source": "skills/iky-product-planner",
       "kind": "owned",
       "dependencies": [
         {
-          "name": "ui-design",
+          "name": "iky-ui-design",
           "when": "Provide bounded visual, interaction, or accessibility support for planning; do not implement production UI."
         }
       ]
     },
-    "recommend-animate": {
-      "source": "skills/recommend-animate",
+    "iky-recommend-animate": {
+      "source": "skills/iky-recommend-animate",
       "kind": "owned",
       "dependencies": []
     },
-    "screen-flow": {
-      "source": "skills/screen-flow",
+    "iky-screen-flow": {
+      "source": "skills/iky-screen-flow",
       "kind": "owned",
       "dependencies": [
         {
-          "name": "ui-design",
+          "name": "iky-ui-design",
           "when": "Resolve a new design question under the existing project or selected workflow."
         },
         {
@@ -135,13 +135,13 @@
         }
       ]
     },
-    "standup": {
-      "source": "skills/standup",
+    "iky-standup": {
+      "source": "skills/iky-standup",
       "kind": "owned",
       "dependencies": []
     },
-    "ui-design": {
-      "source": "skills/ui-design",
+    "iky-ui-design": {
+      "source": "skills/iky-ui-design",
       "kind": "owned",
       "dependencies": [
         {
@@ -157,7 +157,7 @@
           "when": "Review Korean product copy using its UI-copy integration."
         },
         {
-          "name": "image-assets",
+          "name": "iky-image-assets",
           "when": "Produce imagery actually required by the requested design."
         },
         {
@@ -214,23 +214,23 @@
         }
       ]
     },
-    "website-launch-readiness": {
-      "source": "skills/website-launch-readiness",
+    "iky-website-launch-readiness": {
+      "source": "skills/iky-website-launch-readiness",
       "kind": "owned",
       "dependencies": []
     },
-    "instagram-korean-writing": {
-      "source": "skills/instagram-korean-writing",
+    "iky-instagram-korean-writing": {
+      "source": "skills/iky-instagram-korean-writing",
       "kind": "owned",
       "dependencies": []
     },
-    "threads-korean-writing": {
-      "source": "skills/threads-korean-writing",
+    "iky-threads-korean-writing": {
+      "source": "skills/iky-threads-korean-writing",
       "kind": "owned",
       "dependencies": []
     },
-    "x-korean-writing": {
-      "source": "skills/x-korean-writing",
+    "iky-x-korean-writing": {
+      "source": "skills/iky-x-korean-writing",
       "kind": "owned",
       "dependencies": []
     },
@@ -406,13 +406,13 @@
       "entry": "GUIDE.md",
       "dependencies": []
     },
-    "interactive-landing": {
-      "source": "skills/interactive-landing",
+    "iky-interactive-landing": {
+      "source": "skills/iky-interactive-landing",
       "kind": "owned",
       "dependencies": []
     },
-    "find-partner": {
-      "source": "skills/find-partner",
+    "iky-find-partner": {
+      "source": "skills/iky-find-partner",
       "kind": "owned",
       "dependencies": [
         {
@@ -423,10 +423,10 @@
     }
   },
   "handoffs": {
-    "component-workbench": [
-      "screen-flow artifacts are inputs; generating new screen catalogs is outside component documentation."
+    "iky-component-workbench": [
+      "iky-screen-flow artifacts are inputs; generating new screen catalogs is outside component documentation."
     ],
-    "product-planner": [
+    "iky-product-planner": [
       "to-prd and to-issues are explicitly separate downstream workflows, not required planning dependencies."
     ],
     "better-interface": [

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "root": "iky-develop-pr-review-merge",
+  "modules": [
+    "browser-runtime"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    }
+  },
+  "files": {
+    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/references/dependencies.md": "fca89cdb4c946c687c890f06bb159e0b9eaf06169b1853d941c44dbbf8b45c4a",
+    "references/dependencies.md": "e5a1acb6039d7a5bb7b832f9fb3092ccff124ff566366f9a34c39da57562d4f5"
+  }
+}

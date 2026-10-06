@@ -1,0 +1,4 @@
+interface:
+  display_name: "제품 기획서 HTML"
+  short_description: "기능 설명·정책·일정·완료 조건을 읽기 쉬운 HTML 기획서로 제작"
+  default_prompt: "Use $iky-product-plan-html to create release-specific HTML planning documents from the current plan."

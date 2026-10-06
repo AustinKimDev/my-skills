@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy"
+  short_description: "Deploy and verify within project rules and approved scope."
+  default_prompt: "Use $iky-deploy to deploy the requested project safely and verify the result."

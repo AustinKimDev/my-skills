@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "root": "iky-deploy-branch-deploy",
+  "modules": [
+    "iky-deploy"
+  ],
+  "source_sha256": {
+    "iky-deploy": {
+      "SKILL.md": "cc98e18f761ae7a9c136585e12b8bfaef24b0e391a9899778c827153b9092466"
+    }
+  },
+  "files": {
+    "embedded/iky-deploy/GUIDE.md": "8704a8c8c400fa1d6fb440686edf2cc122768589663dda745ec90c6ab1b6e870",
+    "embedded/iky-deploy/references/dependencies.md": "bbedbcd18f84175f4d7df6d4adae1f239a9313928a1fe113794793c4d2e31c10",
+    "references/dependencies.md": "0688199b790ab52b2c59fcdc57da5a42e071f7f58e138e7785747bc900865b77"
+  }
+}

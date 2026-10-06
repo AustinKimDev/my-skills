@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "root": "iky-decision-report",
+  "modules": [
+    "browser-runtime"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    }
+  },
+  "files": {
+    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/references/dependencies.md": "ee59c4a01b98bbbb89f0090f22d9a9dee84e780cec8ac3b2ee13ff333133f80f",
+    "references/dependencies.md": "5ca6dda2b29664c8282ae1572d191ca3bedbcb414b90a3790bd587da5d741afa"
+  }
+}

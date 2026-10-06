@@ -1,4 +1,0 @@
-interface:
-  display_name: "Recommend Animate"
-  short_description: "Recommend web animation libraries and combinations with supporting evidence."
-  default_prompt: "Use $recommend-animate to choose the smallest suitable animation stack for this web experience."

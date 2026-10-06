@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy Branch Deploy"
+  short_description: "Promote PRs through the deploy branch and verify production deployment."
+  default_prompt: "Use $iky-deploy-branch-deploy to synchronize deploy from main, integrate the current PR, promote deploy, and verify the deployment."
