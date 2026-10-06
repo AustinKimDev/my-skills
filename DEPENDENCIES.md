@@ -1,19 +1,28 @@
 # 스킬 연결 관계
 
-2026-10-03 기준 19개 스킬을 관리합니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
+2026-10-07 기준 28개 스킬을 관리합니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
 
 | 스킬 | 직접 연결하는 내장 자료 | 전체 내장 모듈 수 |
 |---|---|---:|
+| iky-backend-architecture | 독립 실행 | 0 |
+| iky-backend-build | 독립 실행 | 0 |
+| iky-backend-spec | 독립 실행 | 0 |
 | iky-component-workbench | iky-ui-design, 브라우저 연결 | 19 |
 | iky-decision-report | 브라우저 연결 | 1 |
 | iky-deploy | 독립 실행 | 0 |
 | iky-deploy-branch-deploy | iky-deploy | 1 |
-| iky-develop-pr-review-merge | 브라우저 연결 | 1 |
 | iky-design | humanize-korean, 브라우저 연결 | 2 |
 | iky-design-audit | iky-design, humanize-korean | 3 |
+| iky-develop-pr-review-merge | 브라우저 연결 | 1 |
+| iky-erd | 독립 실행 | 0 |
+| iky-find-partner | 브라우저 연결 | 1 |
+| iky-frontend-build | iky-ui-design, iky-component-workbench, 브라우저 연결 | 20 |
 | iky-image-assets | 이미지 생성 연결 | 1 |
 | iky-instagram-korean-writing | 독립 실행, 자체 말투 분석 자료 | 0 |
+| iky-integration-check | 브라우저 연결 | 1 |
 | iky-interactive-landing | 독립 실행, 자체 디자인·인터랙션 기준과 CSS 토큰 | 0 |
+| iky-motion-audit | iky-recommend-animate, 브라우저 연결 | 2 |
+| iky-next | 독립 실행 | 0 |
 | iky-product-plan-html | iky-product-planner, 브라우저 연결 | 20 |
 | iky-product-planner | iky-ui-design | 19 |
 | iky-recommend-animate | 독립 실행 | 0 |
@@ -32,6 +41,8 @@
 - 한국어 제품 문구는 `humanize-korean/references/ui-copy-review.md`를 사용합니다. 버튼 한 단어에 장문 윤문용 점수·변경률·별도 결과 파일을 강제하지 않습니다.
 - `iky-product-planner → iky-ui-design`은 기획을 보조하는 제한된 검토입니다. 제품 코드 구현이나 트래커 발행 권한이 생기지 않습니다.
 - `iky-product-plan-html → iky-product-planner`는 새 기획 판단이 실제로 필요한 경우에만 사용합니다. 문서 서식 변경으로 기획 인터뷰를 다시 시작하지 않습니다.
+- `iky-frontend-build → iky-ui-design·iky-component-workbench`는 목업이 정하지 않은 디자인 판단과 빠진 공통 컴포넌트에만 사용합니다. 새 디자인 탐색을 다시 시작하지 않습니다.
+- `iky-motion-audit → iky-recommend-animate`는 프로젝트에 필요한 모션 도구가 없을 때만 사용합니다. 애니메이션 의존성 추가는 별도 승인이 필요합니다.
 - `iky-deploy-branch-deploy → iky-deploy`는 승인된 통합 커밋의 배포·검증에만 적용합니다. 내장 파일을 열거나 스킬을 설치하는 행위는 배포 승인이 아닙니다.
 
 ## 별도 작업과 실행 환경

@@ -420,6 +420,73 @@
           "when": "Search candidates, inspect first-party posts and verify the generated HTML in the user-selected browser."
         }
       ]
+    },
+    "iky-next": {
+      "source": "skills/iky-next",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-erd": {
+      "source": "skills/iky-erd",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-backend-architecture": {
+      "source": "skills/iky-backend-architecture",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-backend-spec": {
+      "source": "skills/iky-backend-spec",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-backend-build": {
+      "source": "skills/iky-backend-build",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-frontend-build": {
+      "source": "skills/iky-frontend-build",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-ui-design",
+          "when": "Resolve visual or interaction decisions the approved mockup leaves open while implementing production screens."
+        },
+        {
+          "name": "iky-component-workbench",
+          "when": "Add or extend a shared component that the screens need instead of creating a local duplicate."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Open implemented screens and compare them with the screen images and mockups."
+        }
+      ]
+    },
+    "iky-integration-check": {
+      "source": "skills/iky-integration-check",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "browser-runtime",
+          "when": "Walk each flow in the running app and observe requests and UI states."
+        }
+      ]
+    },
+    "iky-motion-audit": {
+      "source": "skills/iky-motion-audit",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-recommend-animate",
+          "when": "Choose a tool or pattern when the project lacks one for a needed motion."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Observe animation timing and smoothness in the running app."
+        }
+      ]
     }
   },
   "handoffs": {
@@ -431,6 +498,12 @@
     ],
     "better-interface": [
       "interface-review resolves separately requested version-control change reviews; it is not invoked by a screen review."
+    ],
+    "iky-next": [
+      "Recommends the next pipeline skill; the recommended skill runs only when the user invokes it."
+    ],
+    "iky-backend-spec": [
+      "iky-backend-build and iky-frontend-build consume the contract as input; the spec skill does not implement either side."
     ]
   },
   "runtime_requirements": {

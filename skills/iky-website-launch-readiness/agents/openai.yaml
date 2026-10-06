@@ -1,4 +1,4 @@
 interface:
   display_name: "웹사이트 출시 준비"
   short_description: "출시 전 20개 항목의 적용 여부를 점검하고 필요한 부분을 구현합니다"
-  default_prompt: "$website-launch-readiness로 이 웹사이트의 출시 준비 20개 항목을 점검하고, 승인된 범위에서 빠진 부분을 수정해줘."
+  default_prompt: "$iky-website-launch-readiness로 이 웹사이트의 출시 준비 20개 항목을 점검하고, 승인된 범위에서 빠진 부분을 수정해줘."

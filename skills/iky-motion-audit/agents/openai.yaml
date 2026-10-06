@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 모션 점검"
+  short_description: "화면 전환·오버레이·피드백 애니메이션의 누락·과다·성능을 점검"
+  default_prompt: "$iky-motion-audit로 구현된 화면에 애니메이션이 적절히 들어갔는지 점검해줘."

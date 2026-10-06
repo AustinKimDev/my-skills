@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 백엔드 구현"
+  short_description: "API 명세를 기준으로 백엔드를 구현하고 테스트"
+  default_prompt: "$iky-backend-build로 명세된 API를 구현하고 테스트까지 해줘."

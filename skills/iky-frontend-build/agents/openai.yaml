@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 프론트엔드 구현"
+  short_description: "목업·화면 이미지·공통 컴포넌트로 실제 프론트엔드를 구현"
+  default_prompt: "$iky-frontend-build로 승인된 목업과 화면 이미지, 공통 컴포넌트를 써서 실제 화면을 구현해줘."

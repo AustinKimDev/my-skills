@@ -1,4 +1,4 @@
 interface:
   display_name: "Screen Flow · 화면 시안 지도"
   short_description: "앱 시안을 전체 화면 갤러리와 하나의 연결 지도로 제작하고 검증"
-  default_prompt: "$screen-flow로 이 앱의 화면 시안을 만들고 전체 화면 보기와 연결 지도를 구성해줘."
+  default_prompt: "$iky-screen-flow로 이 앱의 화면 시안을 만들고 전체 화면 보기와 연결 지도를 구성해줘."

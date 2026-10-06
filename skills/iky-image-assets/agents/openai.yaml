@@ -1,4 +1,4 @@
 interface:
   display_name: "이미지 에셋 디자인"
   short_description: "프로젝트 스타일로 일러스트·배경을 만들고 누끼·최적화·UI 연결까지 처리"
-  default_prompt: "$image-assets로 프로젝트의 이미지 스타일과 실제 배치를 확인하고, 필요한 이미지를 생성·가공·저장한 뒤 적용 결과를 검증해 주세요."
+  default_prompt: "$iky-image-assets로 프로젝트의 이미지 스타일과 실제 배치를 확인하고, 필요한 이미지를 생성·가공·저장한 뒤 적용 결과를 검증해 주세요."

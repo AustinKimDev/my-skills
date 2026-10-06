@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 다음 작업"
+  short_description: "iky 단계별 산출물을 확인하고 다음에 실행할 스킬을 추천"
+  default_prompt: "$iky-next로 이 프로젝트가 어느 단계까지 왔는지 보고 다음 작업을 추천해줘."

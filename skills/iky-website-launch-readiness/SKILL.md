@@ -15,6 +15,10 @@ Turn a visually finished website into a reviewable launch candidate. These 20 it
 - For a supplied URL without repository access, inspect observable behavior and report implementation limits. Do not treat inaccessible source, authenticated routes, failed requests, or missing tools as a confirmed absence.
 - Resolve only material unknowns: canonical domain, intended CTA/conversion, real operator/contact details, actual data processing, and approved analytics provider. Continue independent work while awaiting answers.
 
+## Pipeline inputs
+
+This is the last stage of the iky pipeline. Before the checklist, read `docs/qa/integration-matrix.md` (`iky-integration-check`) and `docs/qa/motion-audit.md` (`iky-motion-audit`) when they exist. Carry their open mismatches and high-severity findings into the readiness result as launch risks instead of re-auditing them. If they are missing for a product with a backend or significant motion, say so and recommend running them first. For a native app, mark web-only items (robots.txt, sitemap, Open Graph, cookies) not applicable unless the app ships a web surface.
+
 ## Checklist and acceptance evidence
 
 For a full review, account for all 20 items. For a requested subset, inspect that subset without silently expanding scope. Mark each item **verified**, **needs work**, **unverified**, **decision needed**, or **not applicable**, with evidence or a reason. Implementation alone is not verification.

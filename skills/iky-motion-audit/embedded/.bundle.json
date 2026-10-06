@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "root": "iky-motion-audit",
+  "modules": [
+    "browser-runtime",
+    "iky-recommend-animate"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    },
+    "iky-recommend-animate": {
+      "SKILL.md": "63555096399c4991927a18d5a13cc6660bf715c4ca7f3b6822ce3fdc0ab9dd20",
+      "references/catalog.md": "d1fc9431382ea80c79971ffe3c1cf7ac12e066a51895a53d10c8f917f6ee7570",
+      "references/patterns.md": "74e144e9851eb42dd4114010b2e4769b88adf6cad07f9fffd845f236ce3db2c6"
+    }
+  },
+  "files": {
+    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/references/dependencies.md": "56c9faa63a880ff332ba84e70cef6d607c9d79cbc1f598ab4ce00296177bc6ce",
+    "embedded/iky-recommend-animate/GUIDE.md": "2bd08fefc89b2f964e5ae438b2197849c8a0616b9b84b98790e33a3623911291",
+    "embedded/iky-recommend-animate/references/catalog.md": "d1fc9431382ea80c79971ffe3c1cf7ac12e066a51895a53d10c8f917f6ee7570",
+    "embedded/iky-recommend-animate/references/dependencies.md": "3589534f0c52293068eb1514b246ce9a2ddfab4df5b6b328bd996786e0c70eb6",
+    "embedded/iky-recommend-animate/references/patterns.md": "74e144e9851eb42dd4114010b2e4769b88adf6cad07f9fffd845f236ce3db2c6",
+    "references/dependencies.md": "02ae0ec810ddf3fe3b15d3a1ec8144d436acbd999e1e22d6e9c351414973cbc1"
+  }
+}

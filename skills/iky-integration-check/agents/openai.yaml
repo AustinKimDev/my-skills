@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 연동 점검"
+  short_description: "화면별로 프론트엔드와 백엔드 연결을 추적·실행해 검증"
+  default_prompt: "$iky-integration-check로 프론트엔드와 백엔드가 제대로 연결됐는지 화면별로 점검해줘."

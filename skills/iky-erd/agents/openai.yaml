@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY ERD"
+  short_description: "기획서와 화면 흐름에서 ERD를 추출하거나 기존 ERD를 갱신"
+  default_prompt: "$iky-erd로 기획서와 screen-flow 화면을 바탕으로 ERD를 만들거나 갱신해줘."

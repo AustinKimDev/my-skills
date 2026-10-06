@@ -1,0 +1,713 @@
+[
+  {
+    "id": "service.home",
+    "family": "service",
+    "name": "서비스 홈",
+    "question": "첫 방문과 재방문 중 누구를 먼저 도울까?",
+    "states": [
+      "default",
+      "loading",
+      "empty"
+    ],
+    "next": [
+      "service.search",
+      "service.listing",
+      "service.notifications"
+    ],
+    "brand_candidates": [
+      "naver",
+      "daangn"
+    ]
+  },
+  {
+    "id": "service.search",
+    "family": "service",
+    "name": "검색·필터",
+    "question": "무엇으로 찾으며 결과가 없을 때 어디로 갈까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "error"
+    ],
+    "next": [
+      "service.listing",
+      "service.detail"
+    ],
+    "brand_candidates": [
+      "naver",
+      "daangn",
+      "yogiyo"
+    ]
+  },
+  {
+    "id": "service.listing",
+    "family": "service",
+    "name": "목록·카탈로그",
+    "question": "비교할 핵심 정보와 정렬 기준은 무엇일까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "error"
+    ],
+    "next": [
+      "service.detail",
+      "service.search"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "yogiyo",
+      "naver"
+    ]
+  },
+  {
+    "id": "service.detail",
+    "family": "service",
+    "name": "상품·콘텐츠·장소 상세",
+    "question": "결정 전에 필요한 근거와 다음 행동은 무엇일까?",
+    "states": [
+      "default",
+      "loading",
+      "unavailable"
+    ],
+    "next": [
+      "service.checkout",
+      "service.booking",
+      "chat.conversation"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "hyundai-card",
+      "yogiyo"
+    ]
+  },
+  {
+    "id": "service.editorial",
+    "family": "service",
+    "name": "기사·가이드·문서",
+    "question": "정독과 빠른 훑어보기 중 무엇이 우선일까?",
+    "states": [
+      "default",
+      "loading",
+      "error"
+    ],
+    "next": [
+      "service.search",
+      "service.detail"
+    ],
+    "brand_candidates": [
+      "naver",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.profile",
+    "family": "service",
+    "name": "프로필·마이페이지",
+    "question": "본인 관리와 다른 사람의 신뢰 확인 중 어느 쪽인가?",
+    "states": [
+      "default",
+      "loading",
+      "empty"
+    ],
+    "next": [
+      "service.settings",
+      "service.history",
+      "chat.conversation"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.settings",
+    "family": "service",
+    "name": "설정·환경설정",
+    "question": "변경 즉시 저장할까, 한 번에 저장할까?",
+    "states": [
+      "default",
+      "saving",
+      "error"
+    ],
+    "next": [
+      "service.profile",
+      "service.auth"
+    ],
+    "brand_candidates": [
+      "toss",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.auth",
+    "family": "service",
+    "name": "로그인·가입·계정 복구",
+    "question": "인증 후 사용자가 원래 하려던 일로 어떻게 돌아갈까?",
+    "states": [
+      "default",
+      "loading",
+      "error",
+      "expired"
+    ],
+    "next": [
+      "service.onboarding",
+      "service.home"
+    ],
+    "brand_candidates": [
+      "toss",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.onboarding",
+    "family": "service",
+    "name": "시작 안내·초기 설정",
+    "question": "사용 가치에 도달하기 전 꼭 필요한 정보는 무엇일까?",
+    "states": [
+      "default",
+      "loading",
+      "error"
+    ],
+    "next": [
+      "service.home",
+      "service.form"
+    ],
+    "brand_candidates": [
+      "toss",
+      "daangn"
+    ]
+  },
+  {
+    "id": "service.form",
+    "family": "service",
+    "name": "신청·다단계 입력",
+    "question": "중단 후 복원할 정보와 확인 단계는 무엇일까?",
+    "states": [
+      "default",
+      "invalid",
+      "saving",
+      "error"
+    ],
+    "next": [
+      "service.upload",
+      "service.result"
+    ],
+    "brand_candidates": [
+      "toss",
+      "hyundai-card"
+    ]
+  },
+  {
+    "id": "service.checkout",
+    "family": "service",
+    "name": "장바구니·결제",
+    "question": "총액·조건·실패 후 재시도를 어떻게 분명하게 할까?",
+    "states": [
+      "default",
+      "loading",
+      "error",
+      "success"
+    ],
+    "next": [
+      "service.result",
+      "service.history"
+    ],
+    "brand_candidates": [
+      "toss",
+      "yogiyo",
+      "baemin"
+    ]
+  },
+  {
+    "id": "service.booking",
+    "family": "service",
+    "name": "예약·일정 선택",
+    "question": "시간대·잔여 수량·예약 변경 조건은 무엇일까?",
+    "states": [
+      "default",
+      "loading",
+      "unavailable"
+    ],
+    "next": [
+      "service.checkout",
+      "service.result"
+    ],
+    "brand_candidates": [
+      "naver"
+    ]
+  },
+  {
+    "id": "service.history",
+    "family": "service",
+    "name": "주문·활동·거래 내역",
+    "question": "과거 항목을 다시 찾고 취소·재주문하려면?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "error"
+    ],
+    "next": [
+      "service.detail",
+      "chat.support"
+    ],
+    "brand_candidates": [
+      "toss",
+      "yogiyo",
+      "baemin"
+    ]
+  },
+  {
+    "id": "service.notifications",
+    "family": "service",
+    "name": "알림·활동 센터",
+    "question": "중요도·읽음 상태와 정확한 도착 화면은?",
+    "states": [
+      "default",
+      "loading",
+      "empty"
+    ],
+    "next": [
+      "service.detail",
+      "chat.conversation"
+    ],
+    "brand_candidates": [
+      "kakao",
+      "naver"
+    ]
+  },
+  {
+    "id": "service.community",
+    "family": "service",
+    "name": "피드·커뮤니티",
+    "question": "발견·참여·신뢰 중 무엇을 중심으로 할까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "error"
+    ],
+    "next": [
+      "service.detail",
+      "service.profile",
+      "chat.thread"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.map",
+    "family": "service",
+    "name": "지도·지역 탐색",
+    "question": "위치 권한 없이도 사용할 수 있는 탐색 경로는?",
+    "states": [
+      "default",
+      "loading",
+      "denied",
+      "empty"
+    ],
+    "next": [
+      "service.listing",
+      "service.detail"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "naver"
+    ]
+  },
+  {
+    "id": "service.upload",
+    "family": "service",
+    "name": "작성·파일 첨부",
+    "question": "초안·업로드 진행·실패 복구를 어떻게 보존할까?",
+    "states": [
+      "default",
+      "uploading",
+      "error",
+      "success"
+    ],
+    "next": [
+      "service.form",
+      "service.result"
+    ],
+    "brand_candidates": [
+      "naver",
+      "kakao"
+    ]
+  },
+  {
+    "id": "service.result",
+    "family": "service",
+    "name": "완료·확인·처리 상태",
+    "question": "무엇이 완료됐으며 다음에 무엇을 해야 할까?",
+    "states": [
+      "default",
+      "pending",
+      "error",
+      "success"
+    ],
+    "next": [
+      "service.home",
+      "service.history",
+      "chat.support"
+    ],
+    "brand_candidates": [
+      "toss",
+      "hyundai-card"
+    ]
+  },
+  {
+    "id": "landing.product",
+    "family": "landing",
+    "name": "서비스·제품 소개",
+    "question": "방문자가 이해하고 실행할 한 가지 행동은?",
+    "states": [
+      "default"
+    ],
+    "next": [
+      "service.auth",
+      "service.onboarding"
+    ],
+    "brand_candidates": [
+      "toss",
+      "daangn"
+    ]
+  },
+  {
+    "id": "landing.campaign",
+    "family": "landing",
+    "name": "캠페인·프로모션",
+    "question": "혜택 조건·기간·행동을 어떻게 연결할까?",
+    "states": [
+      "default",
+      "expired"
+    ],
+    "next": [
+      "service.detail",
+      "service.checkout"
+    ],
+    "brand_candidates": [
+      "baemin",
+      "yogiyo",
+      "hyundai-card"
+    ]
+  },
+  {
+    "id": "landing.pricing",
+    "family": "landing",
+    "name": "요금·플랜·멤버십",
+    "question": "비교 기준과 최종 비용을 숨김없이 보여주려면?",
+    "states": [
+      "default"
+    ],
+    "next": [
+      "service.auth",
+      "service.checkout"
+    ],
+    "brand_candidates": [
+      "toss",
+      "hyundai-card"
+    ]
+  },
+  {
+    "id": "landing.event",
+    "family": "landing",
+    "name": "행사·사전 신청",
+    "question": "일시·대상·참여 방법·마감 조건은?",
+    "states": [
+      "default",
+      "closed"
+    ],
+    "next": [
+      "service.form",
+      "service.result"
+    ],
+    "brand_candidates": [
+      "hyundai-card",
+      "baemin"
+    ]
+  },
+  {
+    "id": "landing.brand",
+    "family": "landing",
+    "name": "브랜드·기업·스토리",
+    "question": "어떤 근거와 이야기로 어떤 인상을 남길까?",
+    "states": [
+      "default"
+    ],
+    "next": [
+      "service.editorial",
+      "landing.product"
+    ],
+    "brand_candidates": [
+      "hyundai-card",
+      "kakao",
+      "naver"
+    ]
+  },
+  {
+    "id": "dashboard.overview",
+    "family": "dashboard",
+    "name": "현황·운영 요약",
+    "question": "누가 어떤 이상을 발견하고 행동해야 할까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "stale",
+      "error"
+    ],
+    "next": [
+      "dashboard.analytics",
+      "dashboard.records"
+    ],
+    "brand_candidates": [
+      "baemin",
+      "toss"
+    ]
+  },
+  {
+    "id": "dashboard.analytics",
+    "family": "dashboard",
+    "name": "분석·리포트",
+    "question": "기간·단위·비교 기준과 다음 판단은 무엇일까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "partial",
+      "error"
+    ],
+    "next": [
+      "dashboard.records",
+      "dashboard.record-detail"
+    ],
+    "brand_candidates": [
+      "baemin",
+      "toss"
+    ]
+  },
+  {
+    "id": "dashboard.records",
+    "family": "dashboard",
+    "name": "관리 목록·데이터 테이블",
+    "question": "검색·필터·일괄 작업의 최소 단위는?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "denied",
+      "error"
+    ],
+    "next": [
+      "dashboard.record-detail",
+      "dashboard.editor"
+    ],
+    "brand_candidates": [
+      "baemin"
+    ]
+  },
+  {
+    "id": "dashboard.record-detail",
+    "family": "dashboard",
+    "name": "업무 상세·검토",
+    "question": "근거·이력·수정 권한과 다음 상태는?",
+    "states": [
+      "default",
+      "loading",
+      "denied",
+      "conflict"
+    ],
+    "next": [
+      "dashboard.workflow",
+      "dashboard.editor"
+    ],
+    "brand_candidates": [
+      "baemin"
+    ]
+  },
+  {
+    "id": "dashboard.workflow",
+    "family": "dashboard",
+    "name": "작업 보드·승인·처리 대기열",
+    "question": "상태 전환과 담당자·기한을 어떻게 드러낼까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "conflict"
+    ],
+    "next": [
+      "dashboard.record-detail",
+      "chat.channels"
+    ],
+    "brand_candidates": [
+      "baemin"
+    ]
+  },
+  {
+    "id": "dashboard.editor",
+    "family": "dashboard",
+    "name": "편집기·설정 도구",
+    "question": "초안·자동 저장·동시 편집 충돌을 어떻게 다룰까?",
+    "states": [
+      "default",
+      "saving",
+      "error",
+      "conflict"
+    ],
+    "next": [
+      "dashboard.record-detail",
+      "dashboard.records"
+    ],
+    "brand_candidates": [
+      "baemin",
+      "naver"
+    ]
+  },
+  {
+    "id": "dashboard.access",
+    "family": "dashboard",
+    "name": "멤버·역할·권한",
+    "question": "초대·권한 변경의 대상과 영향 범위는?",
+    "states": [
+      "default",
+      "pending",
+      "denied",
+      "error"
+    ],
+    "next": [
+      "dashboard.records",
+      "dashboard.overview"
+    ],
+    "brand_candidates": [
+      "toss",
+      "kakao"
+    ]
+  },
+  {
+    "id": "chat.inbox",
+    "family": "chat",
+    "name": "대화 목록·받은편지함",
+    "question": "미확인·우선순위·검색으로 대화를 어떻게 찾을까?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "offline"
+    ],
+    "next": [
+      "chat.conversation",
+      "chat.support"
+    ],
+    "brand_candidates": [
+      "kakao",
+      "daangn"
+    ]
+  },
+  {
+    "id": "chat.conversation",
+    "family": "chat",
+    "name": "1:1 메신저",
+    "question": "새 메시지와 이전 기록을 읽는 의도를 어떻게 구분할까?",
+    "states": [
+      "default",
+      "sending",
+      "failed",
+      "offline"
+    ],
+    "next": [
+      "service.profile",
+      "chat.thread",
+      "chat.inbox"
+    ],
+    "brand_candidates": [
+      "kakao",
+      "daangn"
+    ]
+  },
+  {
+    "id": "chat.ai",
+    "family": "chat",
+    "name": "AI 대화·도구 실행",
+    "question": "응답 중단·재생성·출처·도구 승인을 어떻게 보여줄까?",
+    "states": [
+      "default",
+      "streaming",
+      "stopped",
+      "error"
+    ],
+    "next": [
+      "service.detail",
+      "service.result"
+    ],
+    "brand_candidates": [
+      "kakao"
+    ]
+  },
+  {
+    "id": "chat.support",
+    "family": "chat",
+    "name": "고객 상담·지원",
+    "question": "대기·담당자 연결·상담 종료 후 기록은?",
+    "states": [
+      "default",
+      "waiting",
+      "offline",
+      "closed"
+    ],
+    "next": [
+      "service.history",
+      "service.result",
+      "chat.inbox"
+    ],
+    "brand_candidates": [
+      "kakao",
+      "baemin",
+      "toss"
+    ]
+  },
+  {
+    "id": "chat.channels",
+    "family": "chat",
+    "name": "그룹·채널·협업",
+    "question": "대화 범위·멤버·멘션·읽지 않은 위치는?",
+    "states": [
+      "default",
+      "loading",
+      "empty",
+      "denied"
+    ],
+    "next": [
+      "chat.thread",
+      "chat.conversation"
+    ],
+    "brand_candidates": [
+      "kakao"
+    ]
+  },
+  {
+    "id": "chat.thread",
+    "family": "chat",
+    "name": "댓글·답글·스레드",
+    "question": "원문 맥락과 답글 깊이를 어떻게 유지할까?",
+    "states": [
+      "default",
+      "sending",
+      "failed",
+      "deleted"
+    ],
+    "next": [
+      "service.community",
+      "chat.channels"
+    ],
+    "brand_candidates": [
+      "daangn",
+      "kakao"
+    ]
+  }
+]

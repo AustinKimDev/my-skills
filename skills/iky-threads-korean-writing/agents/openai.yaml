@@ -1,4 +1,4 @@
 interface:
   display_name: "Threads 한국어 글쓰기"
   short_description: "쓰레드의 대화형 게시물과 답글을 자연스러운 한국어로 작성합니다"
-  default_prompt: "$threads-korean-writing으로 이 주제를 대화가 이어지는 한국어 글로 써줘."
+  default_prompt: "$iky-threads-korean-writing으로 이 주제를 대화가 이어지는 한국어 글로 써줘."
