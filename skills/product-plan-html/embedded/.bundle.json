@@ -206,7 +206,7 @@
       "SKILL.md": "3478f4ddddd54471b274d7738905b6fa031ebde4360bc98150996c2f7c954979",
       "assets/example/manifest.json": "cd9c7555b21f6ce79e31bd6b97e488661e8854113e2069f86c66a0ca12043cc8",
       "assets/example/sample.html": "3baf2825f20455a5d86728f03717d544e6ea9270ee37bda9cff7c4c49b7a7eb2",
-      "assets/review.html": "53c1ef75309a199cb31df01222fec15f0da94941686566f70ff272665ff38a11",
+      "assets/review.html": "d8bd06b892fbf8c3995a381d6b3e857962826bb9b8c39e5d73be8730a679c955",
       "references/brands/apple-music.md": "e1ad9633e43c7c15691acba1977f89ddc64ae5ff6b49114c02a69ce50ce25993",
       "references/brands/apple-wallet.md": "7e32bb8baa3957fb6864fa6b37121bd405aaabf81f165239f12d92ab1e21d559",
       "references/brands/apple-web.md": "a8ed98271f3e13a7f7735f04fa8ece321d922085481a85dc99c69dc359183f9e",
@@ -239,14 +239,14 @@
       "references/discovery.md": "912bee7c1cfe5d5c273abd5234830f5c914482762f46060a1dcca3fb82589588",
       "references/modes.md": "d7cd301dd49a835119b64e0a39b26a4e41ec62dbcc54b888b0f0d320a81383c5",
       "references/overview-board.md": "743374418bfd18343fdd9a090c0fbb417a84ebe381e97f5dd39a2cde71f68bf8",
-      "references/preview.md": "b91c203b1f3d3c1d3db131a92c93db8a192b565e237ecffd88ba07d130329dbb",
+      "references/preview.md": "c289cf9a0cb33bf99cf66bf9ba7db9d41c31310ea5d07bffa0cbb67633ab8134",
       "references/screens/catalog.json": "882bec2f8cbd341a1ca24f943912cff5f3e067e85ec9413e3aa6c4edebf60493",
       "references/screens/chat.md": "fbeb4b52834b06688cb1b710e686f336c7ca3f81f50a7fdf038f8156cfa2782e",
       "references/screens/dashboard.md": "023e434032b6feb3ec3f4ce8eee5226ab5dd5e185f6870bf12b2dfcece99f091",
       "references/screens/landing.md": "260d177e416495c560b87255f61eeaacf5bf3302cab2db4a9cefaf40ffe2a6b6",
       "references/screens/service.md": "07b83cda56c9602d4150b7b74eca9cd1e38e2ccaafc4a3ef74aa5c6df93aa722",
-      "scripts/preview.mjs": "225f6527cd3b10da1928b944fb9dab8a8524e2b8eadf7fa4b6087f58ce2a90f3",
-      "scripts/preview.test.mjs": "0515a812935e71d493057686aebc5bcc30b89dae38ba802604187990cecca503"
+      "scripts/preview.mjs": "5317c4f908aae35e82702472f17af7c1e8241197cc81fe01d6822f51033eb354",
+      "scripts/preview.test.mjs": "c3ad727a49ff4b58aa245a00b693400d04d204f45b9a4fb1686be1d6560fd14c"
     }
   },
   "files": {
@@ -413,7 +413,7 @@
     "embedded/ui-design/GUIDE.md": "32b76c6b5e213ccadf3b78bea200394b5e68a72c6505dc0ab9ff504c330534eb",
     "embedded/ui-design/assets/example/manifest.json": "cd9c7555b21f6ce79e31bd6b97e488661e8854113e2069f86c66a0ca12043cc8",
     "embedded/ui-design/assets/example/sample.html": "3baf2825f20455a5d86728f03717d544e6ea9270ee37bda9cff7c4c49b7a7eb2",
-    "embedded/ui-design/assets/review.html": "53c1ef75309a199cb31df01222fec15f0da94941686566f70ff272665ff38a11",
+    "embedded/ui-design/assets/review.html": "d8bd06b892fbf8c3995a381d6b3e857962826bb9b8c39e5d73be8730a679c955",
     "embedded/ui-design/references/brands/apple-music.md": "e1ad9633e43c7c15691acba1977f89ddc64ae5ff6b49114c02a69ce50ce25993",
     "embedded/ui-design/references/brands/apple-wallet.md": "7e32bb8baa3957fb6864fa6b37121bd405aaabf81f165239f12d92ab1e21d559",
     "embedded/ui-design/references/brands/apple-web.md": "a8ed98271f3e13a7f7735f04fa8ece321d922085481a85dc99c69dc359183f9e",
@@ -447,14 +447,14 @@
     "embedded/ui-design/references/discovery.md": "3be13a51ac054764f91256c5d9ef7333a3ea621051e7492802a90ce3d4c641b2",
     "embedded/ui-design/references/modes.md": "d7cd301dd49a835119b64e0a39b26a4e41ec62dbcc54b888b0f0d320a81383c5",
     "embedded/ui-design/references/overview-board.md": "743374418bfd18343fdd9a090c0fbb417a84ebe381e97f5dd39a2cde71f68bf8",
-    "embedded/ui-design/references/preview.md": "b91c203b1f3d3c1d3db131a92c93db8a192b565e237ecffd88ba07d130329dbb",
+    "embedded/ui-design/references/preview.md": "c289cf9a0cb33bf99cf66bf9ba7db9d41c31310ea5d07bffa0cbb67633ab8134",
     "embedded/ui-design/references/screens/catalog.json": "882bec2f8cbd341a1ca24f943912cff5f3e067e85ec9413e3aa6c4edebf60493",
     "embedded/ui-design/references/screens/chat.md": "fbeb4b52834b06688cb1b710e686f336c7ca3f81f50a7fdf038f8156cfa2782e",
     "embedded/ui-design/references/screens/dashboard.md": "023e434032b6feb3ec3f4ce8eee5226ab5dd5e185f6870bf12b2dfcece99f091",
     "embedded/ui-design/references/screens/landing.md": "260d177e416495c560b87255f61eeaacf5bf3302cab2db4a9cefaf40ffe2a6b6",
     "embedded/ui-design/references/screens/service.md": "07b83cda56c9602d4150b7b74eca9cd1e38e2ccaafc4a3ef74aa5c6df93aa722",
-    "embedded/ui-design/scripts/preview.mjs": "225f6527cd3b10da1928b944fb9dab8a8524e2b8eadf7fa4b6087f58ce2a90f3",
-    "embedded/ui-design/scripts/preview.test.mjs": "0515a812935e71d493057686aebc5bcc30b89dae38ba802604187990cecca503",
+    "embedded/ui-design/scripts/preview.mjs": "5317c4f908aae35e82702472f17af7c1e8241197cc81fe01d6822f51033eb354",
+    "embedded/ui-design/scripts/preview.test.mjs": "c3ad727a49ff4b58aa245a00b693400d04d204f45b9a4fb1686be1d6560fd14c",
     "references/dependencies.md": "214beca084df6a5c8bcb5b8c6bc6c48c23bae5416571af38b4e31ebd43a6e449"
   }
 }

@@ -1,0 +1,65 @@
+/* Scoped landing roles. Each value aliases a product token first; the fallback is
+   Yumeit's palette and applies only to Yumeit or a product without a brand yet.
+   No font file, reset, controller or theme switch is supplied: follow the
+   product's light/dark/system support instead of forcing a scheme here. */
+.landing {
+  --landing-canvas: var(--color-canvas, #0b0b10);
+  --landing-surface: var(--color-surface, #111119);
+  --landing-card: var(--color-card, #171720);
+  --landing-text: var(--color-text, #f9fafb);
+  --landing-secondary: var(--color-text-secondary, #a1a1aa);
+  --landing-line: var(--color-border, #ffffff20);
+  --landing-brand: var(--color-primary, #6552e8);
+  --landing-on-brand: var(--color-on-primary, #ffffff);
+  --landing-accent: var(--color-accent, #b4a8ff);
+  --landing-on-accent: var(--color-on-accent, #201737);
+  /* Width, gutter, radius, easing and the type scale below are Yumeit's own
+     calibration values; replace them from the product's layout and motion. */
+  --landing-width: 1200px;
+  --landing-gutter: 32px;
+  --landing-radius: 20px;
+  --landing-ease-out: cubic-bezier(.22, 1, .36, 1);
+  /* Dark-only brands such as Yumeit may add: color-scheme: dark; */
+  color: var(--landing-text);
+  background: var(--landing-canvas);
+  font-family: var(--font-body, Pretendard, system-ui, sans-serif);
+  font-synthesis: none;
+}
+.landing-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--landing-width);
+  margin-inline: auto;
+  padding-inline: var(--landing-gutter);
+}
+.landing-title, .landing-heading {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.landing-title { font-size: clamp(52px, 6.8vw, 92px); line-height: 1.13; }
+.landing-heading { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.3; }
+.landing-copy {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--landing-secondary);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+.landing :focus-visible {
+  outline: 3px solid var(--landing-accent);
+  outline-offset: 5px;
+}
+@media (max-width: 700px) {
+  .landing { --landing-gutter: 24px; --landing-radius: 16px; }
+  .landing-title { font-size: clamp(40px, 11.5vw, 60px); }
+  .landing-heading { font-size: 28px; }
+  .landing-copy { font-size: 14px; line-height: 1.8; }
+}
+@media (max-width: 360px) {
+  .landing { --landing-gutter: 20px; }
+}

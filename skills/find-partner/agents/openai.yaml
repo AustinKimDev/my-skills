@@ -1,0 +1,4 @@
+interface:
+  display_name: "파트너 후보 찾기"
+  short_description: "모집 조건에 맞는 파트너를 조사하고 사진·콘텐츠·출처를 담은 후보 보고서 제작"
+  default_prompt: "$find-partner로 우리 모집 조건에 맞는 후보를 찾고, 대표 사진과 콘텐츠·연락 경로를 확인해 HTML 보고서로 보여줘."

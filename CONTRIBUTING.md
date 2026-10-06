@@ -1,6 +1,6 @@
 # Maintaining standalone skill bundles
 
-The 15 owned skills remain the only top-level installable entries. Their live discovery links point to `skills/<name>/`. This repository's dependency manifest is the authority for bundled support, not an instruction to run every connected workflow.
+The 20 owned skills remain the only top-level installable entries. Their live discovery links point to `skills/<name>/`. This repository's dependency manifest is the authority for bundled support, not an instruction to run every connected workflow.
 
 ## Sources and generated files
 

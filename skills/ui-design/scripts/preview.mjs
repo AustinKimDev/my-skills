@@ -72,6 +72,7 @@ function checkURL(root, value) {
 export function loadManifest(root) {
   const data = readJSON(path.join(root, 'manifest.json'));
   if (!text(data.title, 150) || !Array.isArray(data.subjects) || !data.subjects.length) fail('제목과 비교 대상이 필요합니다');
+  if (data.variantLink !== undefined && !['separate', 'linked'].includes(data.variantLink)) fail('variantLink는 separate 또는 linked여야 합니다');
   const ids = new Set();
   for (const s of data.subjects) {
     if (!isID(s.id) || ids.has(s.id)) fail('비교 대상 ID가 잘못되었거나 중복입니다');
@@ -86,6 +87,8 @@ export function loadManifest(root) {
     for (const field of ['states', 'sizes']) {
       if (!Array.isArray(s[field]) || !s[field].length || s[field].some(x => !isID(x)) || new Set(s[field]).size !== s[field].length) fail(`${s.id}: ${field} 설정 오류`);
     }
+    // Optional display names for custom states, e.g. {"live": "행사 당일"}.
+    if (s.stateLabels !== undefined && (!s.stateLabels || typeof s.stateLabels !== 'object' || Array.isArray(s.stateLabels) || Object.entries(s.stateLabels).some(([k, v]) => !s.states.includes(k) || !text(v, 40)))) fail(`${s.id}: stateLabels 설정 오류`);
     if (!Array.isArray(s.variants) || s.variants.length < 1 || s.variants.length > 6) fail(`${s.id}: 시안은 1–6개로 구성하세요`);
     const variants = new Set();
     for (const v of s.variants) {

@@ -1,0 +1,4 @@
+interface:
+  display_name: "인터랙티브 랜딩"
+  short_description: "브랜드 토큰을 유지하는 유메잇 스타일 인터랙티브 소개 페이지·인터랙션 다듬기"
+  default_prompt: "$interactive-landing 스킬로 이 제품의 브랜드 색과 버튼을 그대로 쓰는 유메잇 스타일 인터랙티브 소개 페이지를 만들어줘."

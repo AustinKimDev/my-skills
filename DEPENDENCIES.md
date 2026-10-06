@@ -1,6 +1,6 @@
 # 스킬 연결 관계
 
-2026-09-30 기준 15개 스킬을 분석했습니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
+2026-10-03 기준 19개 스킬을 관리합니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
 
 | 스킬 | 직접 연결하는 내장 자료 | 전체 내장 모듈 수 |
 |---|---|---:|
@@ -12,13 +12,17 @@
 | iky-design | humanize-korean, 브라우저 연결 | 2 |
 | iky-design-audit | iky-design, humanize-korean | 3 |
 | image-assets | 이미지 생성 연결 | 1 |
+| instagram-korean-writing | 독립 실행, 자체 말투 분석 자료 | 0 |
+| interactive-landing | 독립 실행, 자체 디자인·인터랙션 기준과 CSS 토큰 | 0 |
 | product-plan-html | product-planner, 브라우저 연결 | 20 |
 | product-planner | ui-design | 19 |
 | recommend-animate | 독립 실행 | 0 |
 | screen-flow | ui-design, 이미지 생성·브라우저 연결 | 19 |
 | standup | 독립 실행 | 0 |
+| threads-korean-writing | 독립 실행, 자체 말투 분석 자료 | 0 |
 | ui-design | IKY 설계·검수, 이미지 제작, 한국어 검수, UI 전문 지침, 브라우저·컴포넌트 연결 | 18 |
 | website-launch-readiness | 독립 실행 | 0 |
+| x-korean-writing | 독립 실행, 자체 말투 분석 자료 | 0 |
 
 전체 수에는 연결 스킬이 다시 참조하는 지원 자료까지 포함됩니다. 같은 패키지 안에서는 한 번만 저장합니다. `better-*`의 상호 참조는 하나의 평평한 묶음으로 해결하며, 이미 읽은 지침을 반복 호출하지 않습니다. 독립 스킬에는 원래 작업에 필요하지 않은 의존성을 추가하지 않았습니다.
 

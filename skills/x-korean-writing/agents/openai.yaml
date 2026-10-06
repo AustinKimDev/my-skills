@@ -1,0 +1,4 @@
+interface:
+  display_name: "X 한국어 글쓰기"
+  short_description: "트위터의 게시 목적에 맞춰 한국어 게시물과 답글을 작성합니다"
+  default_prompt: "$x-korean-writing으로 이 내용을 X에 맞는 한국어 게시물로 써줘."

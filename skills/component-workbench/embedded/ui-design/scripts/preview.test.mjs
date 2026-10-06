@@ -31,6 +31,20 @@ try {
     fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ title: 'Invalid frame', subjects: [{ ...openSubject, preview }] }));
     assert.throws(() => loadManifest(root));
   }
+  for (const variantLink of ['both', true]) {
+    fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ ...manifest, variantLink }));
+    assert.throws(() => loadManifest(root));
+  }
+  for (const stateLabels of [{ missing: '없는 상태' }, { [openSubject.states[0]]: '' }, []]) {
+    fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ ...manifest, subjects: [{ ...openSubject, stateLabels }] }));
+    assert.throws(() => loadManifest(root));
+  }
+  fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ ...manifest, subjects: [{ ...openSubject, stateLabels: { [openSubject.states[0]]: '평소' } }] }));
+  assert.equal(loadManifest(root).subjects[0].stateLabels[openSubject.states[0]], '평소');
+  for (const variantLink of ['separate', 'linked']) {
+    fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify({ ...manifest, variantLink }));
+    assert.equal(loadManifest(root).variantLink, variantLink);
+  }
   fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify(manifest));
   // Exercise the shipped frame-sizing function, including the former component crop.
   const viewer = fs.readFileSync(path.join(base, 'assets/review.html'), 'utf8');

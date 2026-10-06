@@ -21,6 +21,10 @@ For each new comparison, generate five alternatives by default, minimum four. A 
 
 Show all actual Korean names and short differences in a radio list. Reveal the active variant's tradeoff/reference inside the option. Never substitute numbers or a select control. Support arrow keys, Home/End, and one selected Tab stop. Preview switching is separate from saving a direction with “이 방향 선택”.
 
+### Per-subject and linked variant choice
+
+Each subject keeps its own previewed and saved variant, so a review can choose A for one screen and C for another. Switching subjects restores that subject's own choice instead of carrying the previous subject's variant ID. When several subjects share variant IDs (for example, one A–E direction applied across many screens), the sidebar shows “대상별로 따로 / 모든 대상 같이”. In linked mode, choosing or saving a variant applies the same ID to every subject that has it; subjects without that ID keep their own choice. Set the initial mode with optional top-level `"variantLink": "separate" | "linked"` (default `separate`); the viewer remembers the reviewer's later choice. Saved directions appear per subject: a check on the subject button, “선택 저장됨” on the option, and the saved name above the preview. Read decisions per subject from `select` events; a linked save writes one event per affected subject.
+
 The workspace is desktop-first: 14px base type, a 320px left sidebar for decisions, and the remaining width for previews. Sidebar and canvas scroll independently. Keep modes, advanced settings, feedback, and history in expandable secondary areas. Put single/side-by-side view and viewport controls above the preview. Stack the regions on narrow displays while preserving touch targets. Do not use select elements.
 
 Workspace colors: white `#fff`, black `#000`, and royal-blue 100–900 with 500 at `#4169E1`. Use light-blue selection fills and visible blue borders/indicators. Product previews follow their own confirmed style; workspace styling is not a universal product theme.
@@ -53,7 +57,7 @@ Workspace colors: white `#fff`, black `#000`, and royal-blue 100–900 with 500 
 
 This is a one-variant schema example, not a complete exploration. Fill the remaining distinct variants for an exploration. Use `description` for the decisive difference and `tradeoff` for its cost. For exploration, populate the browser comparison data below using [discovery.md](discovery.md#comparison-criteria). The workspace renders the supplied assessments and recommendations; an agent remains responsible for the reasoning.
 
-`url` accepts a relative HTML path (query allowed) or a local HTTP URL. Optional fields: `contextUrl`, `reference`, `next`. Every `next` entry must reference another subject in this manifest. Frames receive `state` and `size` query parameters; implement them rather than merely showing controls.
+`url` accepts a relative HTML path (query allowed) or a local HTTP URL. Optional fields: `contextUrl`, `reference`, `next`. Every `next` entry must reference another subject in this manifest. Frames receive `state` and `size` query parameters; implement them rather than merely showing controls. Custom state IDs can carry display names through optional per-subject `stateLabels` (for example `{"live": "행사 당일"}`); every key must be one of that subject's `states`.
 
 ### Target viewport and specimen height
 

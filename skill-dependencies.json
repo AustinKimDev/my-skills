@@ -219,6 +219,21 @@
       "kind": "owned",
       "dependencies": []
     },
+    "instagram-korean-writing": {
+      "source": "skills/instagram-korean-writing",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "threads-korean-writing": {
+      "source": "skills/threads-korean-writing",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "x-korean-writing": {
+      "source": "skills/x-korean-writing",
+      "kind": "owned",
+      "dependencies": []
+    },
     "apple-design": {
       "source": "vendor/skills/apple-design",
       "kind": "third-party",
@@ -390,6 +405,21 @@
       "kind": "runtime-guide",
       "entry": "GUIDE.md",
       "dependencies": []
+    },
+    "interactive-landing": {
+      "source": "skills/interactive-landing",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "find-partner": {
+      "source": "skills/find-partner",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "browser-runtime",
+          "when": "Search candidates, inspect first-party posts and verify the generated HTML in the user-selected browser."
+        }
+      ]
     }
   },
   "handoffs": {

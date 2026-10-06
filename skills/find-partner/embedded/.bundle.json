@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "root": "find-partner",
+  "modules": [
+    "browser-runtime"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    }
+  },
+  "files": {
+    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/references/dependencies.md": "ba6e92e325704293e5f8e8b7d12e7ddd746aa7f2b79f05aaa744cf47298a6589",
+    "references/dependencies.md": "1c0c9634dabcee9d8015ac6b5af5bf46293f86f6a8cab24fc5e2011701e08f77"
+  }
+}
