@@ -234,6 +234,32 @@
       "kind": "owned",
       "dependencies": []
     },
+    "iky-cardnews-reels": {
+      "source": "skills/iky-cardnews-reels",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-instagram-korean-writing",
+          "when": "Write or review the card copy and the caption in Korean."
+        },
+        {
+          "name": "humanize-korean",
+          "when": "Check the Korean copy for translationese and stock phrasing before rendering."
+        },
+        {
+          "name": "iky-image-assets",
+          "when": "Brief and generate the full-bleed scenes in the project's illustration style."
+        },
+        {
+          "name": "better-typography",
+          "when": "Settle the type scale, tracking and numeral behaviour for a new layout."
+        },
+        {
+          "name": "browser-runtime",
+          "when": "Open the gallery or reel preview for the user to review."
+        }
+      ]
+    },
     "apple-design": {
       "source": "vendor/skills/apple-design",
       "kind": "third-party",

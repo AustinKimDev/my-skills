@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>Card-news renderer</title>
+<style>
+@font-face{font-family:P;font-weight:500;src:local('Pretendard Medium'),local('Pretendard-Medium'),url(fonts/Pretendard-Medium.otf)}
+@font-face{font-family:P;font-weight:600;src:local('Pretendard SemiBold'),local('Pretendard-SemiBold'),url(fonts/Pretendard-SemiBold.otf)}
+@font-face{font-family:P;font-weight:700;src:local('Pretendard Bold'),local('Pretendard-Bold'),url(fonts/Pretendard-Bold.otf)}
+/* Title face (D): loaded from fonts installed on this machine, never copied into a repository. Text face (P): fonts/ links to the project's own files. */
+@font-face{font-family:D;font-weight:500;src:local('GmarketSansMedium'),local('Gmarket Sans Medium')}
+@font-face{font-family:D;font-weight:700;src:local('GmarketSansBold'),local('Gmarket Sans Bold')}
+body{margin:0;background:#0b0a0d;color:#f4f1f3;font:500 15px P,sans-serif;padding:24px}
+#cards{display:grid;grid-template-columns:repeat(4,270px);gap:16px}
+#cards canvas{width:270px;height:auto;border-radius:8px;display:block}
+#status{margin:0 0 16px;color:#aaa5ad}
+</style>
+<p id="status">렌더링 준비 중</p>
+<div id="cards"></div>
+<script src="render.js"></script>
+<script>
+(async()=>{
+  const status=document.getElementById('status');
+  try{
+    for(let n=1;n<=CARD_COPY.length;n++)document.getElementById('cards').append(await renderCard(n));
+    status.textContent='rendered '+CARD_COPY.length;
+  }catch(e){status.textContent='render failed: '+(e&&e.message||e)}
+})();
+</script>
+</html>

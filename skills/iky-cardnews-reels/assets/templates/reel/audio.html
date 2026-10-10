@@ -1,0 +1,18 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reel soundtrack</title>
+<style>html,body{margin:0;background:#0b0a0e;color:#f4f1f3;font-family:system-ui,sans-serif;color-scheme:dark}
+body{display:grid;place-items:center;min-height:100vh;gap:12px;align-content:center}
+button{background:#e8a2bd;color:#171218;border:0;border-radius:8px;padding:12px 22px;font:600 16px system-ui;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}p{color:#aaa5ad;font-size:14px;margin:0}</style>
+<button id="go">미리 듣기</button><p id="st">버튼을 누르면 30초 사운드트랙을 만들어 재생합니다.</p>
+<script src="timeline.js"></script><script src="audio.js"></script>
+<script>
+const go = document.getElementById('go'), st = document.getElementById('st'); let src = null;
+go.onclick = async () => {
+  if (src) { src.stop(); src = null; go.textContent = '미리 듣기'; st.textContent = '정지했습니다.'; return; }
+  go.disabled = true; st.textContent = '렌더링 중...';
+  const buf = await renderSoundtrack(), ac = new AudioContext();
+  src = ac.createBufferSource(); src.buffer = buf; src.connect(ac.destination);
+  src.onended = () => { src = null; go.textContent = '미리 듣기'; st.textContent = '재생이 끝났습니다.'; };
+  src.start(); go.disabled = false; go.textContent = '정지'; st.textContent = '재생 중 (' + buf.duration.toFixed(1) + '초)';
+};
+</script></html>

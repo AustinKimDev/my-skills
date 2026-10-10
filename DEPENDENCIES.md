@@ -1,12 +1,13 @@
 # 스킬 연결 관계
 
-2026-10-07 기준 28개 스킬을 관리합니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
+2026-10-10 기준 29개 스킬을 관리합니다. 단독 폴더 설치를 기준으로 필요한 지침·참조·스크립트·에셋을 내장합니다. 연결 목록의 원본은 [skill-dependencies.json](skill-dependencies.json), 실제 로딩 경로는 각 스킬의 `references/dependencies.md`입니다.
 
 | 스킬 | 직접 연결하는 내장 자료 | 전체 내장 모듈 수 |
 |---|---|---:|
 | iky-backend-architecture | 독립 실행 | 0 |
 | iky-backend-build | 독립 실행 | 0 |
 | iky-backend-spec | 독립 실행 | 0 |
+| iky-cardnews-reels | 인스타그램 글쓰기, humanize-korean, 이미지 제작, 타이포그래피 지침, 브라우저 연결 | 11 |
 | iky-component-workbench | iky-ui-design, 브라우저 연결 | 19 |
 | iky-decision-report | 브라우저 연결 | 1 |
 | iky-deploy | 독립 실행 | 0 |
