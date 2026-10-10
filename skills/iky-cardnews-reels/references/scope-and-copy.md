@@ -26,10 +26,12 @@ Each card carries four pieces, in this order of size:
 
 The cover names the area and promises the change; its detail line lists the cards that follow. The last card may carry the least glamorous but real improvement (stability, a platform fix).
 
-Write from the reader's side. Describe the change, not a guaranteed state: "we tuned the stream to be steadier", not "the stream is stable". Keep wording independent of button positions when the interface may still move. Use the product's own current terms; if the release renamed something, use the new name.
+Write from the reader's side, and prefer an invitation to act ("…해 보세요") over a description of the system. Describe the change, not a guaranteed state: "we tuned the stream to be steadier", not "the stream is stable". Keep wording independent of button positions when the interface may still move. Use the product's own current terms; if the release renamed something, use the new name.
 
 Rejected patterns:
 
+- A card for something that did not change. "X still works as before" is not news; an unchanged path that the audit found is context for the team, not a card. Every card and every reel scene names a change.
+- A claim that describes a state from the product's side ("gifts are collected too") when an invitation from the reader's side says it better ("send gifts and fill your collection").
 - A bracket holding an unrelated label because the layout had a bracket slot.
 - A keyword invented to fit two syllables when the natural word is different.
 - Slogan fragments split across lines that do not form a sentence when read together.

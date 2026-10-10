@@ -15,10 +15,19 @@
 
   // Chords: pad voicing + bass root (MIDI). Loop is IV-V-iii-vi; intro/outro use F then G.
   const F = { pad: [53, 57, 60, 64], root: 41 }, Gc = { pad: [55, 59, 62, 67], root: 43 };
-  const LOOP = [F, Gc, { pad: [52, 55, 59, 62], root: 40 }, { pad: [57, 60, 64, 69], root: 45 }];
-  const chordOf = b => b < 2 ? [F, Gc][b] : b >= 14 ? [F, Gc][b - 14] : LOOP[(b - 2) % 4];
+  // A second harmony and tune over the same cues, for a sibling reel: ?tune=b turns the loop to vi-IV-I-V (A min, F, C, G).
+  const TUNE_B = new URLSearchParams(location.search).get('tune') === 'b';
+  const Am = { pad: [57, 60, 64, 67], root: 45 }, Cc = { pad: [55, 60, 64, 67], root: 36 };
+  const LOOP = TUNE_B ? [Am, F, Cc, Gc] : [F, Gc, { pad: [52, 55, 59, 62], root: 40 }, { pad: [57, 60, 64, 69], root: 45 }];
+  const EDGE = TUNE_B ? [Am, F] : [F, Gc]; // intro and outro bars
+  const chordOf = b => b < 2 ? EDGE[b] : b >= 14 ? EDGE[b - 14] : LOOP[(b - 2) % 4];
   // Melody per chord, 8 eighth-note slots (0 = rest), chord tones + C pentatonic.
-  const MEL = [
+  const MEL = TUNE_B ? [
+    [76, 72, 0, 69, 72, 0, 76, 0],
+    [77, 0, 72, 69, 0, 72, 0, 77],
+    [79, 76, 0, 72, 76, 0, 79, 0],
+    [74, 0, 79, 0, 74, 71, 0, 74]
+  ] : [
     [81, 0, 76, 72, 0, 76, 77, 0],
     [79, 0, 74, 0, 71, 74, 0, 79],
     [76, 0, 79, 83, 0, 79, 76, 0],

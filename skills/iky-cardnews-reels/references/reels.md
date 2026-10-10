@@ -19,6 +19,10 @@ Each feature slot owns one cue pattern:
 
 Map each feature to the slot whose motion says what the feature does. Write new choreography when none fits; do not force a feature into a motion that misdescribes it. Keep explanatory graphics (gauges, chips, counters, traces) clearly diagrammatic and say in the notes that they are not captured app states.
 
+## Sibling reels
+
+Two reels for one release are siblings, not twins. Give each its own treatment of at least the headline, the transitions, the floating motif, the accent colour and the tune, while keeping the typefaces and scene style shared. The template's `style` field does this: `stage` (kinetic type, stripe wipes, rising hearts) and `bubbles` (the headline as a chat exchange with a typing indicator, an iris wipe, floating message bubbles). `audio.js` carries a second harmony and melody (`?tune=b`) over the same cues; render and mux one soundtrack per reel.
+
 ## Frame design
 
 - Every frame is a pure function of time, drawn on a 1080x1920 canvas. No wall-clock state.

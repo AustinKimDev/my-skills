@@ -41,20 +41,23 @@ const DROP_ICONS = [];
    (pops, drops, count-up, blip, steps, lock), so a slot's `fx` picks the choreography and the rest is copy and placement.
    Copy is one plain sentence split over the lead and display lines. Coordinates inside a slot are in the scene image's
    own pixels (1024x1536). Replace this placeholder deck; add more decks and pick one with ?set=<name>.
+   Sibling reels should not be twins. `style` changes how a reel speaks: 'stage' sets the headline as kinetic type, wipes
+   with diagonal stripes and floats hearts; 'bubbles' sets it as a chat exchange (an incoming line, a typing indicator,
+   then the reply), wipes with an iris and floats small message bubbles. audio.js has a second tune (?tune=b).
    fx options: shelves {shelves:[[surface y, left x, right x, icon size]...], note} | frames {frames:[[cx, cy, size]...]}
-   | drops {targets:[[x, y]...], icon, absorb?} | count {to, unit} | charge {gauge:[before, after]}
+   | drops {targets:[[x, y]...], icon, absorb?} | count {to, unit} (third slot) | charge {gauge:[before, after]} (third or fourth slot)
    | looks {looks:[[chip, css filter]...], shutter?} | lock {rings?:[x, y], trace?, panels?} */
 const VERSION = '1.0.0';
 const DECKS = {
   main: {
-    badge: 'NEW', closing: '달라진 점을 만나 보세요',
+    style: 'stage', badge: 'NEW', closing: '달라진 점을 만나 보세요',
     intro: { scene: 'scene/01-cover.png', lead: '이번 업데이트로', key: '달라졌어요' },
     slots: [
-      { name: '첫째', scene: 'scene/02.png', lead: '기능 하나를', key: '써 보세요', fx: 'charge', gauge: ['준비 중', '준비 완료'] },
-      { name: '둘째', scene: 'scene/03.png', lead: '기능 둘도', key: '달라졌어요', fx: 'charge', gauge: ['준비 중', '준비 완료'] },
+      { name: '첫째', scene: 'scene/02.png', lead: '기능 하나를', key: '써 보세요', fx: 'looks', looks: [] },
+      { name: '둘째', scene: 'scene/03.png', lead: '기능 둘도', key: '써 보세요', fx: 'looks', looks: [] },
       { name: '셋째', scene: 'scene/04.png', lead: '원하는 만큼', fx: 'count', to: 1000, unit: '부터' },
       { name: '넷째', scene: 'scene/05.png', lead: '끊기지 않고', key: '이어져요', fx: 'charge', gauge: ['연결 중', '연결 완료'] },
-      { name: '다섯째', scene: 'scene/06.png', lead: '화면이', key: '바뀌어요', fx: 'looks', looks: [['밝게', 'brightness(1.2) saturate(1.2)'], ['선명하게', 'contrast(1.3)']] },
+      { name: '다섯째', scene: 'scene/06.png', lead: '화면을', key: '바꿔 보세요', fx: 'looks', looks: [['밝게', 'brightness(1.2) saturate(1.2)'], ['선명하게', 'contrast(1.3)']] },
       { name: '여섯째', scene: 'scene/07.png', lead: '불안정하던 부분을', key: '손봤어요', fx: 'lock', trace: true }
     ]
   }
@@ -98,6 +101,13 @@ function drawFrame(x, t) {
   };
   const gift = (id, cx, cy, s, rot = 0) => { if (s <= 0) return; x.save(); x.translate(cx, cy); x.rotate(rot); x.drawImage(assets.gifts[id], -s / 2, -s / 2, s, s); x.restore(); };
   const lit = fn => { x.globalCompositeOperation = 'lighter'; fn(); x.globalCompositeOperation = 'source-over'; };
+  const BUBBLES = DECK.style === 'bubbles', ACCENT = BUBBLES ? C.lav : C.rose;
+  // A small message bubble with three dots: the chat reel's floating motif.
+  const miniBubble = (cx, cy, s, color) => {
+    x.save(); x.translate(cx, cy); x.beginPath(); x.roundRect(-s * .6, -s * .4, s * 1.2, s * .8, [s * .36, s * .36, s * .36, s * .1]); x.fillStyle = color; x.fill();
+    x.fillStyle = 'rgba(27,15,23,.5)'; for (let d = -1; d <= 1; d++) { x.beginPath(); x.arc(d * s * .28, 0, s * .085, 0, Math.PI * 2); x.fill(); }
+    x.restore();
+  };
   const flash = alpha => A(alpha, () => { x.fillStyle = '#fff'; x.fillRect(0, 0, W, H); });
 
   const scene = TL.scenes.find(s => t >= s.a && t < s.b) || TL.scenes[TL.scenes.length - 1];
@@ -193,13 +203,14 @@ function drawFrame(x, t) {
     const period = 2.1 + rnd(j) * 1.3, life = mod(t / period + rnd(j + .2), 1);
     if (t - life * period < heartFrom) continue;
     const size = (26 + rnd(j + .6) * 40) * (.5 + .5 * Math.min(1, life * 6));
-    A(Math.min(1, life * 6) * (1 - prog(life, .6, 1)) * .9, () => heart(850 + rnd(j + .4) * 160 + 46 * Math.sin(life * 7 + j), lerp(1180, 320, Math.pow(life, .85)), size, .3 * Math.sin(life * 5 + j * 2), [C.pink, C.rose, C.lav, '#ffffff'][j % 4]));
+    const px = 850 + rnd(j + .4) * 160 + 46 * Math.sin(life * 7 + j), py = lerp(1180, 320, Math.pow(life, .85)), color = [C.pink, C.rose, C.lav, '#ffffff'][j % 4];
+    A(Math.min(1, life * 6) * (1 - prog(life, .6, 1)) * .9, () => (BUBBLES ? miniBubble(px, py, size * 1.5, color) : heart(px, py, size, .3 * Math.sin(life * 5 + j * 2), color)));
   }
 
   /* ---------- chrome: brand mark and the current feature's position ---------- */
   if (scene.id !== 'end') {
     if (assets.logo) x.drawImage(assets.logo, MARGIN, 228, assets.logo.width * 48 / assets.logo.height, 48);
-    if (slot) { let px = 1008; for (let i = DECK.slots.length - 1; i >= 0; i--) { const w = i === slotIndex ? 44 : 12; px -= w; round(px, 246, w, 12, 6, i === slotIndex ? C.pink : 'rgba(255,255,255,.28)'); px -= 10; } }
+    if (slot) { let px = 1008; for (let i = DECK.slots.length - 1; i >= 0; i--) { const w = i === slotIndex ? 44 : 12; px -= w; round(px, 246, w, 12, 6, i === slotIndex ? (BUBBLES ? C.lav : C.pink) : 'rgba(255,255,255,.28)'); px -= 10; } }
   }
 
   /* ---------- transitions: three-stripe diagonal wipes on every cut ---------- */
@@ -211,6 +222,11 @@ function drawFrame(x, t) {
     }
     // The recap starts on a hard flash cut so its first beat is not hidden under a wipe.
     if (T0 === cues.recapHits[0]) { if (t >= T0) flash(.45 * (1 - prog(t, T0, T0 + .2))); return; }
+    if (BUBBLES) { // iris from the send corner, then a pink dissolve
+      if (t < T0) { const e = eInOut(prog(t, T0 - .26, T0 - .02)); [[C.lav, 1], [C.pink, .86]].forEach(([color, f]) => { x.beginPath(); x.arc(960, 1500, 2400 * e * f, 0, Math.PI * 2); x.fillStyle = color; x.fill(); }); }
+      else A(1 - eOut(prog(t, T0, T0 + .32)), () => { x.fillStyle = C.pink; x.fillRect(0, 0, W, H); });
+      return;
+    }
     const S = 340;
     x.save(); if (i % 2) { x.translate(W, 0); x.scale(-1, 1); }
     [C.lav, C.pink, C.rose].forEach((color, n) => {
@@ -220,7 +236,7 @@ function drawFrame(x, t) {
       x.beginPath(); x.moveTo(trail + S, 0); x.lineTo(lead + S, 0); x.lineTo(lead, H); x.lineTo(trail, H); x.closePath(); x.fillStyle = color; x.fill();
     });
     x.restore();
-    if (i === 0 && t >= T0) flash(.5 * (1 - prog(t, T0, T0 + .3)));
+    if (i === 0 && t >= T0) flash(.5 * (1 - prog(t, T0, T0 + .3))); // the drop
   });
   if (t > DURATION - .4) A(prog(t, DURATION - .4, DURATION), () => { x.fillStyle = '#000'; x.fillRect(0, 0, W, H); });
 
@@ -229,11 +245,38 @@ function drawFrame(x, t) {
   function label(index, name) {
     const p = eOut(prog(lt, .06, .46)); if (p <= 0) return;
     const st = TYPE.label, wi = measure(index, st).total, wn = measure(name, st).total, w = 30 + wi + 37 + wn + 30;
-    x.save(); x.beginPath(); x.rect(MARGIN, 312, w * p, 60); x.clip(); round(MARGIN, 312, w, 60, 30, C.rose);
+    x.save(); x.beginPath(); x.rect(MARGIN, 312, w * p, 60); x.clip(); round(MARGIN, 312, w, 60, 30, ACCENT);
     text(index, MARGIN + 30, 353, st, rgba(C.dark, .62)); round(MARGIN + 30 + wi + 18, 331, 1.5, 22, 1, rgba(C.dark, .35)); text(name, MARGIN + 30 + wi + 37, 353, st, C.dark);
     x.restore();
   }
+  // Chat-style headline: the lead line arrives as an incoming message, a typing indicator follows, then the key line is the reply.
+  function bubbles(lead, key, { leadStart = .1, keyStart = .3, shake = 0 } = {}) {
+    const ls = { ...TYPE.title, size: 62 }, ks = fitted(key || '', { ...TYPE.display, size: 108 }, 800), seed = Math.floor(t * 30);
+    const jx = shake ? (rnd(seed * 5.1) - .5) * 70 * shake : 0, jy = shake ? (rnd(seed * 2.3) - .5) * 26 * shake : 0, lp = eBack(prog(lt, leadStart, leadStart + .4));
+    if (lp > 0) {
+      const lw = measure(lead, ls).total + 84;
+      x.save(); x.translate(MARGIN + jx, 1262 + jy); x.scale(lp, lp);
+      x.beginPath(); x.roundRect(0, -108, lw, 108, [44, 44, 44, 12]); x.fillStyle = 'rgba(34,27,44,.94)'; x.fill(); x.strokeStyle = 'rgba(255,255,255,.16)'; x.lineWidth = 2; x.stroke();
+      text(lead, 42, -36, ls, C.ink); x.restore();
+    }
+    if (!key) return;
+    const kp = eBack(prog(lt, keyStart, keyStart + .42)), typing = Math.max(keyStart - .55, leadStart + .25);
+    if (kp <= 0 && lt > typing) {
+      A(eOut(prog(lt, typing, typing + .2)), () => {
+        x.save(); x.translate(1008, 1478); x.beginPath(); x.roundRect(-176, -96, 176, 96, [48, 48, 12, 48]); x.fillStyle = rgba(C.pink, .9); x.fill();
+        x.fillStyle = '#fff'; for (let d = 0; d < 3; d++) { x.beginPath(); x.arc(-130 + d * 42, -48 - 12 * Math.abs(Math.sin(lt * 9 - d * .9)), 11, 0, Math.PI * 2); x.fill(); }
+        x.restore();
+      });
+    }
+    if (kp > 0) {
+      const kw = measure(key, ks).total + 104;
+      x.save(); x.translate(1008, 1478); x.scale(kp, kp);
+      x.save(); x.shadowColor = rgba(C.pink, .45); x.shadowBlur = 40; x.beginPath(); x.roundRect(-kw, -172, kw, 172, [60, 60, 14, 60]); x.fillStyle = C.pink; x.fill(); x.restore();
+      text(key, -kw + 52, -54, ks, '#fff'); x.restore();
+    }
+  }
   function headline(lead, key, { keyStart = .3, mode = 'rise', stagger = .04 } = {}) {
+    if (BUBBLES) { bubbles(lead, key, { keyStart }); return; }
     chars(lead, MARGIN, LEAD_Y, TYPE.lead, C.ink, .1);
     if (key) chars(key, MARGIN, KEY_Y, TYPE.display, C.pink, keyStart, { mode, stagger });
   }
@@ -253,6 +296,7 @@ function drawFrame(x, t) {
     });
     const lp = eOut(prog(lt, .18, .6));
     A(lp, () => { x.save(); x.translate((1 - lp) * -30, 0); x.beginPath(); x.roundRect(MARGIN + bw + 18, 316, 306, 68, 34); x.strokeStyle = rgba(C.rose, .8); x.lineWidth = 2; x.stroke(); text(`${VERSION} 업데이트`, MARGIN + bw + 18 + 153, 361, { ...TYPE.label, weight: 600 }, C.rose, 'center'); x.restore(); });
+    if (BUBBLES) { bubbles(DECK.intro.lead, DECK.intro.key, { leadStart: BEAT * .5, keyStart: BEAT * 2 }); return; }
     chars(DECK.intro.lead, MARGIN, LEAD_Y, TYPE.lead, C.ink, BEAT * .5);
     const w = chars(DECK.intro.key, MARGIN, KEY_Y, TYPE.display, C.pink, BEAT * 2);
     round(MARGIN, KEY_Y + 42, w * eOut(prog(lt, BEAT * 2.6, BEAT * 3.6)), 8, 4, C.lime);
@@ -345,9 +389,10 @@ function drawFrame(x, t) {
     }
   }
 
-  // A gauge fills until the blip, then confirms: candy topped up, or the call screen staying on.
+  // A gauge fills, then confirms: candy topped up, or the call screen staying on.
+  // In the third slot it lands with the count-up chime; in the fourth, with the blip.
   function charge() {
-    const v = viewOf(slot.z ?? 1.06), blip = cues.playBlip, done = t >= blip, fill = done ? 1 : eInOut(prog(t, scene.a + .2, blip)) * .92;
+    const v = viewOf(slot.z ?? 1.06), blip = slotIndex === 2 ? cues.countEnd : cues.playBlip, done = t >= blip, fill = done ? 1 : eInOut(prog(t, scene.a + .2, blip)) * .92;
     paint(slot.scene, v);
     if (done) lit(() => glow(540, 760, 620, '#ffffff', .28 * (1 - prog(t, blip, blip + .4))));
     scrims();
@@ -364,7 +409,7 @@ function drawFrame(x, t) {
       ring(cx, cy, lerp(40, 260, eOut(q)), C.lime, 5, 1 - q);
       for (let n = 0; n < 8; n++) { const a = n / 8 * Math.PI * 2, d = eOut(q) * (120 + rnd(n) * 120); A(1 - q, () => sparkle(cx + Math.cos(a) * d, cy + Math.sin(a) * d, 26 * (1 - q * .5), a, n % 2 ? '#ffffff' : C.lime)); }
     }
-    headline(slot.lead, slot.key, { keyStart: BEAT * 2 });
+    headline(slot.lead, slot.key, { keyStart: blip - scene.a - .05 });
   }
 
   // The look of the whole scene changes as each chip lights up, wiping across like a compare slider.
@@ -414,8 +459,10 @@ function drawFrame(x, t) {
       }
       x.strokeStyle = locked ? C.pink : 'rgba(255,255,255,.7)'; x.lineWidth = 6; x.lineJoin = 'round'; x.lineCap = 'round'; if (locked) { x.shadowColor = C.pink; x.shadowBlur = 22; } x.stroke(); x.restore();
     }
+    const amt = locked ? 0 : burst ? 1 : .1;
+    if (BUBBLES) { bubbles(slot.lead, slot.key, { leadStart: .03, keyStart: at0 - scene.a + .02, shake: amt }); return; }
     // The lead line glitches in slices until the lock.
-    const amt = locked ? 0 : burst ? 1 : .1, st = fitted(slot.lead, TYPE.lead, COLUMN);
+    const st = fitted(slot.lead, TYPE.lead, COLUMN);
     if (lt > .03) {
       const top = LEAD_Y - st.size * .95, band = st.size * 1.3 / 6;
       for (let b = 0; b < 6; b++) {
@@ -436,7 +483,10 @@ function drawFrame(x, t) {
       const z = lerp(1.2, 1.06, eOut(prog(q, 0, .55))), s = H / 1536 * z, v = { s, tx: (W - 1024 * s) / 2, ty: -(1536 * s - H) * .3 };
       paint(feat.scene, v); scrims();
       text(`0${idx + 1} / 0${DECK.slots.length}`, 540, 1290, { ...TYPE.label, track: .1 }, C.rose, 'center');
-      x.save(); x.translate(540, KEY_Y); x.scale(ts, ts); text(feat.name, 0, 0, TYPE.display, idx % 2 ? C.pink : C.ink, 'center'); x.restore();
+      if (BUBBLES) {
+        const ks = { ...TYPE.display, size: 120 }, kw = measure(feat.name, ks).total + 116, fill = idx % 2 ? C.pink : C.lav;
+        x.save(); x.translate(540, KEY_Y + 14); x.scale(ts, ts); x.beginPath(); x.roundRect(-kw / 2, -186, kw, 186, [64, 64, 16, 64]); x.fillStyle = fill; x.fill(); text(feat.name, 0, -58, ks, idx % 2 ? '#fff' : C.dark, 'center'); x.restore();
+      } else { x.save(); x.translate(540, KEY_Y); x.scale(ts, ts); text(feat.name, 0, 0, TYPE.display, idx % 2 ? C.pink : C.ink, 'center'); x.restore(); }
       flash(.24 * (1 - prog(q, 0, .3)));
     }
     if (t >= f0) {

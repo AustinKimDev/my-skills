@@ -29,10 +29,10 @@ Steps 4 and 6 are slow. Start image generation as soon as the copy is settled an
 
 ## Rules that came from rejected drafts
 
-- **Copy.** Write sentences a person would say, in the product's register. Never invent a word to fill a layout slot. A bracketed gloss is a reading of the keyword, never a second fact. A claim describes the change ("we made X steadier"), not a state the team cannot guarantee ("X is stable").
+- **Copy.** Every card names a change; what stayed the same is not a card. Write sentences a person would say, in the product's register, and prefer inviting the reader to act. Never invent a word to fill a layout slot. A bracketed gloss is a reading of the keyword, never a second fact. A claim describes the change ("we made X steadier"), not a state the team cannot guarantee ("X is stable").
 - **Images.** One distinct image per card. Do not recycle one image set across the carousel and the reel unless the user asks. Generated images carry no text, people, logos or UI; anything that must be exact (product icons, prices, names) is drawn by code.
 - **Type.** A title face for titles, a text face for sentences. A fixed scale, tracking that tightens with size, tabular figures for anything that counts, large lines aligned by their ink.
-- **Reel.** It is not the carousel on a timeline. Cut to a beat grid, give each feature its own motion, and build the sound in from the start. End on the brand mark alone unless a wordmark asset exists.
+- **Reel.** It is not the carousel on a timeline, and two reels for one release are siblings, not twins. Cut to a beat grid, give each feature its own motion, and build the sound in from the start. End on the brand mark alone unless a wordmark asset exists.
 - **Honesty.** Synthesized audio is measured, not heard: say so. Distinguish full-size inspection from a contact sheet. Generated scenes are not app screens: say so in the hand-off notes.
 
 ## Bundled files
