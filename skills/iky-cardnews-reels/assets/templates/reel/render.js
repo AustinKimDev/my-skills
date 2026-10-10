@@ -37,24 +37,28 @@ const mod = (a, n) => ((a % n) + n) % n;
 const ICONS = [];
 const DROP_ICONS = [];
 
-/* Each reel: an intro, six feature slots and a closing line. The six slots ride the same music cues in timeline.js
-   (pops, drops, count-up, blip, steps, lock), so a slot's `fx` picks the choreography and the rest is copy and placement.
+/* Each reel: two opening bars, six feature slots, two closing bars and an end card. Each slot rides one cue pattern from
+   timeline.js, so a slot's `fx` must match the pattern at its position (default order: pops, drops, count, blip, steps, lock):
+     pops  -> shelves {shelves:[[surface y, left x, right x, icon size]...], note} or frames {frames:[[cx, cy, size]...]}
+     drops -> drops {targets:[[x, y]...], icon, absorb?}
+     count -> count {to, unit} or charge {cue:'count', gauge:[before, after]}
+     blip  -> charge {gauge:[before, after]}
+     steps -> looks {looks:[[chip, css filter]...], shutter?}
+     lock  -> lock {rings?:[x, y], trace?, panels?}
    Copy is one plain sentence split over the lead and display lines. Coordinates inside a slot are in the scene image's
    own pixels (1024x1536). Replace this placeholder deck; add more decks and pick one with ?set=<name>.
    Sibling reels should not be twins. `style` changes how a reel speaks: 'stage' sets the headline as kinetic type, wipes
    with diagonal stripes and floats hearts; 'bubbles' sets it as a chat exchange (an incoming line, a typing indicator,
-   then the reply), wipes with an iris and floats small message bubbles. audio.js has a second tune (?tune=b).
-   fx options: shelves {shelves:[[surface y, left x, right x, icon size]...], note} | frames {frames:[[cx, cy, size]...]}
-   | drops {targets:[[x, y]...], icon, absorb?} | count {to, unit} (third slot) | charge {gauge:[before, after]} (third or fourth slot)
-   | looks {looks:[[chip, css filter]...], shutter?} | lock {rings?:[x, y], trace?, panels?} */
+   then the reply), wipes with an iris and floats small message bubbles. audio.js has a second tune (?tune=b), and
+   timeline.js can reorder a reel's slots (ORDERS) and make it open with the list and close with the headline (LIST_FIRST). */
 const VERSION = '1.0.0';
 const DECKS = {
   main: {
     style: 'stage', badge: 'NEW', closing: '달라진 점을 만나 보세요',
     intro: { scene: 'scene/01-cover.png', lead: '이번 업데이트로', key: '달라졌어요' },
     slots: [
-      { name: '첫째', scene: 'scene/02.png', lead: '기능 하나를', key: '써 보세요', fx: 'looks', looks: [] },
-      { name: '둘째', scene: 'scene/03.png', lead: '기능 둘도', key: '써 보세요', fx: 'looks', looks: [] },
+      { name: '첫째', scene: 'scene/02.png', lead: '기능 하나를', key: '써 보세요', fx: 'frames', frames: [] },
+      { name: '둘째', scene: 'scene/03.png', lead: '기능 둘도', key: '써 보세요', fx: 'drops', targets: [], icon: 64 },
       { name: '셋째', scene: 'scene/04.png', lead: '원하는 만큼', fx: 'count', to: 1000, unit: '부터' },
       { name: '넷째', scene: 'scene/05.png', lead: '끊기지 않고', key: '이어져요', fx: 'charge', gauge: ['연결 중', '연결 완료'] },
       { name: '다섯째', scene: 'scene/06.png', lead: '화면을', key: '바꿔 보세요', fx: 'looks', looks: [['밝게', 'brightness(1.2) saturate(1.2)'], ['선명하게', 'contrast(1.3)']] },
@@ -64,7 +68,7 @@ const DECKS = {
 };
 const SET = new URLSearchParams(location.search).get('set') in DECKS ? new URLSearchParams(location.search).get('set') : Object.keys(DECKS)[0];
 const DECK = DECKS[SET];
-const SLOT_IDS = ['gifts', 'gallery', 'candy', 'signature', 'filter', 'stability']; // timeline scene ids, in slot order
+const SLOT_IDS = ['slot0', 'slot1', 'slot2', 'slot3', 'slot4', 'slot5']; // timeline scene ids, in slot order
 
 const assets = { scene: {}, gifts: {} };
 const loadImage = src => new Promise((resolve, reject) => { const i = new Image(); i.onload = () => resolve(i); i.onerror = () => reject(new Error('image failed: ' + src)); i.src = src; });
@@ -198,7 +202,7 @@ function drawFrame(x, t) {
   else end();
 
   // Live-stream hearts rising along the right edge; density and start follow the scene.
-  const [heartCount, heartFrom] = { intro: [12, cues.introArt], gifts: [8, scene.a], gallery: [6, scene.a], candy: [18, cues.countEnd], signature: [10, cues.playBlip], filter: [5, scene.a], stability: [8, cues.lockIn], outro: [16, at(15, 2)], end: [0, 0] }[scene.id];
+  const [heartCount, heartFrom] = scene.id === 'intro' ? [TL.LIST_FIRST ? 0 : 12, cues.introArt] : slot ? [9, scene.a] : scene.id === 'outro' ? [16, TL.LIST_FIRST ? scene.a : cues.closing] : [0, 0];
   for (let j = 0; j < heartCount; j++) {
     const period = 2.1 + rnd(j) * 1.3, life = mod(t / period + rnd(j + .2), 1);
     if (t - life * period < heartFrom) continue;
@@ -296,6 +300,18 @@ function drawFrame(x, t) {
     });
     const lp = eOut(prog(lt, .18, .6));
     A(lp, () => { x.save(); x.translate((1 - lp) * -30, 0); x.beginPath(); x.roundRect(MARGIN + bw + 18, 316, 306, 68, 34); x.strokeStyle = rgba(C.rose, .8); x.lineWidth = 2; x.stroke(); text(`${VERSION} 업데이트`, MARGIN + bw + 18 + 153, 361, { ...TYPE.label, weight: 600 }, C.rose, 'center'); x.restore(); });
+    if (TL.LIST_FIRST) {
+      // Six messages, one per beat: the reel's contents arrive like a chat thread.
+      DECK.slots.forEach((f, n) => {
+        const hit = cues.recapHits[n], e = eBack(prog(t, hit, hit + .3)); if (e <= 0) return;
+        const mine = n % 2 === 1, st = { ...TYPE.title, size: 58 }, label = `0${n + 1}  ${f.name}`, w = measure(label, st).total + 92, y = 640 + n * 126;
+        x.save(); x.translate(mine ? 1008 : MARGIN, y); x.scale(e, e);
+        x.beginPath(); x.roundRect(mine ? -w : 0, -100, w, 100, mine ? [44, 44, 12, 44] : [44, 44, 44, 12]);
+        x.fillStyle = mine ? C.pink : 'rgba(34,27,44,.94)'; x.fill(); if (!mine) { x.strokeStyle = 'rgba(255,255,255,.16)'; x.lineWidth = 2; x.stroke(); }
+        text(label, (mine ? -w : 0) + 46, -33, st, mine ? '#fff' : C.ink); x.restore();
+      });
+      return;
+    }
     if (BUBBLES) { bubbles(DECK.intro.lead, DECK.intro.key, { leadStart: BEAT * .5, keyStart: BEAT * 2 }); return; }
     chars(DECK.intro.lead, MARGIN, LEAD_Y, TYPE.lead, C.ink, BEAT * .5);
     const w = chars(DECK.intro.key, MARGIN, KEY_Y, TYPE.display, C.pink, BEAT * 2);
@@ -351,9 +367,9 @@ function drawFrame(x, t) {
     const last = cues.albumDrops.filter(d => t >= d).pop();
     paint(slot.scene, v);
     // With `absorb` the album swallows each gift; otherwise the gift stays in its slot.
-    if (!slot.absorb) inScene(v, () => cues.albumDrops.forEach((L, n) => { if (t >= L && ids[n]) gift(ids[n], slot.targets[n][0], slot.targets[n][1], slot.icon * (1 + .5 * Math.exp(-(t - L) * 12))); }));
+    if (!slot.absorb) inScene(v, () => cues.albumDrops.forEach((L, n) => { if (t >= L && ids[n] && slot.targets[n]) gift(ids[n], slot.targets[n][0], slot.targets[n][1], slot.icon * (1 + .5 * Math.exp(-(t - L) * 12))); }));
     cues.albumDrops.forEach((L, n) => {
-      if (!ids[n]) return;
+      if (!ids[n] || !slot.targets[n]) return;
       const q = prog(t, L - .55, L), [tx, ty] = toFrame(v, ...slot.targets[n]), side = n % 2 ? 1 : -1;
       if (q > 0 && q < 1) {
         const sx = side > 0 ? 1200 : -120, sy = 420 + n * 50, mx = (sx + tx) / 2, my = Math.min(sy, ty) - 300;
@@ -390,9 +406,9 @@ function drawFrame(x, t) {
   }
 
   // A gauge fills, then confirms: candy topped up, or the call screen staying on.
-  // In the third slot it lands with the count-up chime; in the fourth, with the blip.
+  // It confirms on the blip, or with `cue: 'count'` on the count-up chime of its slot.
   function charge() {
-    const v = viewOf(slot.z ?? 1.06), blip = slotIndex === 2 ? cues.countEnd : cues.playBlip, done = t >= blip, fill = done ? 1 : eInOut(prog(t, scene.a + .2, blip)) * .92;
+    const v = viewOf(slot.z ?? 1.06), blip = slot.cue === 'count' ? cues.countEnd : cues.playBlip, done = t >= blip, fill = done ? 1 : eInOut(prog(t, scene.a + .2, blip)) * .92;
     paint(slot.scene, v);
     if (done) lit(() => glow(540, 760, 620, '#ffffff', .28 * (1 - prog(t, blip, blip + .4))));
     scrims();
@@ -439,7 +455,7 @@ function drawFrame(x, t) {
     const v = viewOf(slot.z ?? 1.06), at0 = cues.lockIn, locked = t >= at0, burst = cues.glitches.some(g => t >= g && t < g + .09), seed = Math.floor(t * 30);
     paint(slot.scene, v, { filter: locked ? null : 'saturate(.3) brightness(.8)', dx: burst ? (rnd(seed * 3.1) - .5) * 70 : 0, alpha: locked ? 1 : burst ? .65 : .9 });
     if (locked) lit(() => glow(540, 760, 640, '#ffffff', .24 * (1 - prog(t, at0, at0 + .4))));
-    if (slot.rings) { const [rx, ry] = toFrame(v, ...slot.rings); [at0, ...cues.pings, at(13, 3)].forEach((rt, n) => { const q = prog(t, rt, rt + 1.2); if (t >= rt) ring(rx, ry, lerp(60, 720, eOut(q)), n % 2 ? C.lav : '#ffffff', 5, .7 * (1 - q)); }); }
+    if (slot.rings) { const [rx, ry] = toFrame(v, ...slot.rings); [at0, ...cues.pings, cues.pings[1] + BEAT].forEach((rt, n) => { const q = prog(t, rt, rt + 1.2); if (t >= rt) ring(rx, ry, lerp(60, 720, eOut(q)), n % 2 ? C.lav : '#ffffff', 5, .7 * (1 - q)); }); }
     if (slot.panels) {
       // Two panels that overlap and jitter, then snap into an aligned stack and fade.
       const snap = eBack(prog(t, at0, at0 + .35)), off = (1 - snap) * (60 + (burst ? (rnd(seed * 1.7) - .5) * 80 : 0)), fade = 1 - prog(t, at0 + .9, at0 + 1.5);
@@ -477,8 +493,12 @@ function drawFrame(x, t) {
 
   /* ---------- outro: one feature per beat, then the version slams in ---------- */
   function outro() {
-    const f0 = at(15, 2), idx = cues.recapHits.filter(h => t >= h).length - 1;
-    if (t < f0 && idx >= 0) {
+    const f0 = cues.closing, idx = cues.recapHits.filter(h => t >= h).length - 1;
+    if (TL.LIST_FIRST && t < f0) {
+      paint(DECK.intro.scene, viewOf(1.06)); scrims();
+      if (BUBBLES) bubbles(DECK.intro.lead, DECK.intro.key, { leadStart: .1, keyStart: BEAT * 2 });
+      else { chars(DECK.intro.lead, MARGIN, LEAD_Y, TYPE.lead, C.ink, .1); chars(DECK.intro.key, MARGIN, KEY_Y, TYPE.display, C.pink, BEAT * 2); }
+    } else if (t < f0 && idx >= 0) {
       const hit = cues.recapHits[idx], q = prog(t, hit, hit + BEAT), feat = DECK.slots[idx], ts = lerp(1.22, 1, eOut(prog(q, 0, .4)));
       const z = lerp(1.2, 1.06, eOut(prog(q, 0, .55))), s = H / 1536 * z, v = { s, tx: (W - 1024 * s) / 2, ty: -(1536 * s - H) * .3 };
       paint(feat.scene, v); scrims();

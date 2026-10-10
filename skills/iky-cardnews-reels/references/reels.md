@@ -6,7 +6,7 @@ A reel is a separate piece of motion design that shares the carousel's facts, co
 
 `assets/templates/reel/timeline.js` is the single source of timing: a tempo, bars, scene boundaries and named cues. Picture and sound both read it, so every cut and effect lands on the music. The template runs 140 BPM for 17.5 bars (30.0s): a two-bar intro, six two-bar feature slots, a two-bar recap and an end card.
 
-Each feature slot owns one cue pattern:
+Each feature slot owns one cue pattern (the default order; `ORDERS` can rearrange it per reel, and both picture and sound follow):
 
 | Slot | Cue pattern | Choreography in the template (`fx`) |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ Map each feature to the slot whose motion says what the feature does. Write new 
 
 ## Sibling reels
 
-Two reels for one release are siblings, not twins. Give each its own treatment of at least the headline, the transitions, the floating motif, the accent colour and the tune, while keeping the typefaces and scene style shared. The template's `style` field does this: `stage` (kinetic type, stripe wipes, rising hearts) and `bubbles` (the headline as a chat exchange with a typing indicator, an iris wipe, floating message bubbles). `audio.js` carries a second harmony and melody (`?tune=b`) over the same cues; render and mux one soundtrack per reel.
+Two reels for one release are siblings, not twins. A different skin on the same sequence still reads as the same video, so change the order as well as the look: reorder the feature slots (`ORDERS` in `timeline.js`, with the deck listed in the same order) and swap what the opening and closing bars do (`LIST_FIRST`: one reel opens with the headline and recaps before the version; the other opens with the six-beat list and closes with the headline). Then give each its own treatment of the headline, the transitions, the floating motif, the accent colour and the tune, while keeping the typefaces and scene style shared. The template's `style` field does this: `stage` (kinetic type, stripe wipes, rising hearts) and `bubbles` (the headline as a chat exchange with a typing indicator, an iris wipe, floating message bubbles). `audio.js` carries a second harmony and melody (`?tune=b`) over the same cues; render and mux one soundtrack per reel.
 
 ## Frame design
 

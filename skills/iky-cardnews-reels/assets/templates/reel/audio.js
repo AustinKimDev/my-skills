@@ -294,7 +294,7 @@
       chime(cues.countEnd, [79, 86]); }
     chime(cues.playBlip, [83, 91]);
     [88, 95].forEach((m, i) => tone('sine', mtof(m), cues.playBlip + 0.03 + i * 0.05, 0.003, 0.3, 0.06, chan(sfxBus, i ? 0.5 : -0.5, 0.5)));
-    shutter(cues.shutter);
+    if (cues.hasShutter) shutter(cues.shutter);
     cues.filterSteps.forEach((t, i) => tick(t, 2000 + i * 300, 0.25, 0.1));
     cues.glitches.forEach((t, i) => glitch(t, 7 + i));
     lockIn(cues.lockIn);
