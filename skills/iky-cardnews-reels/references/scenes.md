@@ -27,7 +27,7 @@ Generate one image first and use it as the style reference for the rest of the s
 
 ## Real artwork inside a scene
 
-When product artwork must be exact (gift icons, badges), ask for an empty display in the scene (flat shelves, empty frames) and note in the brief that code will fill it. After viewing the result, record the display's coordinates in the scene's own pixels and place the artwork with a contact shadow. Ask the worker to report approximate positions, then confirm them by eye.
+When product artwork must be exact (gift icons, badges), ask for an empty display in the scene (flat shelves, empty frames) and note in the brief that code will fill it. After viewing the result, measure the display's slot centres in the scene's own pixels and place the artwork with a contact shadow. Do not estimate them: generated displays are tilted and unevenly spaced, and a guess puts icons across slot borders or on top of each other. Use `scripts/grid.mjs <image> <out.png> <x> <y> <w> <h> <scale> <step> [marks]` to get an enlarged, gridded crop with your candidate points marked, read the centres off it, then check a close-up of the rendered result with every icon in place. Size icons to about three quarters of the slot.
 
 ## Using a scene
 

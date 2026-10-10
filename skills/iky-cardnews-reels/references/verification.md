@@ -4,7 +4,7 @@
 
 - The title face loaded (the export script prints it). Every PNG is 1080x1350.
 - Inspect the contact sheet for the whole set and at least the cover and any card with placed artwork at full size.
-- Look for: a subject hidden by the headline, text touching an edge, a sticker covering the focal detail or the tag, a gloss overlapping its keyword, an auto-shrunk line.
+- Look for: placed artwork sitting across a slot border or overlapping its neighbour, a subject hidden by the headline, text touching an edge, a sticker covering the focal detail or the tag, a gloss overlapping its keyword, an auto-shrunk line.
 - Alternative text for every card describes the copy and the scene.
 
 ## Reel

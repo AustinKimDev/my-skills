@@ -38,7 +38,7 @@ Steps 4 and 6 are slow. Start image generation as soon as the copy is settled an
 ## Bundled files
 
 - `scripts/export-server.mjs` serves a template folder and saves posted canvases; `export-cards.mjs` exports every card and a contact sheet.
-- `scripts/capture.mjs`, `encode.swift`, `mux.swift`, `verify.swift`, `sheet.mjs` render frames, encode H.264, add the soundtrack and read the result back (macOS, no installs). `audio.mjs` and `bands.mjs` render and measure the soundtrack.
+- `scripts/capture.mjs`, `encode.swift`, `mux.swift`, `verify.swift`, `sheet.mjs` render frames, encode H.264, add the soundtrack and read the result back (macOS, no installs). `audio.mjs` and `bands.mjs` render and measure the soundtrack. `grid.mjs` makes a gridded close-up of a scene for measuring where placed artwork goes.
 - `assets/templates/cards/` and `assets/templates/reel/` are working renderers with placeholder decks.
 
 Headless Chromium comes from an existing Playwright cache; nothing is installed. Fonts load with `local()` from the machine and are never copied into a repository.
