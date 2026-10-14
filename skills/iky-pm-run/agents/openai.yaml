@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY PM 진행"
+  short_description: "PM이 되어 직원을 배치하고 트랙을 진행하며 단계마다 보고 후 대기"
+  default_prompt: "$iky-pm-run으로 백엔드와 프론트엔드 트랙을 단계별로 진행해줘."

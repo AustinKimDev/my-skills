@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 팀 리뷰"
+  short_description: "직군별 직원을 골라 성향별로 피드백을 받고 PM이 종합"
+  default_prompt: "$iky-team-review로 이 산출물을 직원들에게 검토시키고 결정 사항을 정리해줘."

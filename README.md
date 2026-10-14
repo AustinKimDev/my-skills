@@ -1,6 +1,6 @@
 # My Skills
 
-기획부터 데이터·백엔드 설계와 구현, UI 설계, 연동·출시 점검, 이미지 제작, SNS 글쓰기와 카드뉴스·릴스 제작, 배포와 업무보고에 사용하는 스킬 29개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
+기획부터 데이터·백엔드 설계와 구현, UI 설계, 연동·출시 점검, 이미지 제작, SNS 글쓰기와 카드뉴스·릴스 제작, 배포와 업무보고에 사용하는 스킬 32개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
 
 ## 스킬 목록
 
@@ -21,6 +21,9 @@
 | [iky-find-partner](skills/iky-find-partner/SKILL.md) | 파트너 후보 조사·최근 5개와 대표 3개 콘텐츠·사진 포함 HTML 보고서 |
 | [iky-frontend-build](skills/iky-frontend-build/SKILL.md) | 목업·화면 이미지·공통 컴포넌트 기반 프론트엔드 구현 |
 | [iky-image-assets](skills/iky-image-assets/SKILL.md) | 이미지 스타일 가이드와 에셋 제작 |
+| [iky-pm-run](skills/iky-pm-run/SKILL.md) | PM이 직원을 배치해 트랙을 진행하고 단계마다 보고 후 답변 대기 |
+| [iky-skill-capture](skills/iky-skill-capture/SKILL.md) | 반복되는 작업 방식을 iky-* 스킬로 만들고 저장소 갱신 |
+| [iky-team-review](skills/iky-team-review/SKILL.md) | 직군별 에이전트 27명을 골라 성향별 피드백을 받고 종합 |
 | [iky-instagram-korean-writing](skills/iky-instagram-korean-writing/SKILL.md) | 인스타그램 이미지와 목적에 맞는 한국어 캡션·캐러셀 문구 |
 | [iky-integration-check](skills/iky-integration-check/SKILL.md) | 화면별 프론트엔드·백엔드 연동 검증 |
 | [iky-interactive-landing](skills/iky-interactive-landing/SKILL.md) | 유메잇 스타일의 인터랙티브 제품 랜딩과 반응형 모션 |
@@ -65,7 +68,7 @@ git clone https://github.com/AustinKimDev/my-skills.git ~/Workspace/my-skills
 
 ## 내장 스킬과 실행 도구
 
-29개 중 연결 지침이 필요한 16개에는 의존 자료를 내장했고, 독립적인 13개에는 불필요한 의존성을 추가하지 않았습니다. [스킬별 연결 관계](DEPENDENCIES.md)에서 범위와 조건을 확인할 수 있습니다.
+32개 중 연결 지침이 필요한 16개에는 의존 자료를 내장했고, 독립적인 16개에는 불필요한 의존성을 추가하지 않았습니다. [스킬별 연결 관계](DEPENDENCIES.md)에서 범위와 조건을 확인할 수 있습니다.
 
 SNS 글쓰기 스킬 3개에는 한국어 사례 관찰, 공식 자료와 분석의 한계를 기록했습니다. 기존 계정 말투와 게시 목적을 우선하며, 글쓰기 스킬 자체가 게시나 계정 변경 권한을 부여하지는 않습니다.
 
@@ -87,7 +90,9 @@ Python 3.10 이상 표준 라이브러리만 사용합니다. 변경된 원본�
 
 ## 수록 범위
 
-직접 관리 대상으로 선정한 위 29개를 최상위 스킬로 보관합니다. `notion-work-sync`, `magic-ui`, OMD·ui-craft 계열은 개인 제작 스킬 목록에 포함하지 않습니다. 2026-09-30 의존성 내장 요청에 따라 `humanize-korean` 등 재배포 가능한 지원 스킬은 출처가 구분된 내장 자료로 추가했습니다. 이는 외부 스킬을 직접 제작한 것으로 분류하는 변경이 아닙니다. 2026-10-02에는 X·인스타그램·Threads의 한국어 말투 분석과 각 플랫폼 글쓰기 스킬 제작 요청에 따라 독립 스킬 3개를 추가했습니다. 2026-10-03에는 유메잇 랜딩 페이지의 구성과 모션을 재사용하는 `iky-interactive-landing`을 추가했습니다.
+직접 관리 대상으로 선정한 위 32개를 최상위 스킬로 보관합니다. `notion-work-sync`, `magic-ui`, OMD·ui-craft 계열은 개인 제작 스킬 목록에 포함하지 않습니다. 2026-09-30 의존성 내장 요청에 따라 `humanize-korean` 등 재배포 가능한 지원 스킬은 출처가 구분된 내장 자료로 추가했습니다. 이는 외부 스킬을 직접 제작한 것으로 분류하는 변경이 아닙니다. 2026-10-02에는 X·인스타그램·Threads의 한국어 말투 분석과 각 플랫폼 글쓰기 스킬 제작 요청에 따라 독립 스킬 3개를 추가했습니다. 2026-10-03에는 유메잇 랜딩 페이지의 구성과 모션을 재사용하는 `iky-interactive-landing`을 추가했습니다.
+
+2026-10-15에는 실제 회사 팀처럼 직군별 에이전트(27개 페르소나는 `skills/iky-team-review/references/roster/`)를 골라 성향별 피드백을 받는 `iky-team-review`, PM으로서 트랙을 진행하고 단계마다 보고 후 답을 기다리는 `iky-pm-run`, 반복되는 작업 방식을 스킬로 만드는 `iky-skill-capture`를 추가했습니다.
 
 2026-10-06에는 프로젝트별 모집 조건을 입력받는 `iky-find-partner`를 추가했습니다. 후보별 최근 게시물 5개와 대표 게시물 3개를 수집하고 출처와 사진을 포함한 HTML 보고서를 만듭니다.
 

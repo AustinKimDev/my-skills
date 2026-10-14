@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 스킬 캡처"
+  short_description: "반복되는 작업 방식을 iky-* 스킬로 만들고 저장소까지 갱신"
+  default_prompt: "$iky-skill-capture로 지금 진행한 작업 방식을 스킬로 만들고 저장소를 업데이트해줘."
