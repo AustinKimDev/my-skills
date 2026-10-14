@@ -23,5 +23,3 @@ Probation: first two tasks of a role. Fire if confirmed rate is under half, scop
 
 | Date | Action | Role | Reason | Replacement |
 |---|---|---|---|---|
-| 2026-10-15 | hire | initial 24 roles above | initial company | - |
-| 2026-10-15 | hire | mobile-engineer, sales-manager, localization-manager | requested by user | - |
