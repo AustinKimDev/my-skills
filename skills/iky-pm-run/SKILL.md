@@ -45,6 +45,15 @@ Default staffing in Claude Code. You are the team lead; builders and reviewers a
 - **Display.** Keep `in-process` (works in Orca); use `--teammate-mode auto` only inside tmux or iTerm2. Orca's branch and browser rules (§3, §7) bind every teammate: brief them to stay on the current branch and to use no browser tab but their own.
 - **Cleanup.** Report which teammates ran and their rough cost; do not leave teammates running past the stage report.
 
+## Lessons from runs
+
+- Run independent tracks in one message: reviewers of the backend document and builders of frontend files in parallel, as long as file ownership is disjoint.
+- Split builders by component group and give each a folder it owns plus its own registry/specimen file; keep shared files (tokens CSS, registry, types, config, App routes) yourself and prepare them before the builders start.
+- Reviewers cite code and mockups but rarely run the app: verify their high-severity claims yourself (arithmetic, a source line, a command, a screen check) before you act.
+- After a review, send one fix batch to the same file-owning builders, then re-run typecheck, lint, tests and build, exercise the changed behavior in the real browser (sample a few specimens and one real interaction), and keep the dev-server tab you created.
+- A Codex image worker in Orca stops at its folder-trust prompt on first use in a project: ask the user once, then trust and retry.
+- Dependencies: when the user delegated installation, install what the approved stack needs and report names and versions; do not add anything outside the approved stack.
+
 ## Hard boundaries
 
 No pushes, dependency additions or upgrades, DB migrations, auth-boundary or public-contract changes without approval. Inside Orca never create, switch or delete branches or worktrees. Preserve user changes. Never claim a check you did not run.
