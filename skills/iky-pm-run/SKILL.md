@@ -54,6 +54,10 @@ Default staffing in Claude Code. You are the team lead; builders and reviewers a
 - A Codex image worker in Orca stops at its folder-trust prompt on first use in a project: ask the user once, then trust and retry.
 - Dependencies: when the user delegated installation, install what the approved stack needs and report names and versions; do not add anything outside the approved stack.
 
+- Browser checks in Orca: take one screenshot after `goto` and a wait, then a second one (the first can be one frame stale), confirm the route text with a short eval, and keep each eval short; long SPA-navigation loops can make the CLI drop the connection. Re-open the tab if its URL becomes empty.
+- A reviewer's screenshot of the wrong page is a capture glitch, not a finding; say so and re-shoot.
+- Review findings that conflict between roles (for example 'protect the badge' versus 'too many badges') get a PM compromise noted in the review log, not a coin flip.
+
 ## Hard boundaries
 
 No pushes, dependency additions or upgrades, DB migrations, auth-boundary or public-contract changes without approval. Inside Orca never create, switch or delete branches or worktrees. Preserve user changes. Never claim a check you did not run.
