@@ -58,6 +58,9 @@ Default staffing in Claude Code. You are the team lead; builders and reviewers a
 - A reviewer's screenshot of the wrong page is a capture glitch, not a finding; say so and re-shoot.
 - Review findings that conflict between roles (for example 'protect the badge' versus 'too many badges') get a PM compromise noted in the review log, not a coin flip.
 
+- Backend builds: give each builder one folder plus its tests, run a review round with DBA, finance and security reading the code, then fix in one batch and add an end-to-end integration test that wires the pieces together (adapter to storage to totals): reviewers and builders each saw only their own piece and missed the seams.
+- Do not start long-lived services the user did not ask for without saying so; local Postgres in Docker on a free port (check `lsof` and `docker ps` first, never touch containers you did not create) is fine and gets reported with its port.
+
 ## Hard boundaries
 
 No pushes, dependency additions or upgrades, DB migrations, auth-boundary or public-contract changes without approval. Inside Orca never create, switch or delete branches or worktrees. Preserve user changes. Never claim a check you did not run.
