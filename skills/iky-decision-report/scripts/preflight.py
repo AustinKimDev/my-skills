@@ -18,11 +18,19 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'met
 REF_LABEL = 'AI 생성 참고 이미지'
 MAX_FILE_KB = 1500
 MAX_WIDTH = 2400
+LONG_TEXT = 160  # characters in one paragraph or list item before it reads as prose
+FIGURES = ('shot', 'vopt', 'dfig', 'sumfig')
 
 
 def sniff(payload: bytes) -> bool:
     return (payload.startswith(b'\x89PNG\r\n\x1a\n') or payload.startswith(b'\xff\xd8\xff')
-            or (payload[:4] == b'RIFF' and payload[8:12] == b'WEBP') or payload[:6] in (b'GIF87a', b'GIF89a'))
+            or (payload[:4] == b'RIFF' and payload[8:12] == b'WEBP') or payload[:6] in (b'GIF87a', b'GIF89a')
+            or is_svg(payload))
+
+
+def is_svg(payload: bytes) -> bool:
+    head = payload[:512].lstrip()
+    return head.startswith(b'<svg') or (head.startswith(b'<?xml') and b'<svg' in head)
 
 
 def png_width(payload: bytes) -> int | None:
@@ -37,6 +45,8 @@ class Report(HTMLParser):
         self.imgs: list[dict] = []
         self.refs: list[dict] = []
         self.viz = 0
+        self.long_text: list[str] = []
+        self._text: list[str] | None = None
         self.meta: dict[str, str] = {}
         self.title = ''
         self._in_title = False
@@ -53,7 +63,7 @@ class Report(HTMLParser):
             self._in_title = True
         if 'dcard' in classes:
             self.cards.append({'q': a.get('data-q') or '', 'rank': a.get('data-rank') == '1',
-                               'opts': 0, 'rankitems': 0, 'rec': 0, 'empty_v': 0})
+                               'opts': 0, 'rankitems': 0, 'rec': 0, 'empty_v': 0, 'visual': False})
         if self.cards and self._inside('dcard'):
             card = self.cards[-1]
             if 'opt' in classes:
@@ -64,19 +74,29 @@ class Report(HTMLParser):
                 card['rankitems'] += 1
             if 'rec' in classes:
                 card['rec'] += 1
+            if tag in ('img', 'svg') or 'viz' in classes or 'flow' in classes:
+                card['visual'] = True
         if 'viz' in classes:
             self.viz += 1
         if 'shot' in classes and 'ref' in classes:
             self.refs.append({'text': ''})
         if tag == 'img' and not self._inside('lightbox'):
             self.imgs.append({'src': (a.get('src') or '').strip(), 'alt': (a.get('alt') or '').strip(),
-                              'shot': self._inside('shot') or self._inside('vopt')})
+                              'shot': self._inside('shot'),
+                              'figure': any(self._inside(f) for f in FIGURES) or bool(classes & set(FIGURES))})
+        if tag in ('p', 'li') and self._text is None and not self._inside('fallback'):
+            self._text = []
         if tag not in VOID:
             self.stack.append((tag, classes))
 
     def handle_endtag(self, tag):
         if tag == 'title':
             self._in_title = False
+        if tag in ('p', 'li') and self._text is not None and self.stack and self.stack[-1][0] == tag:
+            text = ' '.join(''.join(self._text).split())
+            if len(text) > LONG_TEXT:
+                self.long_text.append(text)
+            self._text = None
         for i in range(len(self.stack) - 1, -1, -1):
             if self.stack[i][0] == tag:
                 del self.stack[i:]
@@ -85,6 +105,8 @@ class Report(HTMLParser):
     def handle_data(self, data):
         if self._in_title:
             self.title += data
+        if self._text is not None:
+            self._text.append(data)
         if self.refs and any('ref' in c and 'shot' in c for _, c in self.stack):
             self.refs[-1]['text'] += data
 
@@ -125,10 +147,18 @@ def main() -> int:
             errors.append(f'{name}: option without data-v')
     if report.cards and not any(c['rec'] for c in report.cards):
         warnings.append('no recommendation (.rec) on any card')
+    for n, card in enumerate(report.cards, 1):
+        if not card['visual']:
+            warnings.append(f'{card["q"] or f"card {n}"}: no picture in the card; put the summary image or '
+                            'image options the decision depends on inside it (.dfig / .opts.vis)')
+    for text in report.long_text:
+        warnings.append(f'{len(text)}-character paragraph reads as prose; turn it into a summary image, '
+                        f'chips or a short list: "{text[:40]}…"')
 
     shot_imgs = [i for i in report.imgs if i['shot']]
-    if not report.viz and not shot_imgs:
-        errors.append('no visual evidence (.viz or .shot img)')
+    figure_imgs = [i for i in report.imgs if i['figure']]
+    if not report.viz and not figure_imgs:
+        errors.append('no visual evidence (.viz, .sumfig/.dfig summary image, or .shot capture)')
     elif not shot_imgs:
         warnings.append('no real capture (.shot img); if the report concerns screens or devices, '
                         'add captures or state in a .note why none exist')

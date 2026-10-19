@@ -20,8 +20,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-MIMES = {'png': 'image/png', 'jpeg': 'image/jpeg', 'webp': 'image/webp', 'gif': 'image/gif'}
-EXTS = {'png': '.png', 'jpeg': '.jpg', 'webp': '.webp', 'gif': '.gif'}
+MIMES = {'png': 'image/png', 'jpeg': 'image/jpeg', 'webp': 'image/webp', 'gif': 'image/gif', 'svg': 'image/svg+xml'}
+EXTS = {'png': '.png', 'jpeg': '.jpg', 'webp': '.webp', 'gif': '.gif', 'svg': '.svg'}
 B64_KEYS = ('data', 'base64', 'screenshot', 'image', 'png', 'content')
 
 
@@ -34,6 +34,9 @@ def sniff(payload: bytes) -> str | None:
         return 'webp'
     if payload[:6] in (b'GIF87a', b'GIF89a'):
         return 'gif'
+    head = payload[:512].lstrip()
+    if head.startswith(b'<svg') or (head.startswith(b'<?xml') and b'<svg' in head):
+        return 'svg'  # summary images from summary_image.py
     return None
 
 
@@ -41,6 +44,9 @@ def dimensions(payload: bytes) -> tuple[int, int] | None:
     kind = sniff(payload)
     if kind == 'png' and len(payload) >= 24:
         return struct.unpack('>II', payload[16:24])
+    if kind == 'svg':
+        m = re.search(rb'<svg[^>]*?\swidth="(\d+)"[^>]*?\sheight="(\d+)"', payload[:2048])
+        return (int(m.group(1)), int(m.group(2))) if m else None
     if kind == 'gif' and len(payload) >= 10:
         return struct.unpack('<HH', payload[6:10])
     if kind == 'jpeg':
@@ -104,7 +110,7 @@ def cmd_add(args) -> int:
     payload = source.read_bytes()
     kind = sniff(payload)
     if not kind:
-        print(f'Not a supported raster image: {source.name}', file=sys.stderr)
+        print(f'Not a supported image (png/jpeg/webp/gif/svg): {source.name}', file=sys.stderr)
         return 1
     assets = report_dir / 'assets'
     assets.mkdir(parents=True, exist_ok=True)
@@ -117,7 +123,7 @@ def cmd_add(args) -> int:
     if source != target:
         shutil.copyfile(source, target)
     size = dimensions(payload)
-    if size and size[0] > args.max_width:
+    if size and size[0] > args.max_width and kind != 'svg':
         if shutil.which('sips'):
             subprocess.run(['sips', '--resampleWidth', str(args.max_width), str(target)],
                            check=True, stdout=subprocess.DEVNULL)
@@ -150,7 +156,7 @@ def cmd_inline(args) -> int:
             payload = target.read_bytes()
             kind = sniff(payload)
             if not kind:
-                raise SystemExit(f'Not a supported raster image: {src}')
+                raise SystemExit(f'Not a supported image: {src}')
             cache[target] = f'data:{MIMES[kind]};base64,' + base64.b64encode(payload).decode('ascii')
         return f'src={quote}{cache[target]}{quote}'
 

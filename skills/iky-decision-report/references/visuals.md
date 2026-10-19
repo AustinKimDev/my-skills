@@ -1,11 +1,12 @@
 # Visuals for decision reports
 
-Load this when the report needs screenshots, device captures, diagrams or AI reference images. The template's classes and the two helpers in `scripts/` implement everything below.
+Load this for every report: status, plans and options are shown as pictures, not paragraphs. The template's classes and the helpers in `scripts/` implement everything below.
 
 ## Pick the visual by the question
 
 | The decision depends on | Use |
 |---|---|
+| Overall status, a plan, a mechanism, what changes and what stays untouched | Summary image (`summary_image.py`) in `.sumfig`, or in the card as `.dfig` |
 | How a screen, page or device state looks now or after a change | Real capture: `.shots` (desktop/web), `.shots.phones` (portrait), `.tag` 전/후 for before/after |
 | Choosing between visual directions or screen variants | Image options (`.opts.vis` + `.vopt`), real captures first, AI references only when none exist |
 | Structure, flow, dependencies, money or state lifecycle | `.diagram` SVG (boxes and arrows) or `.flow` chips |
@@ -14,6 +15,22 @@ Load this when the report needs screenshots, device captures, diagrams or AI ref
 | Two alternatives in words | `.viz-compare` |
 
 A diagram does not replace a capture of a changed screen. When a capture is impossible (not deployed, no device, login required), keep the gallery slot out and write one `.note` naming the reason, for example `캡처 없음 — STAGE 미배포라 화면을 볼 수 없음`.
+
+## Summary images instead of prose
+
+Write the content as a JSON spec and draw it:
+
+```bash
+python3 scripts/summary_image.py spec.json /tmp/status.svg
+python3 scripts/report_assets.py add <report-dir> /tmp/status.svg --name status
+```
+
+Blocks stack top to bottom: `tiles` (status cards with a state pill), `stats` (big numbers), `steps` (numbered flow with arrows), `columns` (before/after or side-by-side boxes, `arrows: true` to connect them), `chips` (short rules or shared traits), `band` (one emphasized line, e.g. what will not be touched), `text`. States color the block: `done` green, `part` amber, `need` blue, `no` red, `wait` gray. The script's docstring has the full spec.
+
+- One picture per question. The overall status goes in `<figure class="sumfig">` near the top; the picture for one decision goes inside that decision card as `<figure class="dfig">`, after `.dwhy` and before the options.
+- Option tradeoffs that are easier to see than to read (screen variants, flows, policy outcomes) become image options: one small picture per option in `.opts.vis` + `.vopt`. Hand-drawn SVG thumbnails are fine for structure and policy; label them as schematic, never as the product.
+- Keep labels short (about 12 Korean characters per tile title). Look at the rendered image: wrapping is estimated, and a crowded tile reads worse than two tiles.
+- Every summary image still needs alt text describing what it shows and a caption line with its source (file:line, test command, query).
 
 ## Real captures
 
