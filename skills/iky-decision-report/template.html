@@ -46,8 +46,9 @@ h2 i{color:var(--dim);font-size:20px}
 .kpi .l{font-size:12px;color:var(--dim);margin-top:5px}
 .kpi.hl{background:var(--elev);border-color:var(--text)}
 .kpi.hl .v{color:var(--text)}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--hair);border-radius:12px;overflow:hidden;font-size:13.5px;display:block}
-table thead,table tbody{display:table;width:100%;table-layout:fixed}
+/* 테두리·라운드는 래퍼가 맡는다 — table 자체는 기본 display라 th 너비가 본문 칸에 그대로 적용된다 */
+.tbl{background:var(--card);border:1px solid var(--hair);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13.5px}
 th{font-size:11px;letter-spacing:0.2px;color:var(--faint);font-weight:700;text-align:left;padding:12px 16px;border-bottom:1px solid var(--hair)}
 td{padding:12px 16px;border-bottom:1px solid var(--hair);color:var(--dim);line-height:1.55;vertical-align:top}
 tr:last-child td{border-bottom:none}
@@ -100,15 +101,52 @@ td b{color:var(--text);font-weight:600}
 .det .body .flow .step{background:var(--elev);border:1px solid var(--hair);border-radius:7px;padding:6px 11px;font-weight:600;color:var(--text)}
 .det .body .flow i{color:var(--faint);font-size:13px}
 .det .body code{font-family:ui-monospace,'SF Mono',monospace;font-size:0.92em;background:var(--elev);border-radius:5px;padding:1px 5px}
+.det .body .shots{margin-top:12px}
 .det .body p{margin-top:10px}
 .det .body p:first-child{margin-top:0}
 /* 상세 서술 — 여러 문단 산문(단독 사용 가능) */
 .prose{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px;font-size:13px;color:var(--dim);line-height:1.8}
 .prose p{margin-top:10px}.prose p:first-child{margin-top:0}.prose b{color:var(--text);font-weight:600}
-/* 스크린샷·이미지 (작성 시 임베드 — src는 data:URI 권장, 또는 file:///절대경로) */
-.shot{margin:12px 0 2px;background:var(--elev);border:1px solid var(--hair);border-radius:10px;overflow:hidden}
-.shot img{display:block;width:100%;height:auto;outline:1px solid oklch(0 0 0/0.1);outline-offset:-1px}
-.shot figcaption{font-size:12px;color:var(--faint);padding:9px 14px;border-top:1px solid var(--hair);line-height:1.6}
+/* 실제 캡처 — src는 보고서 폴더의 상대경로 assets/… (HTTP 제공) 또는 data:URI (단일 파일).
+   file:///는 http://127.0.0.1 에서 열면 브라우저가 막으므로 쓰지 않는다. */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:start}
+.shots.phones{grid-template-columns:repeat(auto-fill,minmax(190px,230px));justify-content:start}
+.shot{margin:0;background:var(--elev);border:1px solid var(--hair);border-radius:10px;overflow:hidden;min-width:0}
+.shot.phone{max-width:300px}
+.shot img{display:block;width:100%;height:auto;max-height:680px;object-fit:contain;background:var(--elev);cursor:zoom-in}
+.shot figcaption{font-size:12px;color:var(--faint);padding:9px 14px;border-top:1px solid var(--hair);line-height:1.6;background:var(--card)}
+.shot figcaption b{color:var(--text);font-weight:700}
+.shot .tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--text);border-radius:5px;padding:1px 7px;margin-right:6px}
+/* AI 생성 참고 이미지 — 실제 화면 캡처와 시각적으로 구분 */
+.shot.ref{border-style:dashed;border-color:var(--amber)}
+.ref-label{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--amber);background:var(--amber-soft);border-radius:6px;padding:2px 8px;margin:0 6px 4px 0}
+.shot .prompt summary{cursor:pointer;font-size:11.5px;color:var(--dim);margin-top:4px}
+.shot .prompt p{font-family:ui-monospace,'SF Mono',monospace;font-size:11px;color:var(--dim);background:var(--elev);border-radius:6px;padding:8px 10px;margin-top:6px;white-space:pre-wrap}
+/* 다이어그램 SVG — 상자·화살표 문법. 화살촉 marker는 body 첫머리의 #arrowhead 하나를 공유 */
+.diagram .box{fill:var(--card);stroke:var(--hair);stroke-width:1.5}
+.diagram .box.hl{fill:var(--elev);stroke:var(--text);stroke-width:2}
+.diagram .box.good{fill:var(--green-soft);stroke:var(--green)}
+.diagram .box.warn{fill:var(--amber-soft);stroke:var(--amber)}
+.diagram .ttl{fill:var(--text);font-size:13px;font-weight:700}
+.diagram .sm{fill:var(--dim);font-size:11.5px}
+.diagram .good-t{fill:var(--green);font-size:12.5px;font-weight:700}
+.diagram .warn-t{fill:var(--amber);font-size:12.5px;font-weight:700}
+.diagram .arrow{stroke:var(--dim);stroke-width:1.4;fill:none;marker-end:url(#arrowhead)}
+/* 이미지 선택지 — 이미지는 버튼 밖(래퍼)에 둔다. 버튼 안 버튼·이미지 클릭 충돌 방지 */
+.opts.vis{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.vopt{display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:var(--card);transition:border-color 0.18s var(--ease),box-shadow 0.18s var(--ease)}
+.vopt img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--elev);border-bottom:1px solid var(--hair);cursor:zoom-in}
+.opts.vis.tall .vopt img{aspect-ratio:9/16}
+.vopt .opt{border:none;border-radius:0;width:100%;flex:1}
+.vopt .opt small{max-width:none}
+.vopt:has(.opt.sel){border-color:var(--text);box-shadow:0 0 0 1px var(--text)}
+/* 이미지 크게 보기 */
+.lightbox{position:fixed;inset:0;z-index:120;background:oklch(0.12 0.008 260/0.86);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:56px 24px 24px}
+.lightbox.on{display:flex}
+.lightbox img{max-width:min(1400px,100%);max-height:calc(100vh - 140px);object-fit:contain;border-radius:8px;background:#fff}
+.lightbox p{color:#fff;font-size:13px;line-height:1.6;max-width:900px;text-align:center}
+.lightbox .lb-close{position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:10px;border:1px solid oklch(1 0 0/0.3);background:oklch(1 0 0/0.12);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.zoomable:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 /* 시각 근거 — 질문에 맞는 양식 1개 이상만 남긴다 */
 .visuals{display:grid;gap:14px}
 .visual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
@@ -172,6 +210,9 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
   .viz-compare{grid-template-columns:1fr}
   .viz-bar-row{grid-template-columns:72px 1fr auto}
   .dwhy,.opts,.memo,.evid,.ranklist{margin-left:0}
+  .tbl{overflow-x:auto}
+  table{min-width:560px}
+  .shots.phones{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar{justify-content:flex-start;gap:8px;padding-inline:12px}
   .copybtn{width:100%;justify-content:center}
 }
@@ -179,6 +220,8 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
 </style>
 </head>
 <body>
+<!-- 다이어그램 공용 화살촉 — .diagram .arrow 가 참조 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--dim)"/></marker></defs></svg>
 <div class="wrap">
 
 <!-- TODO: 배지·제목·부제 -->
@@ -200,13 +243,13 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
 <!-- ═══ 상태 테이블 (선택) ═══ -->
 <section>
 <h2><i class="ph ph-list-checks"></i>진행 상황</h2>
-<table>
+<div class="tbl"><table>
 <thead><tr><th style="width:30%">항목</th><th style="width:52%">내용</th><th>상태</th></tr></thead>
 <tbody>
   <!-- TODO: 행 — 상태 배지는 st done / st part / st wait -->
   <tr><td><b>예시 기능</b></td><td>설명</td><td><span class="st done">완료</span></td></tr>
 </tbody>
-</table>
+</table></div>
 </section>
 
 <!-- ═══ 시각 근거 — 질문에 맞는 예시만 남기기 ═══ -->
@@ -214,6 +257,55 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
 <h2><i class="ph ph-chart-line-up"></i>시각 근거</h2>
 <p class="note"><!-- TODO: 무엇을 비교·확인할 수 있는지 한 줄. 아래 양식 중 유용한 것만 남기고 실제 값으로 교체 --></p>
 <div class="visuals">
+
+  <!-- 실제 화면 캡처 — 화면·UI·브라우저·기기 상태가 걸린 보고서는 여기가 1순위.
+       파일은 scripts/report_assets.py add 로 assets/ 에 넣고 출력된 상대경로를 src에 쓴다.
+       캡처할 수 없으면 블록을 지우지 말고 이유를 .note 한 줄로 남긴다 (예: "캡처 없음 — STAGE 미배포"). -->
+  <!-- TODO: 데스크톱·웹 캡처는 .shots, 폰 캡처는 .shots.phones. 전·후 비교는 .tag 로 표시 -->
+  <div class="shots">
+    <figure class="shot">
+      <img src="assets/before.png" alt="변경 전 화면이 보여주는 상태">
+      <figcaption><span class="tag">전</span>무엇을 보여주는지 한 줄 · 출처(URL·빌드·기기)</figcaption>
+    </figure>
+    <figure class="shot">
+      <img src="assets/after.png" alt="변경 후 화면이 보여주는 상태">
+      <figcaption><span class="tag">후</span>달라진 점 한 줄 · 출처</figcaption>
+    </figure>
+  </div>
+  <div class="shots phones">
+    <figure class="shot">
+      <img src="assets/phone-1.png" alt="폰 화면이 보여주는 상태">
+      <figcaption><b>화면 이름</b> · 기기·빌드</figcaption>
+    </figure>
+  </div>
+
+  <!-- AI 생성 참고 이미지 — 시각 방향을 고르는 결정인데 실제 캡처가 없을 때만.
+       실제 화면 캡처를 대신하지 않는다. 라벨·프롬프트는 지우지 않는다 (preflight가 검사). -->
+  <div class="shots">
+    <figure class="shot ref">
+      <img src="assets/ref-option-a.png" alt="A안 방향을 보여주는 참고 이미지">
+      <figcaption><span class="ref-label"><i class="ph ph-sparkle"></i>AI 생성 참고 이미지 · 실제 화면 아님</span>무엇을 참고하려는지 한 줄
+        <details class="prompt"><summary>프롬프트</summary><p>실제로 쓴 프롬프트 전문</p></details>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- 구조·흐름·의존 관계: 상자·화살표 다이어그램 (.diagram). 좌표만 바꿔 재사용 -->
+  <figure class="viz">
+    <div class="viz-title">처리 흐름</div>
+    <div class="viz-summary">요소 사이의 순서와 의존을 상자와 화살표로 보여줍니다.</div>
+    <svg class="viz-chart diagram" viewBox="0 0 640 130" role="img" aria-labelledby="flow-title flow-desc">
+      <title id="flow-title">입력에서 출력까지 세 단계 처리 흐름</title>
+      <desc id="flow-desc">입력을 검증한 뒤 처리하고, 처리 결과를 출력합니다. 실패하면 입력으로 돌아갑니다.</desc>
+      <rect class="box" x="10" y="20" width="170" height="70" rx="10"/><text class="ttl" x="26" y="48">입력</text><text class="sm" x="26" y="70">설명 한 줄</text>
+      <rect class="box hl" x="235" y="20" width="170" height="70" rx="10"/><text class="ttl" x="251" y="48">처리</text><text class="sm" x="251" y="70">강조할 단계는 .hl</text>
+      <rect class="box good" x="460" y="20" width="170" height="70" rx="10"/><text class="good-t" x="476" y="48">출력</text><text class="sm" x="476" y="70">결과·상태는 .good/.warn</text>
+      <path class="arrow" d="M180 55 L233 55"/><path class="arrow" d="M405 55 L458 55"/>
+      <path class="arrow" d="M320 90 C320 122, 95 122, 95 92"/><text class="sm" x="150" y="124">실패 → 입력으로</text>
+    </svg>
+    <figcaption>근거(파일·문서)를 한 줄로 적으세요.</figcaption>
+  </figure>
+
   <div class="visual-grid">
     <!-- 수치 비교·순위: 가로 막대 -->
     <figure class="viz">
@@ -299,20 +391,13 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
 <div class="body"><ul><li><code>path/to/file.py</code> <b>(+N)</b> — 무엇을 왜</li></ul></div>
 </details>
 
-<!-- 상세 서술 + 스크린샷: 표 한 줄에 안 들어가는 맥락을 문단으로, 캡처는 figure로.
-     img src = data:image/png;base64,...(자가완결·파일 이동에도 안 깨짐, 권장) 또는 file:///절대경로.
-     .prose / .shot 은 details 밖 단독 섹션으로도 그대로 쓸 수 있다. -->
-<details class="det" open>
-<summary><i class="ph ph-article lead"></i>예: 상세 서술 & 스크린샷<i class="ph ph-caret-down chev"></i></summary>
+<!-- 상세 서술: 표 한 줄에 안 들어가는 맥락을 문단으로. 보조 캡처는 .shots 를 그대로 넣어도 된다.
+     .prose / .shots 는 details 밖 단독 섹션으로도 쓸 수 있다. -->
+<details class="det">
+<summary><i class="ph ph-article lead"></i>예: 상세 서술<i class="ph ph-caret-down chev"></i></summary>
 <div class="body">
   <p>긴 배경·근거를 문단으로. 표 한 줄로 부족한 맥락, 트레이드오프, 의사결정 히스토리를 자유롭게 적는다.</p>
   <p>두 번째 문단도 가능. 코드 식별자는 <code>identifier</code>로.</p>
-  <!-- 실제 캡처가 판단에 도움 될 때 아래 figure를 활성화하고 src·alt·캡션을 실제 근거로 교체.
-  <figure class="shot">
-    <img src="data:image/png;base64,..." alt="스크린샷이 보여주는 상태와 핵심 근거">
-    <figcaption>캡처 캡션 — 무엇을 보여주는지 한 줄.</figcaption>
-  </figure>
-  -->
 </div>
 </details>
 
@@ -350,16 +435,35 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
   <div class="memo"><textarea rows="1" aria-label="② 복수 선택 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
 </div>
 
+<!-- 이미지 선택지 카드: 시각 방향·화면안을 고를 때. opts에 class="vis"(폰 비율은 "vis tall").
+     이미지는 .vopt 래퍼 안·버튼 밖 — 이미지 클릭은 크게 보기, 버튼 클릭은 선택.
+     이미지는 실제 캡처 우선. AI 생성이면 버튼 small에 "AI 참고 이미지"를 적는다. -->
+<div class="dcard" data-q="③ 이미지 선택 예시">
+  <div class="dhead"><div class="dnum">③</div><div class="dq">어느 화면안으로 갈까요?</div></div>
+  <div class="dwhy">설명.</div>
+  <div class="opts vis">
+    <div class="vopt">
+      <img src="assets/option-a.png" alt="A안 화면">
+      <button type="button" class="opt" data-v="A안">A안<span class="rec">권장</span><small>권장 이유 한 줄</small></button>
+    </div>
+    <div class="vopt">
+      <img src="assets/option-b.png" alt="B안 화면">
+      <button type="button" class="opt" data-v="B안">B안<small>트레이드오프 한 줄</small></button>
+    </div>
+  </div>
+  <div class="memo"><textarea rows="1" aria-label="③ 이미지 선택 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
+</div>
+
 <!-- 랭킹 카드: data-rank="1" + .ranklist. 항목을 끌어 우선순위 정렬. JSON values = 정렬된 순서, 항상 "결정함"으로 카운트 -->
-<div class="dcard" data-q="③ 랭킹 예시" data-rank="1">
-  <div class="dhead"><div class="dnum">③</div><div class="dq">우선순위대로 끌어서 정렬하세요. (드래그)</div></div>
+<div class="dcard" data-q="④ 랭킹 예시" data-rank="1">
+  <div class="dhead"><div class="dnum">④</div><div class="dq">우선순위대로 끌어서 정렬하세요. (드래그)</div></div>
   <div class="dwhy">설명.</div>
   <div class="ranklist">
     <div class="rankitem" draggable="true" data-v="항목 A"><span class="rnk">1</span><span class="lbl">항목 A<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
     <div class="rankitem" draggable="true" data-v="항목 B"><span class="rnk">2</span><span class="lbl">항목 B<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
     <div class="rankitem" draggable="true" data-v="항목 C"><span class="rnk">3</span><span class="lbl">항목 C<small>설명</small></span><i class="ph ph-dots-six-vertical grip"></i></div>
   </div>
-  <div class="memo"><textarea rows="1" aria-label="③ 랭킹 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
+  <div class="memo"><textarea rows="1" aria-label="④ 랭킹 예시 메모" placeholder="메모 · 조건 · 기타 의견 (선택)"></textarea></div>
 </div>
 
 <p class="note"><i class="ph ph-info"></i> <!-- TODO: 이미 결정된 사항/제외 사항 한 줄 --></p>
@@ -392,6 +496,13 @@ button:focus-visible,a:focus-visible,textarea:focus-visible,summary:focus-visibl
     <textarea id="cbText" aria-label="수동 복사용 결정 요약" readonly></textarea>
     <div class="x"><button type="button" class="ghostbtn" onclick="document.getElementById('cbFallback').classList.remove('on')">닫기</button></div>
   </div>
+</div>
+
+<!-- 이미지 크게 보기 (JS가 .shot img · .vopt img 에 연결) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 크게 보기">
+  <button type="button" class="lb-close" aria-label="닫기"><i class="ph ph-x"></i></button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
 </div>
 
 <script>
@@ -520,6 +631,39 @@ function showFallback(text){
   const f = document.getElementById('cbFallback'), t = document.getElementById('cbText');
   t.value = text; f.classList.add('on'); t.focus(); t.select();
 }
+// ── 이미지 크게 보기: 클릭·Enter·Space로 열고 Esc·배경·닫기로 닫는다. 닫으면 연 이미지로 포커스 복귀 ──
+(() => {
+  const box = document.getElementById('lightbox'), big = document.getElementById('lbImg'), cap = document.getElementById('lbCap');
+  let opener = null;
+  function open(img){
+    opener = img;
+    big.src = img.currentSrc || img.src; big.alt = img.alt;
+    const fc = img.closest('figure')?.querySelector('figcaption');
+    let text = img.alt;
+    if (fc) { // 프롬프트는 빼고, 전/후·AI 라벨 뒤에 구분점
+      const c = fc.cloneNode(true);
+      c.querySelectorAll('.prompt').forEach(e => e.remove());
+      c.querySelectorAll('.tag, .ref-label').forEach(e => e.append(' · '));
+      text = c.textContent.replace(/\s+/g, ' ').trim();
+    }
+    cap.textContent = text;
+    box.classList.add('on'); box.querySelector('.lb-close').focus();
+  }
+  function close(){
+    if (!box.classList.contains('on')) return;
+    box.classList.remove('on'); big.removeAttribute('src');
+    if (opener) opener.focus();
+  }
+  document.querySelectorAll('.shot img, .vopt img').forEach(img => {
+    img.classList.add('zoomable'); img.tabIndex = 0; img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', '크게 보기: ' + (img.alt || '이미지'));
+    img.addEventListener('click', () => open(img));
+    img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } });
+  });
+  box.addEventListener('click', e => { if (e.target === box || e.target.closest('.lb-close')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
 // 자동 복사 시도 → 실패(권한·비보안 컨텍스트·미지원) 시 수동복사 오버레이. 루프는 절대 무대응으로 끝나지 않는다.
 function copySummary(){
   const text = buildSummary();

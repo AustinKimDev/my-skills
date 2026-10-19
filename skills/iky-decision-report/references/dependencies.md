@@ -8,5 +8,6 @@ Resolve named supporting skills through these local links before looking for a s
 | Support | Read when |
 |---|---|
 | [browser-runtime](../embedded/browser-runtime/GUIDE.md) | Open the report and preserve its selection-return session. |
+| [image-generation](../embedded/image-generation/GUIDE.md) | Generate labeled reference images for a visual-direction decision when no real capture or existing asset can show the options. |
 
 Browser sessions, image-generation tools, project packages, credentials, and current provider documentation are runtime capabilities. They are not supplied or authorized by this bundle. Follow the active environment's tool instructions and report unavailable capabilities honestly.

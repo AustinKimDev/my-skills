@@ -9,7 +9,7 @@
 | iky-backend-spec | 독립 실행 | 0 |
 | iky-cardnews-reels | 인스타그램 글쓰기, humanize-korean, 이미지 제작, 타이포그래피 지침, 브라우저 연결 | 11 |
 | iky-component-workbench | iky-ui-design, 브라우저 연결 | 19 |
-| iky-decision-report | 브라우저 연결 | 1 |
+| iky-decision-report | 이미지 생성·브라우저 연결 | 2 |
 | iky-deploy | 독립 실행 | 0 |
 | iky-deploy-branch-deploy | iky-deploy | 1 |
 | iky-design | humanize-korean, 브라우저 연결 | 2 |

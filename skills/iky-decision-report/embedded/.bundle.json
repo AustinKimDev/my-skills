@@ -2,16 +2,22 @@
   "version": 1,
   "root": "iky-decision-report",
   "modules": [
-    "browser-runtime"
+    "browser-runtime",
+    "image-generation"
   ],
   "source_sha256": {
     "browser-runtime": {
       "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+    },
+    "image-generation": {
+      "GUIDE.md": "7086a2d702a966543bec9d8df6783ca5c25428ad448aaecb003d6ee21b1d02bc"
     }
   },
   "files": {
     "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
-    "embedded/browser-runtime/references/dependencies.md": "ee59c4a01b98bbbb89f0090f22d9a9dee84e780cec8ac3b2ee13ff333133f80f",
-    "references/dependencies.md": "5ca6dda2b29664c8282ae1572d191ca3bedbcb414b90a3790bd587da5d741afa"
+    "embedded/browser-runtime/references/dependencies.md": "e1ef873bdbdac5cd3c0211c7e78fd1520930caff239d3ce927f2ba1fe6f07393",
+    "embedded/image-generation/GUIDE.md": "e6c6859c31748e0fd784cbd49a2d159b2d3301aa67cfd6deb0f9bcaec2a31bbc",
+    "embedded/image-generation/references/dependencies.md": "021ea36276ea845ce271be14af863ccbe110ecbdf876e1c3db4d1b602534a161",
+    "references/dependencies.md": "f56b39507fae22928b9e87877a953dc760a4fbb7336bfff3e9206d2a7ecdabdc"
   }
 }

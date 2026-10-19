@@ -11,7 +11,7 @@
 | [iky-backend-spec](skills/iky-backend-spec/SKILL.md) | API·권한·에러·이벤트 등 백엔드 명세 |
 | [iky-cardnews-reels](skills/iky-cardnews-reels/SKILL.md) | 업데이트 내용을 검증해 인스타그램 카드뉴스와 릴스 모션그래픽으로 제작 |
 | [iky-component-workbench](skills/iky-component-workbench/SKILL.md) | 시안·기존 코드 기반 공통 컴포넌트 구현과 인터랙티브 문서 |
-| [iky-decision-report](skills/iky-decision-report/SKILL.md) | 선택·승인이 가능한 HTML 보고서 |
+| [iky-decision-report](skills/iky-decision-report/SKILL.md) | 실제 캡처·다이어그램·AI 참고 이미지를 담은, 선택·승인이 가능한 HTML 보고서 |
 | [iky-deploy](skills/iky-deploy/SKILL.md) | 배포 절차 실행·검증 |
 | [iky-deploy-branch-deploy](skills/iky-deploy-branch-deploy/SKILL.md) | deploy 브랜치 통합·배포 |
 | [iky-design](skills/iky-design/SKILL.md) | IKY 디자인 규칙 적용 |

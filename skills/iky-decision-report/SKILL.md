@@ -1,6 +1,6 @@
 ---
 name: iky-decision-report
-description: "Create an interactive status and decision report when the user requests a browser report with choices or approvals. Use the browser selected by the session policy or the user; ordinary inline questions do not require this workflow."
+description: "Create an interactive status and decision report when the user requests a browser report with choices or approvals, with real screenshots, diagrams and labeled AI reference images as evidence. Use the browser selected by the session policy or the user; ordinary inline questions do not require this workflow."
 ---
 
 # Decision Report
@@ -8,6 +8,8 @@ description: "Create an interactive status and decision report when the user req
 ## Bundled support
 
 Read [the dependency map](references/dependencies.md) when a step calls for another skill. The required guides and resources are included in this folder; load only the relevant support and keep this workflow primary. Resolve a supporting guide's scripts and assets from its own directory. Runtime tools and project packages still come from the active environment.
+
+Read [visuals](references/visuals.md) when the report needs screenshots, device captures, diagrams or AI reference images. `scripts/report_assets.py` saves and places images; `scripts/preflight.py` checks the finished report.
 
 
 ## Overview
@@ -42,12 +44,13 @@ NOT for: pure status reports (no decisions), single trivial questions (just ask 
 7. **Readable light design** — keep the report on a white canvas with near-black text, quiet gray borders, and restrained semantic status colors. Reuse project fonts/icons and spacing where useful, but do not inherit a dark or low-contrast project theme. CDN fonts/icons are fine for a local file. No gradients, decorative color, or emoji as UI chrome.
 8. **Open the report in the selected browser** — follow the active session policy and the user's explicit browser choice. Read the [bundled browser runtime guide](embedded/browser-runtime/GUIDE.md). In Orca, load the executable's version-matched guide; resolve the session's owning workspace and pin subsequent operations to its page ID. If HTTP is needed, serve only the report directory on loopback using the port policy and record the server PID/session. When Aside is selected, read its runtime-provided guide, use a persistent interactive `aside repl` PTY and `openTab('http://127.0.0.1:<port>/')`, and keep the REPL and server alive until the decision summary returns; one-shot execution closes its tab. Stop only task-owned processes afterward. If the selected browser is unavailable, provide the artifact and specific limitation without silently switching browsers.
 9. **Tell the user the protocol** after opening: click choices → press copy → paste the summary back here, and I proceed accordingly.
-10. **Visual evidence is required**. Include at least one relevant visual that helps decisions: screenshots from the selected browser for browser state, `.viz-bars` for numeric/ranked comparisons, `.viz-timeline` for chronology, `.viz-compare` for alternatives/before-after, and `.flow` or accessible inline `<svg class="viz-chart">` for flows/dependencies/trends. Place real captures in `<figure class="shot"><img …><figcaption>`, preferably using data:image/png;base64 URIs. Supply alt text or SVG title/desc and a one-line caption. No decorative images or fabricated product captures.
-11. **Preflight before delivery**: before opening the report, check for leftover TODO comments; replaced title/report-id/generated-at; at least one option per non-ranking card and two rank items per ranking card; recommendation markers where appropriate; at least one nonempty `.shot img` or `.viz`; and no empty image source. Fix and recheck failures; prevent beautiful-but-broken reports.
+10. **Visual evidence is required; real captures come first.** When a decision depends on how a screen, page or device looks, show real captures in `.shots` (portrait phones in `.shots.phones`, before/after with `.tag`). Otherwise use the grammar that answers the question: `.diagram` SVG for structure, flows and lifecycles, `.viz-bars` for numbers, `.viz-timeline`, `.viz-compare`. Save images into the report's `assets/` with `scripts/report_assets.py add` and reference them relatively, or inline them for a single-file handoff; never use `file:///` (blocked when served over HTTP). If a capture is impossible, write the reason in a `.note` instead of silently omitting it. Every image has alt text and a caption naming what it proves and its source; images open in the built-in zoom view. Follow [visuals](references/visuals.md).
+11. **AI reference images only for visual-direction decisions** with no real capture or existing asset. Generate through the [image-generation guide](embedded/image-generation/GUIDE.md) with the environment's image tool, one per option, and inspect each result. Show them in `figure.shot.ref` with the visible label `AI 생성 참고 이미지 · 실제 화면 아님` and the actual prompt, or as image options (`.opts.vis` + `.vopt`) marked "AI 참고 이미지". Never use one in place of a screen capture or as product state. If no image tool is available, say so and use a diagram.
+12. **Preflight before delivery**: run `python3 scripts/preflight.py <report.html>` and fix every ERROR. It checks leftover TODOs, the title/report-id/generated-at, options per card and rank items, image files (missing, empty, outside the folder, `file://`), alt text, AI reference labels and visual evidence, and warns about oversized or remote images and reports with no real capture. After opening, confirm images load and one zoom view opens and closes with Esc.
 
 ## Implementation
 
-Copy `template.html` from this directory and replace TODO markers: title, report-id/generated-at metadata, badge, KPIs, status rows, a relevant visual/capture, collapsible details/prose, decision cards with memo and optional evidence/ranking, and known issues. Delete unused visual examples. JavaScript already handles single/multiple/exclusive selection, drag ranking, counts, defaults/reset, human+JSON handoff, and clipboard fallback. Preserve `data-q`, `data-v`, `data-multi`, `data-rank`, `.opt`, `.dcard`, `.memo textarea`, and `.rankitem` contracts. Decision keys follow card order. Native `.det`/`.shot`/`.viz` need no chart dependency or extra JS.
+Copy `template.html` from this directory and replace TODO markers: title, report-id/generated-at metadata, badge, KPIs, status rows, captures and visuals, collapsible details/prose, decision cards with memo and optional evidence/ranking/image options, and known issues. Delete unused visual examples, including placeholder `assets/…` images. JavaScript already handles single/multiple/exclusive selection, drag ranking, counts, defaults/reset, human+JSON handoff, and clipboard fallback. Preserve `data-q`, `data-v`, `data-multi`, `data-rank`, `.opt`, `.dcard`, `.memo textarea`, and `.rankitem` contracts. Decision keys follow card order. Keep the status table inside its `.tbl` wrapper (column widths depend on it). Native `.det`/`.shots`/`.viz`/`.diagram` need no chart dependency; the zoom view attaches itself to `.shot img` and `.vopt img`.
 
 ## Processing pasted decisions (return contract)
 
@@ -70,4 +73,9 @@ Copy `template.html` from this directory and replace TODO markers: title, report
 | Cramming technical detail into the status table (or omitting it) | Move depth into collapsed `.det` blocks (or `.prose`/`.shot`) — scannable body, detail one click away |
 | Clipboard write with no `.catch` → silent dead-end on failure | Template auto-opens the manual-copy overlay; the loop never dead-ends |
 | Re-parsing the Korean prose summary | Parse the JSON fence only — comma-bearing values & multi-select stay unambiguous |
-| Opening with `<!-- TODO -->` or empty `<img src="">` left in | Run the pre-flight checks before opening the report |
+| Opening with `<!-- TODO -->` or empty `<img src="">` left in | Run `scripts/preflight.py` before opening the report |
+| `file:///` image sources in a report served over HTTP | `report_assets.py add` into `assets/`, relative `src` |
+| Phone capture at full width (2000 px tall) | `.shots.phones` or `.shot.phone` |
+| Diagrams only, for a report about changed screens | Capture the screens, or state in a `.note` why that is impossible |
+| Trusting a full-page capture | Inspect it; some runtimes repeat the first viewport. Capture the element after scrolling it into view |
+| AI image shown as if it were the product | `.shot.ref` label plus prompt; only for visual-direction choices |

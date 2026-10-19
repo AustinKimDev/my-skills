@@ -9,6 +9,6 @@ This support guide has no additional skill dependencies.
 
 Other support already present in this package (load only if an applicable guide refers to it):
 
-[iky-decision-report](../../../SKILL.md).
+[iky-decision-report](../../../SKILL.md), [image-generation](../../image-generation/GUIDE.md).
 
 Browser sessions, image-generation tools, project packages, credentials, and current provider documentation are runtime capabilities. They are not supplied or authorized by this bundle. Follow the active environment's tool instructions and report unavailable capabilities honestly.

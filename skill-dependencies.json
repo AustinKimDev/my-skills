@@ -22,6 +22,10 @@
         {
           "name": "browser-runtime",
           "when": "Open the report and preserve its selection-return session."
+        },
+        {
+          "name": "image-generation",
+          "when": "Generate labeled reference images for a visual-direction decision when no real capture or existing asset can show the options."
         }
       ]
     },
