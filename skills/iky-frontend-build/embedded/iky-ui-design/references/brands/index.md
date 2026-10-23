@@ -14,6 +14,11 @@ This library is optional support beneath established project design settings and
 | [Apple Music](apple-music.md) | Korean web discovery and album detail | Editorial/list density; identity and item actions | Signed-out desktop; native playback untested |
 | [Apple Wallet](apple-wallet.md) | Official card-stack and travel-status illustrations; website disclosure | Object recognition; current status | Native interactions untested; illustrated pass includes future availability |
 | [Apple website](apple-web.md) | Campaign hero, product story, two-column grid | Proposition/action hierarchy; parallel offer structure | Desktop marketing, not an app or comparison table |
+| [Toss TDS](toss-tds.md) | TDS Mobile / React Native component docs, text-verified 2026-10-23 | Documented anatomy, variants and usage per component (Button/BottomCTA, ListRow, BottomSheet, Dialog, TextField, Toast…) | Text only; some doc inconsistencies noted |
+| [Daangn SEED](daangn-seed.md) | seed-design.io component docs, text-verified 2026-10-23 | Documented component anatomy, Field copy rules, Chip, Callout, Snackbar, Result Section | Token names not converted to px; repo not opened |
+| [Apple HIG components](apple-hig-components.md) | HIG component pages (DocC JSON text), 2026-10-23 | Platform conventions for buttons, lists, sheets, alerts, text fields, steppers | Text only; figures not seen |
+| [Material 3 components](material3-components.md) | m3.material.io via a text reader, 2026-10-23 | Button emphasis ladder, text fields, chips, tabs, snackbar, sheets | Third-party reader; figures not seen |
+| [Award-winning apps](award-winning-apps.md) | Apple Design Award 2022–2025 winners/finalists, Material 3 Expressive, 2026-10-23 | Distinctive documented treatments (status/progress, buttons, tabs) for award-level directions | Text only; Chip/Badge/Dialog/Toast have no award precedent |
 
 See [pattern synthesis](patterns.md) for cross-service combinations and what to verify. Each file contains dated observations, captures, adaptation hypotheses, and limits. A visual observation applies only to its recorded region; it is never a service-wide certification.
 

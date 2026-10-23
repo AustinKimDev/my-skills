@@ -1,6 +1,6 @@
 # Overlay behavior and confirmation contract
 
-Status: current portable IKY guidance, authorized by the user on 2026-09-09. The motivating case was inconsistent request/withdrawal confirmations in one mobile attendance flow. The portable correction is consistent task semantics, presentation selection and lifecycle ownership; the product's attendance fields and brand are not universal defaults.
+Status: current portable IKY guidance, authorized by the user on 2026-09-09. The motivating case was inconsistent request/withdrawal confirmations in one mobile attendance flow. The portable correction is consistent task semantics, presentation selection and lifecycle ownership; the product's attendance fields and brand are not universal defaults. Revision 2026-10-23 (owner-approved, IKY 0.2.0) adds the irreversible-choice action sheet and the sheet header anatomy.
 
 ## Principle
 
@@ -12,7 +12,8 @@ A popup is an imprecise description. Identify whether the task is a confirmation
 
 | User task | Default presentation | Boundary |
 | --- | --- | --- |
-| Confirm an action, withdrawal, cancellation or deletion in the current workflow | One shared task-confirmation composition: bottom sheet in compact touch layouts; centered dialog in spacious desktop layouts | Request and withdrawal remain the same family. Destructiveness changes consequence copy and action emphasis, not the host. A documented project policy may choose dialogs for both. |
+| Confirm an action, withdrawal, cancellation or deletion in the current workflow | One shared task-confirmation composition: bottom sheet in compact touch layouts; centered dialog in spacious desktop layouts | Request and withdrawal remain the same family. Destructiveness changes consequence copy and action emphasis, not the host, except for irreversible choices (next row). A documented project policy may choose dialogs for both. |
+| Make an irreversible choice (delete, refund, block, leave) | Bottom action sheet: the destructive action on top in `error`, cancel at the bottom, stacked vertically | The one exception to "severity does not change the host". Show the consequence above the actions. Reversible withdrawals stay in the shared confirmation family. |
 | Choose among contextual actions or values | Anchored menu/popover when a usable anchor and space exist; action/selection sheet in compact touch layouts | A menu selects the next action; its destructive action may enter the shared confirmation step. It is not itself a second confirmation design. |
 | Enter a short form or inspect local details | Sheet or dialog using the same environment policy | Grow with content within the usable viewport. Promote a long, independent or multi-step task to a screen; do not bury essential actions below a fixed-height overlay. |
 | Confirm that an ordinary operation succeeded | Update the affected content, optionally with a nonblocking toast | Do not require another confirmation tap for an ordinary success. Use an explicit receipt/detail screen when the result itself requires review. |
@@ -31,7 +32,8 @@ Use shared header, body and action-row components within a platform adapter. Kee
 - Explain the actual consequence before committing. Do not label a reversible withdrawal irreversible, or confuse closing a confirmation with cancelling an existing request.
 - Default two actions to a horizontal row with separate hit targets: neutral return/dismiss on the leading side, explicit commit action on the trailing side, respecting locale direction. Use action-specific labels rather than two generic confirmation/cancellation words.
 - A primary action has the selected project/IKY filled emphasis; destructive actions use the danger treatment when consequences justify it. Return stays visually secondary. Use dedicated on-action text/icon/progress foregrounds. Merely accepting a `secondary`/`danger` prop is not compliance: it must visibly change the rendered control.
-- Stack only when available width, localization or enlarged text cannot preserve readable unbroken labels and target sizes. Treat that as responsive behavior, not a different feature-specific style.
+- Stack only when available width, localization or enlarged text cannot preserve readable unbroken labels and target sizes. Treat that as responsive behavior, not a different feature-specific style. The irreversible action sheet always stacks vertically.
+- Sheet headers put the close control at the leading edge with a centered title. A second step inside the same sheet puts back at the leading edge and moves close to the trailing edge. Sheets use radius12 top corners on the `sheet` face.
 
 ## Content sizing and navigation — OVERLAY-03
 
