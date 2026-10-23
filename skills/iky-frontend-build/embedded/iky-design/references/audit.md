@@ -29,6 +29,11 @@ Run the relevant rows when that component or material is in scope. These checks 
 Evidence must name the reference hash and tested implementation revision. Retain prior captures as historical records after an approved token change; do not relabel them as current. Record raw viewport size, pixel ratio, safe-area crop, font readiness and state. If a capture has repeated compositor tiles, preserve it, exclude and disclose the invalid region, and obtain fresh valid evidence before passing that region. A DOM geometry check may establish non-overlap, but it does not establish the appearance of a gradient or native parity. Native targets without fresh evidence stay unverified.
 
 
+## Supporting text and layout
+
+Run LAYOUT-05 on product screens in scope; documentation, specimen sheets and reports are `not-applicable`. A `fail` cites a pair: the supporting string and the heading, control label or layout element it repeats, with route and state. Items on the LAYOUT-05 keep list are never a LAYOUT-05 failure; check them under their own rules. The "same decision without it" question guides authoring and repair, not pass/fail. After removing text, recheck accessible names, visible input labels, narrow layouts and increased text size.
+
+
 ## Identity and appearance acceptance
 
 For IDENTITY-01 inspect the document title, sidebar/mobile masthead and introduction, and verify logo alpha on light and dark surfaces. Preserve the image-generation record; do not substitute an inferred model name for observed metadata. Product-example copy may remain domain-specific when clearly scoped as a specimen.
