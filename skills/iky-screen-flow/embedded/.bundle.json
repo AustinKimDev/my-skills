@@ -88,7 +88,7 @@
       "review-output.md": "f7b4980ac3e4a70dd0b4febc187c7ece73fd7fa6f96bee9da5d7d06ac2c01029"
     },
     "browser-runtime": {
-      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+      "GUIDE.md": "f969668ee7090147368958f692a114669f3c54d7206e32752aea31c088642a45"
     },
     "component-libraries": {
       "GUIDE.md": "c0a2429cfa77f63fc13fcba9e9deb3ccd43b82ea5bbd3fadcaa2f4c194cca47b"
@@ -290,7 +290,7 @@
     "embedded/better-writing/LICENSE": "ed1dfe988fc40511b4845ccd9050a143a2002fee3bedc8064c47fa342b5d8d4f",
     "embedded/better-writing/references/dependencies.md": "09a8e5f28d669f8d39479a37a030d4aeb1f7d2cd27916e1f9542fb81289ed176",
     "embedded/better-writing/review-output.md": "f7b4980ac3e4a70dd0b4febc187c7ece73fd7fa6f96bee9da5d7d06ac2c01029",
-    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/GUIDE.md": "9b269d2d048e78fedaac2701a439d3b1aca552adb7aa601a54afd332e7813ab3",
     "embedded/browser-runtime/references/dependencies.md": "075a3f8a06087f93ac52aefc315697549ad2ce6143ee43cf7dc2906f071597ab",
     "embedded/component-libraries/GUIDE.md": "05b11b9840c68c62c754e86dad224b47d8831cdea90d15aec6529693dffc0174",
     "embedded/component-libraries/references/dependencies.md": "27c2a0495661e8d951d6d6723a1131e99b419efd3362d18e248a2c7fc24f46fe",

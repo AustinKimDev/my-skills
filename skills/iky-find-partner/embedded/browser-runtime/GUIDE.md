@@ -12,7 +12,7 @@ For Orca, select the session's executable using its runtime metadata: an explici
 
 Resolve the current session's owning worktree or folder from runtime/session metadata. A focused workspace, the first list result, or a matching URL is insufficient. Use that workspace's explicit selector, create or reuse a page belonging to it, retain the returned page ID, and pass it to subsequent commands. Re-list in that same workspace if the ID is stale. If ownership or command support cannot be established, report the specific limitation and continue independent artifact work.
 
-When Aside is selected, read `aside guide` from the installed executable. Use its documented persistent interactive session for review pages; do not assume one-shot execution keeps a tab alive. Installation, upgrades, other accounts, and browser substitutions require the applicable user authorization. An unavailable guide is an unavailable runtime, not a reason to guess commands.
+When ego lite is selected, run `ego-browser skill` and follow the guide it prints for the installed version. Work in one TaskSpace per goal; TaskSpaces and their tabs persist across invocations, so no long-lived process is needed to keep a review page open. While the user works in a review page, hand it to them and do not finish the TaskSpace until they return. Installation, upgrades, other accounts, and browser substitutions require the applicable user authorization. An unavailable guide is an unavailable runtime, not a reason to guess commands.
 
 For other exposed browser tools, read their current tool schema and follow the environment's session and page targeting rules. Browser access does not authorize submitting forms, publishing, buying, sending messages, or changing production data.
 

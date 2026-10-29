@@ -72,7 +72,7 @@
       "review-output.md": "f7b4980ac3e4a70dd0b4febc187c7ece73fd7fa6f96bee9da5d7d06ac2c01029"
     },
     "browser-runtime": {
-      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+      "GUIDE.md": "f969668ee7090147368958f692a114669f3c54d7206e32752aea31c088642a45"
     },
     "humanize-korean": {
       "LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",
@@ -153,7 +153,7 @@
     "embedded/better-writing/LICENSE": "ed1dfe988fc40511b4845ccd9050a143a2002fee3bedc8064c47fa342b5d8d4f",
     "embedded/better-writing/references/dependencies.md": "1a4591d4a3d246da3c41179a90a9c7b2b11d0b2f4fc4cb0789f6e5253227e776",
     "embedded/better-writing/review-output.md": "f7b4980ac3e4a70dd0b4febc187c7ece73fd7fa6f96bee9da5d7d06ac2c01029",
-    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/GUIDE.md": "9b269d2d048e78fedaac2701a439d3b1aca552adb7aa601a54afd332e7813ab3",
     "embedded/browser-runtime/references/dependencies.md": "9410ad6b3ab4e52034abf4c3d1d25f98c6bcb329e8439fc0c569597a2cfa6530",
     "embedded/humanize-korean/GUIDE.md": "0cfa6faf47e35bcd48c3ec66d27da16b9a675caa46fbe267b295ce872f277182",
     "embedded/humanize-korean/LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",

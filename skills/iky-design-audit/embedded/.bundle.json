@@ -8,7 +8,7 @@
   ],
   "source_sha256": {
     "browser-runtime": {
-      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+      "GUIDE.md": "f969668ee7090147368958f692a114669f3c54d7206e32752aea31c088642a45"
     },
     "humanize-korean": {
       "LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",
@@ -57,7 +57,7 @@
   },
   "files": {
     "embedded/SOURCES.json": "db7e9b90fe533efe9e544a8a9918d61a39b46e6910b51e1e872fc485f7b38f2d",
-    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/GUIDE.md": "9b269d2d048e78fedaac2701a439d3b1aca552adb7aa601a54afd332e7813ab3",
     "embedded/browser-runtime/references/dependencies.md": "715a6b90b13a8c57f98f09aec4b42e2b99b0ada7a4ce882c06b9d663a9316561",
     "embedded/humanize-korean/GUIDE.md": "0cfa6faf47e35bcd48c3ec66d27da16b9a675caa46fbe267b295ce872f277182",
     "embedded/humanize-korean/LICENSE": "4cc7e8c439fe42f09d98457599c129ea6df9e5d0e622750d75952b441a38343f",

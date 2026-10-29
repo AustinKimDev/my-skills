@@ -7,7 +7,7 @@
   ],
   "source_sha256": {
     "browser-runtime": {
-      "GUIDE.md": "f39a68df6087fd60611613711d8bea90e50599558038c5965b6c50e31a137975"
+      "GUIDE.md": "f969668ee7090147368958f692a114669f3c54d7206e32752aea31c088642a45"
     },
     "iky-recommend-animate": {
       "SKILL.md": "63555096399c4991927a18d5a13cc6660bf715c4ca7f3b6822ce3fdc0ab9dd20",
@@ -16,7 +16,7 @@
     }
   },
   "files": {
-    "embedded/browser-runtime/GUIDE.md": "d9087d2c3121c512d123aa94be87f53019b68eb2c9d8da61d8405bed5de85dea",
+    "embedded/browser-runtime/GUIDE.md": "9b269d2d048e78fedaac2701a439d3b1aca552adb7aa601a54afd332e7813ab3",
     "embedded/browser-runtime/references/dependencies.md": "56c9faa63a880ff332ba84e70cef6d607c9d79cbc1f598ab4ce00296177bc6ce",
     "embedded/iky-recommend-animate/GUIDE.md": "2bd08fefc89b2f964e5ae438b2197849c8a0616b9b84b98790e33a3623911291",
     "embedded/iky-recommend-animate/references/catalog.md": "d1fc9431382ea80c79971ffe3c1cf7ac12e066a51895a53d10c8f917f6ee7570",
