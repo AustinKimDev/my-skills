@@ -101,7 +101,7 @@ python3 scripts/check_map.py <planning-dir>
 python3 scripts/build_report.py <planning-dir>
 ```
 
-Fix every error and rerun. This writes `review.html` and a slide deck, `deck.html`. Both are built, not written by hand, so numbers cannot drift from the maps. `assets/example/` is a complete fictional case: build it to see what good looks like.
+Fix every error and rerun. This writes `review.html`. It is built, not written by hand, so numbers cannot drift from the maps. The standard also sets what pictures it needs: real screens for the worst breaks and a picture inside each open decision. Capture those before the last build. `assets/example/` is a complete fictional case: build it to see what good looks like.
 
 Open the page and answer the standard's pass check once, at desktop and phone widths, in light and dark.
 

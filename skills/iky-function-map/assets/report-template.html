@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>__TITLE__</title>
 <style>
-:root{color-scheme:light dark;--bg:#fff;--text:#191f28;--sub:#4e5968;--faint:#6b7684;--line:#e5e8eb;--soft:#f2f4f6;--warn:#92400e;--warn-soft:#fef3c7;--bad:#b91c1c;--bad-soft:#fde8e8;--ok:#166534;--ok-soft:#e3f5e9;--ink:#191f28;--on-ink:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#101012;--text:#f4f4f5;--sub:#b4b7bd;--faint:#8e9199;--line:#2c2c31;--soft:#1b1b20;--warn:#fcd34d;--warn-soft:#3a2c0b;--bad:#fca5a5;--bad-soft:#3f1818;--ok:#86efac;--ok-soft:#10301c;--ink:#2c2c31;--on-ink:#f4f4f5}}
+:root{color-scheme:light dark;--bg:#fff;--text:#191f28;--sub:#4e5968;--faint:#6b7684;--line:#e5e8eb;--soft:#f2f4f6;--warn:#92400e;--warn-soft:#fef3c7;--bad:#b91c1c;--bad-soft:#fde8e8;--ok:#166534;--ok-soft:#e3f5e9;--ink:#191f28;--on-ink:#fff;--n1:#d1d6db;--n2:#8b95a1;--n3:#4e5968}
+@media (prefers-color-scheme:dark){:root{--bg:#101012;--text:#f4f4f5;--sub:#b4b7bd;--faint:#8e9199;--line:#2c2c31;--soft:#1b1b20;--warn:#fcd34d;--warn-soft:#3a2c0b;--bad:#fca5a5;--bad-soft:#3f1818;--ok:#86efac;--ok-soft:#10301c;--ink:#2c2c31;--on-ink:#f4f4f5;--n1:#3a3a41;--n2:#6e6e78;--n3:#a7a7b0}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font:500 14px/1.6 Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;word-break:keep-all}
 main{max-width:1120px;margin:0 auto;padding:48px 24px 96px}
@@ -71,11 +71,6 @@ body[data-view=after] .step.fixed .state{display:none}
 body[data-view=after] .step .fix{display:block}
 .after-only,body[data-view=after] .now-only{display:none}
 body[data-view=after] .after-only{display:inline}
-.tiles-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px;margin-top:12px}
-.count{background:var(--soft);border-radius:12px;padding:12px}
-.count b{display:block;font-size:20px;font-weight:700}
-.count span{font-size:12px;color:var(--sub)}
-.count.alert{background:var(--bad-soft)}
 table{border-collapse:collapse;width:100%;margin-top:8px;font-size:13px}
 th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:12px;color:var(--faint);font-weight:600}
@@ -91,9 +86,53 @@ summary{cursor:pointer;font-weight:600;min-height:32px}
 .card li{background:var(--soft);border-radius:8px;padding:8px 12px;font-size:13px}
 .limits li{color:var(--sub)}
 a{color:inherit}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;background:var(--sub)}
+.layers{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:8px;margin-top:12px}
+.layer{background:var(--soft);border-radius:12px;padding:12px}
+.layer b{display:block;font-size:24px;font-weight:800;line-height:1.3}
+.layer small{display:block;font-size:12px;color:var(--faint)}
+.layer p{font-size:13px;color:var(--sub);margin-top:4px}
+.layer.last{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+.arrow{align-self:center;color:var(--faint)}
+.stack{display:flex;gap:2px;height:28px;margin:16px 0 8px}
+.stack i{display:block;min-width:4px}
+.stack i:first-child{border-radius:6px 0 0 6px}.stack i:last-child{border-radius:0 6px 6px 0}
+.sk{display:block}.sk text{fill:var(--text);font-size:12px;font-weight:500}.sk .muted{fill:var(--faint)}
+.sk rect{fill:var(--n3)}.sk path{fill:var(--n2);opacity:.35}.sk path:hover{opacity:.8}
+@media (prefers-color-scheme:dark){.sk path{opacity:.55}}
+.row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(112px,1fr);gap:4px;margin-top:4px}
+.row-label{font-size:12px;font-weight:600;color:var(--sub);margin-top:12px}
+.node{border-radius:8px;padding:8px;font-size:13px;line-height:1.4;box-shadow:inset 0 0 0 1px var(--line)}
+.node em{display:block;font-style:normal;font-size:11px;font-weight:700}
+.n-broken{background:var(--warn-soft);box-shadow:none}.n-broken em{color:var(--warn)}
+.n-missing{background:var(--bad-soft);box-shadow:none}.n-missing em{color:var(--bad)}
+.n-fixed{background:var(--ok-soft);box-shadow:none}.n-fixed em{color:var(--ok)}
+.n-out{box-shadow:none;border:1px dashed var(--faint);color:var(--sub)}
+.ev{margin-top:24px}
+.shot{display:grid;grid-template-columns:168px 1fr;gap:12px;align-items:start;margin-top:12px}
+.shot figcaption{font-size:13px;color:var(--sub)}
+.shot button{border:0;background:none;padding:0;cursor:zoom-in;justify-self:start;max-width:100%}
+.shot img{display:block;max-width:100%;height:auto;border-radius:8px;box-shadow:0 0 0 1px var(--line)}
+.zoom{margin:auto;border:0;background:none;padding:0;max-width:96vw;max-height:96vh;cursor:zoom-out}
+.zoom::backdrop{background:rgba(0,0,0,.8)}
+.zoom img{display:block;max-width:96vw;max-height:96vh}
+.opens{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px;margin-top:8px}
+.opens li{display:flex;gap:8px;font-size:13px}
+.seq{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(136px,1fr));gap:8px;margin-top:8px;counter-reset:s}
+.seq li{background:var(--bg);border-radius:8px;padding:8px 12px;font-size:13px}
+.seq li::before{counter-increment:s;content:counter(s);display:block;font-size:12px;color:var(--faint)}
+.dcards{display:grid;gap:12px;margin-top:12px}
+.dfig{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+.dfig h4{font-size:13px;font-weight:600;color:var(--sub)}
+.card .dsteps{list-style:none;display:grid;gap:4px;margin:4px 0 0;counter-reset:s}
+ol.dsteps li::before{counter-increment:s;content:counter(s) '. ';color:var(--faint)}
+.card li.bad{background:var(--bad-soft)}
+.card .note{font-size:12px;color:var(--faint);margin-top:8px}
 @media (max-width:720px){main{padding:32px 16px 64px}h1{font-size:26px}
+.layers,.shot{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}
 .lanes{display:block}.lane-label,.lane-bg{display:none}.step{margin:4px 0;min-width:0}.step .who{display:block}.step .hand{display:inline}}
-@media print{.seg{display:none}main{padding:0}}
+@media print{.seg,.zoom{display:none}main{padding:0}}
 </style>
 </head>
 <body data-view="now">
@@ -105,11 +144,50 @@ const h=(t,a={},...c)=>{const e=document.createElement(t);for(const[k,v]of Objec
 const app=document.getElementById('app');
 const seg=(items,cur,on)=>{const w=h('div',{class:'seg',role:'group'});const draw=v=>{w.replaceChildren(...items.map(i=>h('button',{type:'button','aria-pressed':String(i.key===v),disabled:i.disabled||false,title:i.title||null,onclick:()=>{on(i.key);draw(i.key)}},i.label)))};draw(cur);return w};
 
+const C=M.counts,fraction=v=>{const m=String(v).match(/^(\d+)\s*\/\s*(\d+)$/);return m&&+m[2]?+m[1]/+m[2]:null};
+const swatches=(items,colors)=>h('div',{class:'legend'},items.map(([t,n])=>h('span',{},h('i',{style:`background:${colors[t]}`}),t,' ',h('b',{class:'num'},String(n)))));
+const stack=(items,colors)=>h('div',{class:'stack','aria-hidden':'true'},items.map(([t,n])=>h('i',{style:`flex:${n} 1 0;background:${colors[t]}`})));
 app.append(h('div',{},
   h('p',{class:'kicker'},M.title),
   h('h1',{},M.answer),
-  h('div',{class:'reasons'},M.reasons.map(r=>h('div',{class:'reason'},h('b',{class:'num'},r.value),h('span',{},r.label)))),
+  h('div',{class:'reasons'},M.reasons.map(r=>{const f=fraction(r.value);return h('div',{class:'reason'},h('b',{class:'num'},r.value),h('span',{},r.label),f===null?null:h('div',{class:'meter','aria-hidden':'true'},h('i',{style:`width:${f*100}%`})))})),
   h('p',{class:'next'},h('small',{},'다음에 할 일'),M.next)));
+
+const N=M.method||{},DISP={'유지':'var(--n1)','합침':'var(--n2)','연결':'var(--n3)','공통':'var(--text)','구현 필요':'var(--warn)','조건부 제거':'var(--bad-soft)','제거':'var(--bad)'};
+const disp=M.dispositions.map(d=>[d.name,d.count]),rows=n=>(M.dispositions.find(d=>d.name===n)||{count:0}).count;
+const layer=(n,label,ex,last)=>h('div',{class:'layer'+(last?' last':'')},h('small',{},label),h('b',{class:'num'},String(n)),ex?h('p',{},ex):null);
+app.append(h('section',{},h('h2',{},`기능 ${C.functions}행을 업무 단위 ${C.units}개와 프로세스 ${C.processes}개로 나눴습니다`),
+  h('div',{class:'layers'},layer(C.functions,'기능: 버튼이나 동작 하나',N.function),h('span',{class:'arrow'},'→'),layer(C.units,'업무 단위: 책임지는 결과',N.unit),h('span',{class:'arrow'},'→'),layer(C.processes,'프로세스: 시간순 흐름',N.process),h('span',{class:'arrow'},'→'),layer('마지막','화면','세 층이 정해진 뒤에 그립니다',true)),
+  stack(disp,DISP),swatches(disp,DISP),
+  h('p',{class:'lead'},`${C.functions}행 중 바로 빠지는 것은 ${rows('제거')}행, 조건에 따라 빠지는 것은 ${rows('조건부 제거')}행입니다. 나머지는 남거나 합쳐집니다.`)));
+
+function sankey(R){
+  const NS='http://www.w3.org/2000/svg',el=(t,a,...c)=>{const e=document.createElementNS(NS,t);for(const[k,v]of Object.entries(a))e.setAttribute(k,v);e.append(...c);return e};
+  const small=innerWidth<=720,W=Math.min(1072,innerWidth-(small?32:48)),x0=small?76:104,x1=W-(small?132:136),bar=8,gap=12,head=18,k=440/R.left.reduce((a,n)=>a+n.count,0);
+  const heads=[];let y=0,cur=null;
+  const right=R.right.map((n,i)=>{if(n.surface!==cur){cur=n.surface;y+=i?28:head;heads.push([cur,y-6])}const o={...n,y,h:Math.max(n.count*k,3),used:0};y+=o.h+gap;return o});
+  // Order the old sections by where their rows land, so the ribbons cross as little as possible.
+  const centre=n=>R.links.filter(l=>l.from===n.name).reduce((a,l)=>a+l.count*right.findIndex(r=>r.name===l.to&&r.surface===l.surface),0)/n.count;
+  const order=[...R.left].sort((p,q)=>centre(p)-centre(q));
+  const H=y-gap,sizes=order.map(n=>Math.max(n.count*k,3)),leftGap=(H-head-sizes.reduce((a,b)=>a+b,0))/Math.max(order.length-1,1);
+  let ly=head;
+  const left=order.map((n,i)=>{const o={...n,y:ly,h:sizes[i],used:0};ly+=sizes[i]+leftGap;return o});
+  const links=R.links.map(l=>({...l,a:left.findIndex(n=>n.name===l.from),b:right.findIndex(n=>n.name===l.to&&n.surface===l.surface),t:l.count*k}));
+  [...links].sort((p,q)=>p.a-q.a||p.b-q.b).forEach(l=>{const n=left[l.a];l.y0=n.y+n.used;n.used+=l.t});
+  [...links].sort((p,q)=>p.b-q.b||p.a-q.a).forEach(l=>{const n=right[l.b];l.y1=n.y+n.used;n.used+=l.t});
+  const a=x0+bar,m=(a+x1)/2,ribbon=l=>`M${a} ${l.y0}C${m} ${l.y0} ${m} ${l.y1} ${x1} ${l.y1}L${x1} ${l.y1+l.t}C${m} ${l.y1+l.t} ${m} ${l.y0+l.t} ${a} ${l.y0+l.t}Z`;
+  const label=(n,x,anchor)=>el('text',{x,y:n.y+n.h/2+4,'text-anchor':anchor},`${n.name} `,el('tspan',{class:'muted'},String(n.count)));
+  return el('svg',{class:'sk',width:W,height:H+4,viewBox:`0 0 ${W} ${H+4}`,role:'img','aria-label':'지금 구역에서 새 영역으로 기능이 옮겨 가는 그림. 숫자는 아래 표에 있습니다.'},
+    el('text',{x:x0-8,y:12,'text-anchor':'end',class:'muted'},'지금'),
+    ...heads.map(([t,hy])=>el('text',{x:x1,y:hy,class:'muted'},t)),
+    ...links.map(l=>el('path',{d:ribbon(l)},el('title',{},`${l.from} → ${l.to} ${l.count}행`))),
+    ...left.flatMap(n=>[el('rect',{x:x0,y:n.y,width:bar,height:n.h,rx:2}),label(n,x0-8,'end')]),
+    ...right.flatMap(n=>[el('rect',{x:x1,y:n.y,width:bar,height:n.h,rx:2}),label(n,x1+bar+8,'start')]));
+}
+if(M.recombine){const R=M.recombine;app.append(h('section',{},h('h2',{},`지금 구역 ${R.left.length}개가 새 영역 ${R.right.length}개로 다시 묶입니다`),h('p',{class:'lead'},'왼쪽은 지금 구역, 오른쪽은 새 영역입니다. 띠 굵기가 기능 수입니다.'),
+  h('div',{class:'scroll'},sankey(R)),
+  h('details',{},h('summary',{},'표로 보기'),h('table',{},h('thead',{},h('tr',{},['지금','새 영역','행'].map(t=>h('th',{scope:'col'},t)))),
+    h('tbody',{},[...R.links].sort((p,q)=>q.count-p.count).map(l=>h('tr',{},h('td',{},l.from),h('td',{},l.to),h('td',{class:'num'},String(l.count)))))))))}
 
 const MODES={
   broken:{label:'끊긴 단계',level:u=>u.steps===0?0:u.broken===0?1:u.broken<3?2:3,val:u=>u.steps?`끊김 ${u.broken} / ${u.steps}`:'흐름 없음',legend:[['l1','끊김 없음'],['l2','1~2단계'],['l3','3단계 이상'],['','프로세스에 없음']]},
@@ -140,11 +218,16 @@ function drawMap(){
     h('ul',{},u.items.slice(0,12).map(i=>h('li',{},h('span',{class:'meta'},i.id),h('span',{},i.name)))),
     u.items.length>12?h('p',{class:'meta'},`외 ${u.items.length-12}행은 function-map.tsv에 있습니다`):null):'');
 }
-const mapSec=h('section',{},h('h2',{},'어디가 아픈가'),h('p',{class:'lead'},'칸은 책임지는 결과 하나입니다. 메뉴가 아닙니다. 눌러서 안을 봅니다.'),
+const mapSec=h('section',{},h('h2',{},'어디가 아픈가'),h('p',{class:'lead'},`칸은 책임지는 결과 하나입니다. 메뉴가 아닙니다. 눌러서 안을 봅니다.${M.boundary?` ${M.boundary}.`:''}`),
   h('div',{class:'bar'},seg(Object.entries(MODES).map(([key,v])=>({key,label:v.label,disabled:v.disabled,title:v.title})),mode,v=>{mode=v;drawMap()}),legend),
   M.joins&&M.joins.length?h('p',{class:'bridge',style:'margin-top:12px'},'두 곳을 잇는 것:',M.joins.map(j=>h('span',{class:'tag'},j))):null,
   surfaces,detail);
 app.append(mapSec);drawMap();
+
+const zoom=h('dialog',{class:'zoom',onclick:()=>zoom.close()});document.body.append(zoom);
+const shot=s=>h('figure',{class:'shot'},h('figcaption',{},s.caption),h('button',{type:'button',title:'크게 보기',onclick:()=>{zoom.replaceChildren(h('img',{src:s.src,alt:s.alt}));zoom.showModal()}},h('img',{src:s.src,alt:s.alt,loading:'lazy'})));
+if((M.evidence||[]).length)app.append(h('section',{},h('h2',{},'실제 화면으로 보면'),M.evidence_note?h('p',{class:'lead'},M.evidence_note):null,
+  M.evidence.map(e=>h('article',{class:'ev'},h('h3',{},e.claim),h('p',{class:'bridge'},e.steps.map(s=>h('span',{class:'tag'},`${s.key.replace('-',' ')}단계 ${s.name}: ${s.state}${s.answer?` → ${s.answer}`:''}`))),e.shots.map(shot)))));
 
 const STATE={'있음':'s-ok','끊김':'s-broken','없음':'s-missing','밖':'s-out','콘솔 밖':'s-out','안 함':'s-drop'};
 const unitName=c=>c==='밖'?'밖':(M.units.find(u=>u.code===c)||{name:c}).name;
@@ -161,25 +244,37 @@ function flow(p){
   return h('article',{class:'flow'},h('header',{},h('h3',{},`${p.id} ${p.name}`),h('span',{class:'meta num now-only'},`끊김 ${p.broken} / ${p.counted}단계 · 넘김 ${p.handoffs}번`),h('span',{class:'meta num after-only'},`끊김 ${p.broken} 중 ${fixedN} 해결 · 남은 끊김 ${p.broken-fixedN}`)),h('div',{class:'scroll'},grid));
 }
 const focus=M.processes.filter(p=>p.focus),rest=M.processes.filter(p=>!p.focus&&p.broken);
-app.append(h('section',{},h('h2',{},'가장 많이 끊긴 흐름'),h('p',{class:'lead'},'가로는 순서, 세로는 업무 단위입니다. 줄을 옮겨 가면 일이 넘어간 곳입니다.'),
+const worst=M.processes.find(p=>p.id===M.flow);
+const node=(s,after)=>{const c=after?(s.fixed?'n-fixed':s.broken?'n-missing':''):s.state==='끊김'?'n-broken':s.state==='없음'?'n-missing':'';
+  return h('div',{class:`node ${c} ${STATE[s.state]==='s-out'?'n-out':''}`},s.name,after&&s.fixed?h('em',{},`→ ${s.answer}`):after&&s.broken?h('em',{},s.bucket):!after&&s.broken?h('em',{},s.state):null)};
+const chain=p=>{const left=p.steps.filter(s=>s.broken&&!s.fixed).length;return h('div',{},h('h3',{style:'margin-top:12px'},`${p.id} ${p.name}: 끊긴 ${p.broken}단계 중 ${p.broken-left}단계를 고칩니다`),
+  h('div',{class:'scroll',style:'margin-top:0'},h('p',{class:'row-label'},'지금'),h('div',{class:'row'},p.steps.map(s=>node(s,false))),h('p',{class:'row-label'},'고친 뒤'),h('div',{class:'row'},p.steps.map(s=>node(s,true)))))};
+app.append(h('section',{},h('h2',{},'가장 많이 끊긴 흐름'),worst?chain(worst):null,h('p',{class:'lead',style:'margin-top:24px'},'아래는 흐름별 자세히 보기입니다. 가로는 순서, 세로는 업무 단위이고, 줄을 옮겨 가면 일이 넘어간 곳입니다.'),
   h('div',{class:'bar'},seg([{key:'now',label:'지금'},{key:'after',label:'고친 뒤'}],'now',v=>{document.body.dataset.view=v})),
   focus.map(flow),
   rest.length?h('details',{},h('summary',{},`끊긴 곳이 있는 나머지 ${rest.length}개`),rest.map(flow)):null));
 
 const buckets=['새 기능','공통 능력','결정','안 고침','답 없음'];
 const broken=M.processes.flatMap(p=>p.steps.filter(s=>s.broken).map(s=>({...s,pid:p.id,pname:p.name})));
-app.append(h('section',{},h('h2',{},`끊긴 ${broken.length}단계의 답`),h('p',{class:'lead'},'모든 끊김에 답이 있어야 기획이 닫힙니다.'),
-  h('div',{class:'tiles-row'},buckets.map(l=>{const n=broken.filter(s=>s.bucket===l).length;return h('div',{class:'count'+(l==='답 없음'&&n?' alert':'')},h('b',{class:'num'},String(n)),h('span',{},l))})),
+const ANSWER={'새 기능':'var(--n2)','공통 능력':'var(--n1)','결정':'var(--n3)','안 고침':'var(--warn)','답 없음':'var(--bad)'};
+const tally=buckets.map(l=>[l,broken.filter(s=>s.bucket===l).length]).filter(([,n])=>n),unanswered=broken.filter(s=>s.bucket==='답 없음');
+app.append(h('section',{},h('h2',{},unanswered.length?`끊긴 ${broken.length}단계 중 ${unanswered.length}단계는 아직 답이 없습니다`:`끊긴 ${broken.length}단계 모두 답이 있습니다`),h('p',{class:'lead'},'모든 끊김에 답이 있어야 기획이 닫힙니다.'),
+  stack(tally,ANSWER),swatches(tally,ANSWER),
+  unanswered.length?h('ul',{class:'opens',style:'margin-top:16px'},unanswered.map(s=>h('li',{},h('span',{class:'meta num'},s.pid),h('span',{},s.name)))):null,
   h('details',{},h('summary',{},'단계별로 보기'),h('table',{},h('thead',{},h('tr',{},['프로세스','단계','상태','답'].map(t=>h('th',{scope:'col'},t)))),
     h('tbody',{},broken.map(s=>h('tr',{},h('td',{},`${s.pid} ${s.pname}`),h('td',{},s.name),h('td',{},s.state),h('td',{},s.answer||'답 없음'))))))));
 
 if(M.first_slice){const f=M.first_slice;app.append(h('section',{},h('h2',{},'먼저 낼 것'),f.day?h('p',{class:'lead'},f.day):null,
-  h('div',{class:'two'},h('div',{class:'box'},h('h3',{},'첫 출시'),h('ul',{},(f.in||[]).map(t=>h('li',{},t)))),h('div',{class:'box'},h('h3',{},'나중'),h('ul',{},(f.later||[]).map(t=>h('li',{},t))))),
+  h('div',{class:'two'},h('div',{class:'box'},h('h3',{},'첫 출시 순서'),h('ol',{class:'seq'},(f.in||[]).map(t=>h('li',{},t)))),h('div',{class:'box'},h('h3',{},'나중'),h('p',{class:'bridge',style:'margin-top:8px'},(f.later||[]).map(t=>h('span',{class:'tag',style:'background:var(--bg)'},t))))),
   f.baseline&&f.baseline.length?h('details',{},h('summary',{},'잘됐는지 재는 기준'),h('ul',{class:'plain'},f.baseline.map(t=>h('li',{},t)))):null))}
 
 const D=M.decisions||{};
-if((D.open||[]).length)app.append(h('section',{},h('h2',{},'정해 주실 것'),h('div',{class:'two'},D.open.map(d=>h('article',{class:'card'},h('h3',{},`${d.id} ${d.topic}`),h('ul',{},(d.options||[]).map(o=>h('li',{},o))),h('p',{},h('b',{},'추천 '),d.recommend))))));
+const side=c=>h('div',{},h('h4',{},c.title),h(c.ordered?'ol':'ul',{class:'dsteps'},c.items.map(i=>h('li',{class:i.bad?'bad':null},i.text))));
+if((D.open||[]).length)app.append(h('section',{},h('h2',{},'정해 주실 것'),h('div',{class:'dcards'},D.open.map(d=>h('article',{class:'card'},h('h3',{},`${d.id} ${d.topic}`),
+  d.figure?h('div',{class:'dfig'},d.figure.map(side)):null,(d.shots||[]).map(shot),d.note?h('p',{class:'note'},d.note):null,
+  h('ul',{},(d.options||[]).map(o=>h('li',{},o))),h('p',{},h('b',{},'추천 '),d.recommend))))));
 if((D.accepted||[]).length)app.append(h('section',{},h('h2',{},`받은 결정 ${D.accepted.length}건`),h('ul',{class:'plain decided',style:'margin-top:12px'},D.accepted.map(d=>h('li',{},h('span',{class:'meta'},d.id),h('b',{},d.topic),h('span',{},d.result))))));
+(M.extras||[]).forEach(x=>app.append(h('section',{},h('h2',{},x.title),x.lead?h('p',{class:'lead'},x.lead):null,h('div',{class:'two'},(x.columns||[]).map(c=>h('div',{class:'box'},h('h3',{},c.head),h('ul',{},c.items.map(t=>h('li',{},t)))))))));
 app.append(h('section',{},h('h2',{},'확인하지 못한 것'),h('ul',{class:'plain limits',style:'margin-top:12px'},(M.limits||[]).map(t=>h('li',{},t))),
   (M.links||[]).length?h('p',{class:'meta',style:'margin-top:12px'},'근거: ',M.links.flatMap((l,i)=>[i?' · ':'',h('a',{href:l.href},l.label)])):null));
 </script>

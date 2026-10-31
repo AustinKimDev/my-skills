@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Build the review page and slide deck from a checked map. Usage: build_report.py <planning-dir> [output.html]
+"""Build the review page from a checked map. Usage: build_report.py <planning-dir> [output.html]
 
 Reads function-map.tsv, process-map.tsv and report.json, runs check_map first,
-and writes review.html and deck.html next to the output. Standard library only.
+and writes review.html. Pictures in report.json must be files inside the
+planning directory. Standard library only.
 """
+import collections
 import json
 import pathlib
 import sys
@@ -12,8 +14,8 @@ import check_map
 
 HERE = pathlib.Path(__file__).resolve().parent
 TEMPLATE = HERE.parent / "assets" / "report-template.html"
-DECK = HERE.parent / "assets" / "deck-template.html"
 RISK_WORDS = ("돈", "민감", "되돌림 없음")
+DISPOSITION_ORDER = ("유지", "합침", "연결", "공통", "구현 필요", "조건부 제거", "제거")
 
 
 def require(report, errors):
@@ -37,6 +39,69 @@ def bucket(answer, is_open):
     if answer.startswith(("N", "구현")):
         return "새 기능"
     return "결정"
+
+
+def check_shot(base, shot, where, errors):
+    src = shot.get("src", "")
+    if not src or src.startswith(("/", "file:", "http:", "https:", "data:")) or ".." in src:
+        errors.append(f"report.json: {where} needs a relative path inside the planning folder, got '{src}'")
+    elif not (base / src).is_file():
+        errors.append(f"report.json: {where} points to a missing file: {src}")
+    for key in ("alt", "caption"):
+        if not shot.get(key):
+            errors.append(f"report.json: {where} ({src}) has no {key}. Say what the picture proves.")
+
+
+def resolve_pictures(base, report, processes, errors):
+    places = {f"{p['id']}-{s['order']}": (p, s) for p in processes for s in p["steps"]}
+    for number, item in enumerate(report.get("evidence") or [], 1):
+        where = f"evidence {number}"
+        if not item.get("claim"):
+            errors.append(f"report.json: {where} has no claim. State what the screen proves.")
+        if not item.get("at"):
+            errors.append(f"report.json: {where} names no step in 'at'. Use process-order, like E09-2.")
+        item["steps"] = []
+        for key in item.get("at") or []:
+            if key not in places:
+                errors.append(f"report.json: {where} names unknown step '{key}'")
+                continue
+            proc, step = places[key]
+            item["steps"].append({"key": key, "process": proc["name"], "name": step["name"],
+                                  "state": step["state"], "answer": step["answer"]})
+        if not item.get("shots"):
+            errors.append(f"report.json: {where} has no shots")
+        for shot in item.get("shots") or []:
+            check_shot(base, shot, where, errors)
+    for decision in (report.get("decisions") or {}).get("open") or []:
+        for shot in decision.get("shots") or []:
+            check_shot(base, shot, f"decision {decision.get('id')}", errors)
+
+
+def recombine(functions, meta, legacy, errors):
+    """Rows per old section and new area. Empty without a legacy map."""
+    if not legacy:
+        return None
+    links = collections.Counter()
+    for row in functions:
+        prefix = row["ID"].split("-")[0]
+        if prefix not in legacy:
+            errors.append(f"report.json: legacy has no name for ID prefix '{prefix}'")
+            continue
+        info = meta.get(check_map.unit_code(row["업무 단위"])) or {}
+        links[(legacy[prefix], info.get("area", ""), info.get("surface", ""))] += 1
+    left, right = collections.Counter(), collections.Counter()
+    for (old, area, surface), count in links.items():
+        left[old] += count
+        right[(area, surface)] += count
+    order = list(dict.fromkeys((info.get("area", ""), info.get("surface", "")) for info in meta.values()))
+    surfaces = list(dict.fromkeys(surface for _, surface in order))
+    order.sort(key=lambda key: surfaces.index(key[1]))
+    return {
+        "left": [{"name": name, "count": count} for name, count in left.most_common()],
+        "right": [{"name": area, "surface": surface, "count": right[(area, surface)]}
+                  for area, surface in order if right[(area, surface)]],
+        "links": [{"from": old, "to": area, "surface": surface, "count": count}
+                  for (old, area, surface), count in links.items()]}
 
 
 def build(base):
@@ -74,7 +139,8 @@ def build(base):
         is_open = broken and row.get("해결", "").startswith("답 없음")
         kind = bucket(row.get("해결", ""), is_open)
         by_id[pid]["steps"].append({
-            "name": row["단계"], "unit": "밖" if unit in check_map.OUTSIDE else unit, "actor": row["행위자"],
+            "order": row["순서"], "name": row["단계"], "unit": "밖" if unit in check_map.OUTSIDE else unit,
+            "actor": row["행위자"],
             "state": row["상태"], "memo": row["메모"], "answer": row.get("해결", ""),
             "broken": broken, "open": is_open, "bucket": kind if broken else "",
             "fixed": broken and kind not in ("답 없음", "안 고침")})
@@ -115,13 +181,17 @@ def build(base):
             reason["value"] = reason["value"].format(**counts)
         except (KeyError, IndexError):
             errors.append(f"report.json: unknown count in reason '{reason['value']}'. Use {sorted(counts)}.")
+    resolve_pictures(base, report, processes, errors)
+    moved = recombine(functions, meta, report.get("legacy"), errors)
     if errors:
         return errors, warnings, None
+    tally = collections.Counter(r["처리"] for r in functions)
     data = {key: report.get(key) for key in (
         "title", "answer", "reasons", "next", "surfaces", "joins", "first_slice", "decisions", "limits", "links",
-        "method", "boundary", "extras")}
+        "method", "boundary", "extras", "evidence", "evidence_note")}
     data.update(units=units, processes=processes, hasUsage=any(u["usage"] for u in units), counts=counts,
-                flow=focus[0] if focus else None)
+                flow=focus[0] if focus else None, recombine=moved,
+                dispositions=[{"name": name, "count": tally[name]} for name in DISPOSITION_ORDER if tally[name]])
     return errors, warnings, data
 
 
@@ -140,10 +210,9 @@ def main():
         print("FAIL")
         return 1
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
-    for template, path in ((TEMPLATE, output), (DECK, output.with_name("deck.html"))):
-        html = template.read_text(encoding="utf8").replace("__TITLE__", data["title"]).replace("__DATA__", payload)
-        path.write_text(html, encoding="utf8")
-        print("wrote", path, len(html))
+    html = TEMPLATE.read_text(encoding="utf8").replace("__TITLE__", data["title"]).replace("__DATA__", payload)
+    output.write_text(html, encoding="utf8")
+    print("wrote", output, len(html))
     print("units", len(data["units"]), "processes", len(data["processes"]))
     return 0
 

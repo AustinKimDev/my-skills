@@ -9,11 +9,14 @@ The page has one reader, the owner, who reads it once and must decide something.
 | Answer | What did we conclude? | One sentence, 90 characters at most, with the conclusion and the first move |
 | Reasons | Why believe it? | 2 to 4 numbers, each a different argument |
 | Next | What do I do now? | One action, naming the decision or person |
+| Layers | How was this cut? | Each layer's count with one real example, and what happens to every row |
+| Recombination | Where did things move? | Today's sections to the new areas, widths from the map |
 | Heat map | Where does it hurt? | Work units by surface, one attribute at a time |
-| Lanes | How does it break? | The 3 or 4 worst processes, now and after |
+| Evidence | Is it real? | 3 to 5 real screens, each proving one claim about one step |
+| Lanes | How does it break? | The worst flow now and after in one view, then the 3 or 4 worst in full |
 | Answers | Is every break closed? | `답 없음` is zero, or a reason and the next step say it is not closed |
 | First slice | What ships first? | What is in, what waits, and how success is measured |
-| Decisions | What is left to me? | Open first, each with options and one recommendation |
+| Decisions | What is left to me? | Open first, each with its picture, options and one recommendation |
 | Not checked | What should I not trust? | Never empty |
 
 Cut any section the owner has no use for. A section stays only if it changes a decision or a belief.
@@ -58,16 +61,26 @@ Reasons are a pyramid under the answer: each one supports it, and together they 
 
 - Open decisions come before accepted ones. Each gives options, one recommendation, and what the answer changes.
 - Label a proposal inside an accepted decision as a proposal.
-- With more than four open decisions, or when a choice needs a picture to be understood, offer `iky-decision-report` instead of a longer list.
+- With more than four open decisions, offer `iky-decision-report` instead of a longer list.
 
-## Deck
+## Pictures
 
-`build_report.py` also writes `deck.html` from the same data, so the slides cannot disagree with the page. Use it when the owner will present the plan or wants to walk through it. Arrow keys and space move between slides, and printing to PDF gives one slide per page.
+The owner reads pictures before prose, so the page carries its argument in them. Do not write a separate deck: put the picture on the page.
 
-- One message per slide, and the title states it.
-- Order: answer, reasons, the three layers, surfaces, heat map, the worst flow now and after, answers, first slice, decisions, what was not checked with the next action.
-- Fill `boundary` (the surface rule in one sentence), `method` (`function`, `unit`, `process`: one real example of each) and, when useful, `extras` (a slide with `title`, `lead` and `columns` of `head` and `items`). `focus[0]` picks the worst flow.
-- A `.pptx` needs a package this skill does not ship. Ask before installing one.
+`build_report.py` draws the layers, the row bar, the recombination figure, the now-and-after chain and the answer bar from the maps, so those numbers cannot drift. Feed them with `method` (`function`, `unit`, `process`: one real example of each), `boundary` (the surface rule in one sentence) and `legacy` (ID prefix to today's section name; without it the recombination figure is left out). `focus[0]` picks the worst flow.
+
+**Evidence** is the real screen behind a broken step. Each item in `evidence` has `claim` (the sentence the screen proves), `at` (steps as `E09-2`) and `shots` (`src`, `alt`, `caption`). `evidence_note` says when, where and on what data they were taken. The step label comes from the map. This is proof, not a gallery.
+
+- Capture the running product at about the page's width, then crop to what proves the claim.
+- Look, do not act. Move by address and open dialogs only. Never press approve, refund, delete or submit, and never type into a field.
+- Skip screens that show private messages, credentials or another person's data, even on test data. Prove the fact from another screen.
+- Label test data. Its counts are not production numbers.
+- Keep files in `assets/` inside the planning folder. The build fails on an absolute path, a path outside the folder, a missing file, or a missing `alt` or `caption`.
+- When a screen cannot be captured safely, quote the source and say why in `note` or `limits`. Never mock a screen and present it as real.
+
+**Decision pictures** sit inside the card. `figure` holds the sides to compare, each with `title`, optional `ordered`, and `items` of `text` with optional `bad`. `shots` adds real screens, and `note` says what could not be shown.
+
+`extras` adds a section with `title`, `lead` and `columns` of `head` and `items`, such as a review result.
 
 ## Pass check
 
@@ -80,6 +93,7 @@ Answer each one by looking at the rendered page:
 - [ ] Nothing stated as fact lacks a file, a line, or a measurement in the spec.
 - [ ] "확인하지 못한 것" names real gaps, such as usage, legal duties and production state.
 - [ ] The page holds at desktop and phone widths, in light and dark, with no sideways scroll on the page itself.
-- [ ] Every slide fits its frame, and the title alone tells the story when read in order.
+- [ ] Every real screen states a claim, names a step and shows no private data.
+- [ ] Each open decision can be understood from its picture before reading the options.
 
 Check the render once, fix everything found in one batch, and confirm once. Sources are in [research notes](research.md).
