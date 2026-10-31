@@ -466,6 +466,11 @@
       "kind": "owned",
       "dependencies": []
     },
+    "iky-function-map": {
+      "source": "skills/iky-function-map",
+      "kind": "owned",
+      "dependencies": []
+    },
     "iky-backend-spec": {
       "source": "skills/iky-backend-spec",
       "kind": "owned",
@@ -531,6 +536,9 @@
     ],
     "iky-next": [
       "Recommends the next pipeline skill; the recommended skill runs only when the user invokes it."
+    ],
+    "iky-function-map": [
+      "iky-team-review may review the finished map, and iky-decision-report may carry many open decisions; each runs only when the user invokes it."
     ],
     "iky-backend-spec": [
       "iky-backend-build and iky-frontend-build consume the contract as input; the spec skill does not implement either side."

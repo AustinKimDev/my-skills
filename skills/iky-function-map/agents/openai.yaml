@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 기능 지도"
+  short_description: "기존 제품의 기능을 업무 단위와 프로세스로 나눠 재조합하고 결정까지 정리"
+  default_prompt: "$iky-function-map으로 이 제품의 기능을 전부 분석하고 업무 단위와 프로세스를 나눠 재조합해줘."
