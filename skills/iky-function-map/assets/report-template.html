@@ -55,7 +55,7 @@ button:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var
 .lanes{display:grid;gap:4px;min-width:min-content}
 .lane-label{grid-column:1;font-size:12px;color:var(--sub);display:flex;align-items:center;padding-right:8px;position:sticky;left:0;background:var(--bg);z-index:1}
 .lane-bg{grid-column:2/-1;background:var(--soft);border-radius:8px;opacity:.5}
-.step{position:relative;border-radius:8px;padding:8px;font-size:13px;line-height:1.4;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);min-width:112px;margin:4px 2px}
+.step{position:relative;border-radius:8px;padding:8px;font-size:13px;line-height:1.4;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);min-width:100px;margin:4px 2px}
 .step .n{font-size:11px;color:var(--faint);display:block}
 .step .hand{display:none;font-weight:700;color:var(--sub)}
 .step .who{display:none;font-size:11px;color:var(--faint)}
@@ -233,7 +233,7 @@ const STATE={'있음':'s-ok','끊김':'s-broken','없음':'s-missing','밖':'s-o
 const unitName=c=>c==='밖'?'밖':(M.units.find(u=>u.code===c)||{name:c}).name;
 function flow(p){
   const lanes=[...new Set(p.steps.map(s=>s.unit))];
-  const grid=h('div',{class:'lanes',style:`grid-template-columns:96px repeat(${p.steps.length},minmax(112px,1fr));grid-template-rows:repeat(${lanes.length},auto)`});
+  const grid=h('div',{class:'lanes',style:`grid-template-columns:96px repeat(${p.steps.length},minmax(100px,1fr));grid-template-rows:repeat(${lanes.length},auto)`});
   lanes.forEach((l,i)=>grid.append(h('div',{class:'lane-bg',style:`grid-row:${i+1}`}),h('div',{class:'lane-label',style:`grid-row:${i+1}`},unitName(l))));
   p.steps.forEach((s,i)=>{const fixed=s.fixed;
     grid.append(h('div',{class:`step ${STATE[s.state]||''}${fixed?' fixed':''}`,style:`grid-row:${lanes.indexOf(s.unit)+1};grid-column:${i+2}`,title:s.memo},
