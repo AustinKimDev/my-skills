@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 그래프 진행"
+  short_description: "목표를 노드·의존·검증 지점으로 쪼개 병렬로 끝까지 진행"
+  default_prompt: "$iky-graph-run으로 이 목표를 그래프로 쪼개서 끝까지 진행해줘."
