@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 소셜 마케팅 운영과 학습"
+  short_description: "대화·콘텐츠 실험을 운영하고 성과를 근거로 개선"
+  default_prompt: "$iky-social-marketing으로 대상 독자의 대화와 계정 성과를 살피고 다음 실험을 실행해줘."

@@ -522,6 +522,11 @@
           "when": "Observe animation timing and smoothness in the running app."
         }
       ]
+    },
+    "iky-social-marketing": {
+      "source": "skills/iky-social-marketing",
+      "kind": "owned",
+      "dependencies": []
     }
   },
   "handoffs": {
