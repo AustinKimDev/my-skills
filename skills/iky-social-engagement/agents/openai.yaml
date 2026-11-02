@@ -1,0 +1,4 @@
+interface:
+  display_name: "커뮤니티 대화와 답글"
+  short_description: "멘션과 탐라에서 맥락에 맞는 소통하기"
+  default_prompt: "$iky-social-engagement으로 현재 요청을 진행해줘."

@@ -1,12 +1,16 @@
 # My Skills
 
-기획부터 데이터·백엔드 설계와 구현, UI 설계, 연동·출시 점검, 이미지 제작, SNS 글쓰기와 카드뉴스·릴스 제작, 배포와 업무보고에 사용하는 스킬 35개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
+기획부터 데이터·백엔드 설계와 구현, UI 설계, 연동·출시 점검, 이미지 제작, SNS 글쓰기와 카드뉴스·릴스 제작, 배포와 업무보고에 사용하는 스킬 39개를 모은 공개 저장소입니다. `SKILL.md`와 실행에 필요한 스크립트, 참조 문서, 이미지·폰트, 원래의 라이선스 파일을 함께 보관합니다.
 
 ## 스킬 목록
 
 | 스킬 | 용도 |
 |---|---|
 | [iky-social-marketing](skills/iky-social-marketing/SKILL.md) | 대상 독자 조사·대화·소셜 콘텐츠 실험과 성과 학습 |
+| [iky-audience-research](skills/iky-audience-research/SKILL.md) | 공개 대화에서 실제 질문과 콘텐츠 기회를 찾기 |
+| [iky-social-content-strategy](skills/iky-social-content-strategy/SKILL.md) | 독자 문제를 게시물과 실험 가설로 바꾸기 |
+| [iky-social-engagement](skills/iky-social-engagement/SKILL.md) | 멘션과 탐라에서 맥락에 맞는 소통하기 |
+| [iky-marketing-experiments](skills/iky-marketing-experiments/SKILL.md) | 비교 가능한 지표로 가설을 개선하기 |
 | [iky-backend-architecture](skills/iky-backend-architecture/SKILL.md) | 백엔드 모듈 분리·데이터·서버 아키텍처 설계 |
 | [iky-backend-build](skills/iky-backend-build/SKILL.md) | 명세 기반 백엔드 API 구현·테스트 |
 | [iky-backend-spec](skills/iky-backend-spec/SKILL.md) | API·권한·에러·이벤트 등 백엔드 명세 |
@@ -71,7 +75,7 @@ git clone https://github.com/AustinKimDev/my-skills.git ~/Workspace/my-skills
 
 ## 내장 스킬과 실행 도구
 
-35개 중 연결 지침이 필요한 16개에는 의존 자료를 내장했고, 독립적인 19개에는 불필요한 의존성을 추가하지 않았습니다. [스킬별 연결 관계](DEPENDENCIES.md)에서 범위와 조건을 확인할 수 있습니다.
+39개 중 연결 지침이 필요한 16개에는 의존 자료를 내장했고, 독립적인 23개에는 불필요한 의존성을 추가하지 않았습니다. [스킬별 연결 관계](DEPENDENCIES.md)에서 범위와 조건을 확인할 수 있습니다.
 
 SNS 글쓰기 스킬 3개에는 한국어 사례 관찰, 공식 자료와 분석의 한계를 기록했습니다. 기존 계정 말투와 게시 목적을 우선하며, 글쓰기 스킬 자체가 게시나 계정 변경 권한을 부여하지는 않습니다.
 
@@ -93,7 +97,7 @@ Python 3.10 이상 표준 라이브러리만 사용합니다. 변경된 원본�
 
 ## 수록 범위
 
-직접 관리 대상으로 선정한 위 35개를 최상위 스킬로 보관합니다. `notion-work-sync`, `magic-ui`, OMD·ui-craft 계열은 개인 제작 스킬 목록에 포함하지 않습니다. 2026-09-30 의존성 내장 요청에 따라 `humanize-korean` 등 재배포 가능한 지원 스킬은 출처가 구분된 내장 자료로 추가했습니다. 이는 외부 스킬을 직접 제작한 것으로 분류하는 변경이 아닙니다. 2026-10-02에는 X·인스타그램·Threads의 한국어 말투 분석과 각 플랫폼 글쓰기 스킬 제작 요청에 따라 독립 스킬 3개를 추가했습니다. 2026-10-03에는 유메잇 랜딩 페이지의 구성과 모션을 재사용하는 `iky-interactive-landing`을 추가했습니다.
+직접 관리 대상으로 선정한 위 39개를 최상위 스킬로 보관합니다. `notion-work-sync`, `magic-ui`, OMD·ui-craft 계열은 개인 제작 스킬 목록에 포함하지 않습니다. 2026-09-30 의존성 내장 요청에 따라 `humanize-korean` 등 재배포 가능한 지원 스킬은 출처가 구분된 내장 자료로 추가했습니다. 이는 외부 스킬을 직접 제작한 것으로 분류하는 변경이 아닙니다. 2026-10-02에는 X·인스타그램·Threads의 한국어 말투 분석과 각 플랫폼 글쓰기 스킬 제작 요청에 따라 독립 스킬 3개를 추가했습니다. 2026-10-03에는 유메잇 랜딩 페이지의 구성과 모션을 재사용하는 `iky-interactive-landing`을 추가했습니다.
 
 2026-10-15에는 실제 회사 팀처럼 직군별 에이전트(27개 페르소나는 `skills/iky-team-review/references/roster/`)를 골라 성향별 피드백을 받는 `iky-team-review`, PM으로서 트랙을 진행하고 단계마다 보고 후 답을 기다리는 `iky-pm-run`, 반복되는 작업 방식을 스킬로 만드는 `iky-skill-capture`를 추가했습니다.
 
@@ -109,7 +113,7 @@ Python 3.10 이상 표준 라이브러리만 사용합니다. 변경된 원본�
 
 개인 경로, 회사 계정 매핑, 프로젝트 전용 어댑터와 작업 화면은 공개본에서 제외했습니다. 프로젝트별 정책과 비공개 자료는 각 프로젝트의 지침·설정에서 관리하세요. 공개본은 이전 비공개 이력과 분리된 첫 커밋으로 시작합니다.
 
-2026-11-02에는 실제 대화·콘텐츠 실험과 성과를 연결하는 `iky-social-marketing`을 추가했습니다. 외부 자료의 방법은 검증 한계와 함께 참고하며, 계정 권한은 사용자의 지침을 따릅니다.
+2026-11-02에는 소셜 마케팅을 `iky-social-marketing` 조정 스킬과 독자 조사·콘텐츠 기획·대화·성과 실험의 네 전문 스킬로 분리했습니다. 외부 자료의 방법은 검증 한계와 함께 참고하며, 계정 권한은 사용자의 지침을 따릅니다.
 
 ## 참조 자료와 라이선스
 

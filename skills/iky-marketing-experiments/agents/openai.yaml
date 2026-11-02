@@ -1,0 +1,4 @@
+interface:
+  display_name: "마케팅 실험과 성과 학습"
+  short_description: "비교 가능한 지표로 가설을 개선하기"
+  default_prompt: "$iky-marketing-experiments으로 현재 요청을 진행해줘."

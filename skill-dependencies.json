@@ -527,6 +527,26 @@
       "source": "skills/iky-social-marketing",
       "kind": "owned",
       "dependencies": []
+    },
+    "iky-audience-research": {
+      "source": "skills/iky-audience-research",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-content-strategy": {
+      "source": "skills/iky-social-content-strategy",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-engagement": {
+      "source": "skills/iky-social-engagement",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-marketing-experiments": {
+      "source": "skills/iky-marketing-experiments",
+      "kind": "owned",
+      "dependencies": []
     }
   },
   "handoffs": {

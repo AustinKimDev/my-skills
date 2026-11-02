@@ -1,0 +1,4 @@
+interface:
+  display_name: "소셜 콘텐츠 전략과 기획"
+  short_description: "독자 문제를 게시물과 실험 가설로 바꾸기"
+  default_prompt: "$iky-social-content-strategy으로 현재 요청을 진행해줘."
