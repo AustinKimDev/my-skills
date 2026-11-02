@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 스토리 시퀀스 기획"
+  short_description: "스토리별 내용과 참여 흐름 구성"
+  default_prompt: "$iky-social-story으로 요청을 진행해줘."

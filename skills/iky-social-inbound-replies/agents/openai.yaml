@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 내 글의 댓글 응대"
+  short_description: "실제 질문과 반응을 읽고 맥락에 맞게 답변"
+  default_prompt: "$iky-social-inbound-replies으로 요청을 진행해줘."

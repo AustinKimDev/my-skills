@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 니치와 참고 계정 조사"
+  short_description: "공개 사례를 같은 계정의 기준선과 비교"
+  default_prompt: "$iky-social-niche-research으로 요청을 진행해줘."

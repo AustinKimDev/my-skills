@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 릴스와 숏폼 대본"
+  short_description: "한 영상의 대사와 장면별 전개 작성"
+  default_prompt: "$iky-social-reel-script으로 요청을 진행해줘."

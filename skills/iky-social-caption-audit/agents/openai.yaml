@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 캡션과 글 검수"
+  short_description: "원문을 확인해 수정 이유와 대안 제시"
+  default_prompt: "$iky-social-caption-audit으로 요청을 진행해줘."

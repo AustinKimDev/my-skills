@@ -547,6 +547,61 @@
       "source": "skills/iky-marketing-experiments",
       "kind": "owned",
       "dependencies": []
+    },
+    "iky-social-hook": {
+      "source": "skills/iky-social-hook",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-carousel": {
+      "source": "skills/iky-social-carousel",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-reel-script": {
+      "source": "skills/iky-social-reel-script",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-story": {
+      "source": "skills/iky-social-story",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-caption-audit": {
+      "source": "skills/iky-social-caption-audit",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-hashtags": {
+      "source": "skills/iky-social-hashtags",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-calendar": {
+      "source": "skills/iky-social-calendar",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-repurpose": {
+      "source": "skills/iky-social-repurpose",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-profile-audit": {
+      "source": "skills/iky-social-profile-audit",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-niche-research": {
+      "source": "skills/iky-social-niche-research",
+      "kind": "owned",
+      "dependencies": []
+    },
+    "iky-social-inbound-replies": {
+      "source": "skills/iky-social-inbound-replies",
+      "kind": "owned",
+      "dependencies": []
     }
   },
   "handoffs": {

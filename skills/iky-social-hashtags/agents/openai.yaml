@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 해시태그와 주제 태그"
+  short_description: "게시물과 관련 있는 태그를 선별"
+  default_prompt: "$iky-social-hashtags으로 요청을 진행해줘."

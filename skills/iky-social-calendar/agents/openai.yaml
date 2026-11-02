@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 콘텐츠 일정 계획"
+  short_description: "기존 예약과 간격을 지키며 주간 계획 수립"
+  default_prompt: "$iky-social-calendar으로 요청을 진행해줘."

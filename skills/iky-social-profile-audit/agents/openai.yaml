@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 프로필과 소개 점검"
+  short_description: "실제 프로필을 기준으로 개선안 제시"
+  default_prompt: "$iky-social-profile-audit으로 요청을 진행해줘."

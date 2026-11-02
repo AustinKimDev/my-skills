@@ -1,0 +1,4 @@
+interface:
+  display_name: "IKY 첫 문장과 훅"
+  short_description: "첫 문장의 구체성과 맥락을 점검"
+  default_prompt: "$iky-social-hook으로 요청을 진행해줘."
