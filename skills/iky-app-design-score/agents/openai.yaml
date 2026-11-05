@@ -1,4 +1,4 @@
 interface:
   display_name: "IKY 앱 디자인 점수"
-  short_description: "실제 화면을 여러 디자인 스킬 렌즈로 병렬 분석해 점수와 발견 사항으로 종합"
+  short_description: "실제 화면을 여러 디자인 렌즈로 채점하고, 요청하면 목표 점수까지 가는 전후 비교 시안을 결정 보고서로 제안"
   default_prompt: "$iky-app-design-score로 앱의 실제 화면을 캡처해 디자인과 사용성을 점수로 평가해줘."

@@ -1,13 +1,17 @@
 ---
 name: iky-app-design-score
-description: Score an app's current design and usability from real screenshots - capture the screens (iOS device or simulator via devicectl/simctl deep links, or a browser), have several design-skill lenses review the same screenshots in parallel (critique heuristics, component and layout craft, designer review and final QA, the project's design contract, a Toss/Daangn/Apple HIG/anti-AI-look benchmark, a first-time user), then merge their findings into one scored report with severity and confidence. Use for "앱 디자인 점수 매겨줘", "UI/UX 점수로 분류", "실기기 화면 보고 디자인 평가", "토스 당근 애플 기준으로 평가", "AI 티 나는지 봐줘", "screenshot design review", or "score the app's design". Read-only; fixes only when asked.
+description: Score an app's current design and usability from real screenshots - capture the screens (iOS device or simulator via devicectl/simctl deep links, or a browser), have several design-skill lenses review the same screenshots in parallel (critique heuristics, component and layout craft, designer review and final QA, the project's design contract, a Toss/Daangn/Apple HIG/anti-AI-look benchmark, a first-time user), then merge their findings into one scored report with severity and confidence. On request, continue to a before/after proposal for a target score - several HTML mockup variants per problem area next to the real capture, re-scored by lenses, delivered as a clickable decision report. Use for "앱 디자인 점수 매겨줘", "UI/UX 점수로 분류", "실기기 화면 보고 디자인 평가", "토스 당근 애플 기준으로 평가", "AI 티 나는지 봐줘", "9점대로 올리려면", "전후 비교 제안", "시안 여러 개로 비교", "screenshot design review", "score the app's design", or "before/after proposal to reach a target score". Read-only; app fixes only when asked.
 ---
 
 # IKY App Design Score
 
 Turn real screens into one evidence-graded design and usability score. The main session captures, briefs, merges and decides; lens agents only read screenshots.
 
-Flow: **capture → parallel lens review → merge → final verdict**. Report in Korean.
+Flow: **capture → parallel lens review → merge → final verdict**, and on request **→ before/after proposal**. Report in Korean.
+
+## Bundled support
+
+Read [the dependency map](references/dependencies.md) when a step calls for another skill. The proposal stage uses the bundled decision-report workflow; load it only for that stage.
 
 ## 1. Capture
 
@@ -57,7 +61,21 @@ Write one shared brief file (template: [references/lens-brief.md](references/len
 5. Top 5 fixes in order of impact and effort.
 6. Not verified: interaction, motion, Dynamic Type, light mode, other devices.
 
-Stop after the report. Suggest `iky-ui-design` or `impeccable polish` for the fixes and do not start them unasked.
+Stop after the report. Suggest the before/after proposal (section 5), `iky-ui-design` or `impeccable polish` for the fixes, and do not start them unasked.
+
+## 5. Before/after proposal (on request)
+
+When the user asks how to reach a target score or wants before/after options, follow [references/proposal.md](references/proposal.md):
+
+1. Split findings into Phase 0 single-answer fixes and 5–8 design tracks.
+2. Build a mockup kit from the project's real tokens and assets.
+3. Have one builder per track write 4 variants that differ in hypothesis, in parallel.
+4. Render at 2x, check contact sheets, fix once.
+5. Re-score the recommended set with three lenses and label the result as a mockup score.
+6. Deliver a decision report: before capture plus variants per card, Phase 0 multi-select, terminology, ranking, limits.
+7. Process the pasted choices, including memo-only answers and requests for more comparisons.
+
+Choices set design direction. Code changes beyond selected Phase 0 fixes, production flags, builds and deploys each need their own approval.
 
 ## Boundaries
 

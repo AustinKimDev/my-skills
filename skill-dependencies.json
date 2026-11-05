@@ -1,6 +1,16 @@
 {
   "version": 1,
   "modules": {
+    "iky-app-design-score": {
+      "source": "skills/iky-app-design-score",
+      "kind": "owned",
+      "dependencies": [
+        {
+          "name": "iky-decision-report",
+          "when": "Build the before/after proposal report: summary images, image-option cards, Phase 0 multi-select, ranking and the paste-back handoff."
+        }
+      ]
+    },
     "iky-component-workbench": {
       "source": "skills/iky-component-workbench",
       "kind": "owned",

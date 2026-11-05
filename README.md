@@ -32,7 +32,7 @@
 | [iky-deploy-branch-deploy](skills/iky-deploy-branch-deploy/SKILL.md) | deploy 브랜치 통합·배포 |
 | [iky-design](skills/iky-design/SKILL.md) | IKY 디자인 규칙 적용 |
 | [iky-design-audit](skills/iky-design-audit/SKILL.md) | IKY 디자인 규칙 검수 |
-| [iky-app-design-score](skills/iky-app-design-score/SKILL.md) | 실제 화면을 여러 디자인 렌즈(토스·당근·Apple HIG·안티 AI 기준 포함)로 병렬 분석해 점수로 종합 |
+| [iky-app-design-score](skills/iky-app-design-score/SKILL.md) | 실제 화면을 여러 디자인 렌즈(토스·당근·Apple HIG·안티 AI 기준 포함)로 병렬 분석해 점수로 종합하고, 요청하면 목표 점수까지 가는 전후 비교 시안을 결정 보고서로 제안 |
 | [iky-develop-pr-review-merge](skills/iky-develop-pr-review-merge/SKILL.md) | develop PR 생성·리뷰·수정·머지 |
 | [iky-erd](skills/iky-erd/SKILL.md) | 기획서·화면 흐름 기반 ERD 추출·갱신 |
 | [iky-find-partner](skills/iky-find-partner/SKILL.md) | 파트너 후보 조사·최근 5개와 대표 3개 콘텐츠·사진 포함 HTML 보고서 |
@@ -124,6 +124,8 @@ Python 3.10 이상 표준 라이브러리만 사용합니다. 변경된 원본�
 같은 날 목표만 받아 노드·의존·검증 지점으로 쪼개고 승인 대기 없이 끝까지 진행하는 `iky-graph-run`을 추가했습니다. 단계마다 멈추는 `iky-pm-run`과 달리 승인이 필요한 작업에서만 해당 갈래를 멈춥니다.
 
 2026-11-05에는 실제 앱 화면을 캡처해 여러 디자인 스킬 렌즈로 병렬 분석하고 하나의 점수 보고서로 합치는 `iky-app-design-score`를 추가했습니다. 토스 제품·UX 라이팅 원칙, 당근 SEED, Apple HIG, AI가 만든 듯한 디자인의 징후를 확인 가능한 규칙으로 정리한 기준 문서와, 화면을 가져가지 않는 `devicectl` 캡처 방법을 담았습니다. 렌즈로 쓰는 외부 디자인 스킬은 설치되어 있을 때만 읽으며 내장하지 않습니다.
+
+같은 날 `iky-app-design-score`에 전후 비교 제안 단계를 더했습니다. 점수 보고 뒤 요청이 있으면, 고칠 것을 정답이 하나인 0단계와 시안이 필요한 영역으로 나눕니다. 영역마다 실제 토큰으로 만든 HTML 목업 시안 4개를 실기기 캡처 옆에 놓고, 추천 시안을 렌즈 3개로 다시 채점해 목업 점수로 표기합니다. 결과는 `iky-decision-report` 결정 보고서로 냅니다. 이 단계를 위해 `iky-decision-report`를 번들 의존성으로 선언했습니다.
 
 개인 경로, 회사 계정 매핑, 프로젝트 전용 어댑터와 작업 화면은 공개본에서 제외했습니다. 프로젝트별 정책과 비공개 자료는 각 프로젝트의 지침·설정에서 관리하세요. 공개본은 이전 비공개 이력과 분리된 첫 커밋으로 시작합니다.
 

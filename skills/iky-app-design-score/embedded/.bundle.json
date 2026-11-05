@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "root": "iky-app-design-score",
+  "modules": [
+    "browser-runtime",
+    "iky-decision-report",
+    "image-generation"
+  ],
+  "source_sha256": {
+    "browser-runtime": {
+      "GUIDE.md": "f969668ee7090147368958f692a114669f3c54d7206e32752aea31c088642a45"
+    },
+    "iky-decision-report": {
+      "SKILL.md": "40e8e35eb5c1e63033b7dc7404d79be5971a4305b246304ec08ffa83a02c289d",
+      "references/visuals.md": "a63129111117031578cfcd4b65238d456c8b5d786373e1b080797c3166db611d",
+      "scripts/preflight.py": "d6e2d2a774dcd76d28c55f697a28c5c083d87fb4dcb4869a06c6dfaeca86302e",
+      "scripts/report_assets.py": "3abcb73404159854e89a40eef2dc541ec938284f499797a2de87cd262a947aa9",
+      "scripts/summary_image.py": "76997dfc416c28b049966b3d71b1808803b8c941b68189eb54630cef7344eb16",
+      "template.html": "3c3e905450ed6d6b3112cad2e62a4598e766cfae653ba71b658a993c69ba78af"
+    },
+    "image-generation": {
+      "GUIDE.md": "7086a2d702a966543bec9d8df6783ca5c25428ad448aaecb003d6ee21b1d02bc"
+    }
+  },
+  "files": {
+    "embedded/browser-runtime/GUIDE.md": "9b269d2d048e78fedaac2701a439d3b1aca552adb7aa601a54afd332e7813ab3",
+    "embedded/browser-runtime/references/dependencies.md": "0dc46851124bd70db9b560d2e1acbfc6fbb9522da6cffbcdd5ae693c5e6d6b9b",
+    "embedded/iky-decision-report/GUIDE.md": "5f5adc93f14f58d8579117435d0ee19f519a7a85559eb436d3aa1c09b74f6290",
+    "embedded/iky-decision-report/references/dependencies.md": "e3bcabdee90ad79e00772972f9be7b5166625a5b9df614bc1541840bdfbbd453",
+    "embedded/iky-decision-report/references/visuals.md": "979700e9c3931dcaa829d4a759a1af13096fca8411b4505d03325bc1506c8a32",
+    "embedded/iky-decision-report/scripts/preflight.py": "d6e2d2a774dcd76d28c55f697a28c5c083d87fb4dcb4869a06c6dfaeca86302e",
+    "embedded/iky-decision-report/scripts/report_assets.py": "3abcb73404159854e89a40eef2dc541ec938284f499797a2de87cd262a947aa9",
+    "embedded/iky-decision-report/scripts/summary_image.py": "76997dfc416c28b049966b3d71b1808803b8c941b68189eb54630cef7344eb16",
+    "embedded/iky-decision-report/template.html": "3c3e905450ed6d6b3112cad2e62a4598e766cfae653ba71b658a993c69ba78af",
+    "embedded/image-generation/GUIDE.md": "e6c6859c31748e0fd784cbd49a2d159b2d3301aa67cfd6deb0f9bcaec2a31bbc",
+    "embedded/image-generation/references/dependencies.md": "f75956a1da880a08634946402be658261ad1c9b9fae09e909b6f47154c8995c7",
+    "references/dependencies.md": "97f2ef38a6385bcbdfe99fe81dcf6820f9b57a0688356d7565224d0868726155"
+  }
+}
